@@ -29,26 +29,27 @@ public class CustomButton: UIButton {
         self.layer.cornerRadius = 10
         self.clipsToBounds = true
         self.translatesAutoresizingMaskIntoConstraints = false
-        
-        setGradientBackground()
+    }
+    
+    // MARK: - Gradient Color Method
+    private func getGradientColors() -> (UIColor, UIColor) {
+        let color1 = UIColor(named: "gradientLeftColor") ?? UIColor.red
+        let color2 = UIColor(named: "gradientRightColor") ?? UIColor.orange
+        return (color1, color2)
     }
     
     // MARK: - Configuration Methods
     public func setGradientBackground() {
-        gradientLayer?.removeFromSuperlayer()
-        
         let gradientLayer = CAGradientLayer()
-
-        let color1 = UIColor(named: "gradientLeftColor") ?? UIColor.red
-        let color2 = UIColor(named: "gradientRightColor") ?? UIColor.orange
-     
+        let (color1, color2) = getGradientColors()
+        
         gradientLayer.colors = [color1.cgColor, color2.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
         
         gradientLayer.frame = bounds
-        layer.insertSublayer(gradientLayer, at: 0)
         
+        layer.insertSublayer(gradientLayer, at: 0)
         self.gradientLayer = gradientLayer
     }
     
@@ -59,6 +60,40 @@ public class CustomButton: UIButton {
     
     public func setTitle(_ title: String, for state: UIControl.State) {
         super.setTitle(title, for: state)
+    }
+    
+    public func setSize(width: CGFloat, height: CGFloat) {
+        NSLayoutConstraint.activate([
+            self.widthAnchor.constraint(equalToConstant: width),
+            self.heightAnchor.constraint(equalToConstant: height)
+        ])
+    }
+    
+    // MARK: - Button States
+    public enum ButtonState {
+        case `default`
+        case disabled
+        case secondary
+    }
+    
+    public func configure(for state: ButtonState) {
+        switch state {
+        case .default:
+            isUserInteractionEnabled = true
+            setGradientBackground()
+            setTitle("Default", for: .normal)
+            setTitleColor(.white, for: .normal)
+        case .disabled:
+            isUserInteractionEnabled = false
+                setSolidBackground(color: UIColor(named: "AppDarkFaded") ?? UIColor.darkGray)
+            setTitle("Disabled", for: .normal)
+                setTitleColor(UIColor(named: "AppGrayFaded") ?? UIColor.blue, for: .normal)
+        case .secondary:
+            isUserInteractionEnabled = true
+            setSolidBackground(color: UIColor(named: "AppDarkFaded") ?? UIColor.darkGray)
+            setTitle("Secondary", for: .normal)
+            setTitleColor(.white, for: .normal)
+        }
     }
     
     // MARK: - Layout
