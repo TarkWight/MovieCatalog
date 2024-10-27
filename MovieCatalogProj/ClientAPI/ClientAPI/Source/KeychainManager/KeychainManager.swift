@@ -8,12 +8,12 @@
 import Foundation
 import Security
 
-class KeychainManager {
+public class KeychainManager {
     
-    static let shared = KeychainManager()
+    public static let shared = KeychainManager()
     private let tokenKey = "BearerTokenKey"
 
-    func saveToken(_ token: String) -> Bool {
+    public func saveToken(_ token: String) -> Bool {
         guard let tokenData = token.data(using: .utf8) else { return false }
         
         let query: [String: Any] = [
@@ -28,7 +28,7 @@ class KeychainManager {
         return status == errSecSuccess
     }
     
-    func getToken() -> String? {
+    public func getToken() -> String? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: tokenKey,
@@ -43,7 +43,7 @@ class KeychainManager {
         return String(data: data, encoding: .utf8)
     }
     
-    func deleteToken() -> Bool {
+    public func deleteToken() -> Bool {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: tokenKey
