@@ -81,20 +81,21 @@ public class CustomButton: UIButton {
         case .default:
             isUserInteractionEnabled = true
             setGradientBackground()
-            setTitle("Default", for: .normal)
             setTitleColor(.white, for: .normal)
+            
         case .disabled:
             isUserInteractionEnabled = false
-                setSolidBackground(color: UIColor(named: "AppDarkFaded") ?? UIColor.darkGray)
-            setTitle("Disabled", for: .normal)
-                setTitleColor(UIColor(named: "AppGrayFaded") ?? UIColor.blue, for: .normal)
+            setSolidBackground(color: UIColor(named: "AppDarkFaded") ?? UIColor.darkGray)
+            setTitleColor(UIColor(named: "AppGrayFaded") ?? UIColor.blue, for: .normal)
+            
         case .secondary:
             isUserInteractionEnabled = true
             setSolidBackground(color: UIColor(named: "AppDarkFaded") ?? UIColor.darkGray)
-            setTitle("Secondary", for: .normal)
             setTitleColor(.white, for: .normal)
         }
     }
+
+
     
     // MARK: - Layout
     public override func layoutSubviews() {

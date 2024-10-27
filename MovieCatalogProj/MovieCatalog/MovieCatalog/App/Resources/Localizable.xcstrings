@@ -784,6 +784,7 @@
       }
     },
     "welcome" : {
+      "comment" : "Welcome screen message",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
