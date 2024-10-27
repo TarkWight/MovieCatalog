@@ -17,13 +17,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="aqd-kv-CZB">
-                                <rect key="frame" x="64" y="338" width="265" height="184"/>
+                                <rect key="frame" x="64" y="338" width="265" height="108"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="LIZ-6P-N5I">
-                                        <rect key="frame" x="23" y="0.0" width="219" height="116"/>
+                                        <rect key="frame" x="7.6666666666666856" y="0.0" width="250" height="40"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="MovieCatalog" translatesAutoresizingMaskIntoConstraints="NO" id="3qu-j7-92T">
-                                        <rect key="frame" x="0.0" y="144" width="265" height="40"/>
+                                        <rect key="frame" x="0.0" y="68" width="265" height="40"/>
                                     </imageView>
                                 </subviews>
                             </stackView>
@@ -43,7 +43,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Logo" width="219" height="116"/>
+        <image name="Logo" width="250" height="40"/>
         <image name="MovieCatalog" width="265" height="40"/>
         <namedColor name="AppDark">
             <color red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
