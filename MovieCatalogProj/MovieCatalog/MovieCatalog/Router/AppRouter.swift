@@ -12,6 +12,7 @@ protocol RouterProtocol: AnyObject {
     func showWelcomeScreen()
     func showSignInScreen()
     func showSignUpScreen()
+    func showFeedScreen()
     // TODO: Остальные методы
 }
 
@@ -51,8 +52,8 @@ final class AppRouter: RouterProtocol {
     }
 
     func showSignInScreen() {
-//        let signInVC = SignInModule.createModule(router: self)
-//        currentNavigationController?.pushViewController(signInVC, animated: true)
+        let signInVC = SignInModule.createModule(router: self)
+        currentNavigationController?.pushViewController(signInVC, animated: true)
     }
 
     func showSignUpScreen() {
