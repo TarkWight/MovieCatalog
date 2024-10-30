@@ -40,7 +40,7 @@ final class WelcomeViewController: UIViewController {
         backgroundImage.contentMode = .scaleAspectFill
         view.insertSubview(backgroundImage, at: 0)
         
-        view.backgroundColor = .clear
+        view.backgroundColor = UIColor(named: "AppDark")
 
         let welcomeLabel = UILabel()
         welcomeLabel.text = NSLocalizedString("welcome", comment: "Welcome message")
