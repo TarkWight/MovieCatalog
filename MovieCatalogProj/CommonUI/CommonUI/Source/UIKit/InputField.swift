@@ -21,7 +21,7 @@ public class InputField: UIView {
         case text, password, date
     }
     
-    private let textField = UITextField()
+    public let textField = UITextField()
     private let iconButton = UIButton(type: .system)
     private var fieldType: FieldType
     
