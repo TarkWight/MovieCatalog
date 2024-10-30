@@ -7,6 +7,32 @@
 
 import UIKit
 
+//public class BackButton: UIButton {
+//
+//    public override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        setupButton()
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//
+//    private func setupButton() {
+//        self.layer.cornerRadius = 8
+//        self.backgroundColor = UIColor(named: "AppDarkFaded")
+//        
+//        var config = UIButton.Configuration.plain()
+//        config.baseBackgroundColor = UIColor(named: "AppDarkFaded")
+//        config.image = UIImage(named: "ChevronLeft")
+//        config.imagePlacement = .leading
+//        config.imagePadding = 8
+//
+//        self.configuration = config
+//    }
+//}
+
+
 public class BackButton: UIButton {
 
     public override init(frame: CGRect) {

@@ -12,6 +12,9 @@ final class SignInViewController: UIViewController {
     
     // MARK: - Properties
     private let viewModel: SignInViewModel
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
+    
     private let usernameField = InputField(placeholder: NSLocalizedString("user_username", comment: ""), type: .text)
     private let passwordField = InputField(placeholder: NSLocalizedString("user_password", comment: ""), type: .password)
     private let signInButton = CustomButton()
@@ -35,13 +38,14 @@ final class SignInViewController: UIViewController {
 
     // MARK: - Private Methods
     private func setupUI() {
-        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        view.backgroundColor = UIColor(named: "AppDark")
+        
+        let backgroundImage = UIImageView()
         backgroundImage.image = UIImage(named: "Background")
         backgroundImage.contentMode = .scaleAspectFill
-        view.insertSubview(backgroundImage, at: 0)
+        backgroundImage.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(backgroundImage)
         
-        view.backgroundColor = UIColor(named: "AppDark")
-
         let backButton = BackButton()
         backButton.addTarget(self, action: #selector(didTapBack), for: .touchUpInside)
 
@@ -49,34 +53,32 @@ final class SignInViewController: UIViewController {
         titleLabel.text = NSLocalizedString("sign_in_account", comment: "")
         titleLabel.font = UIFont(name: "Manrope-Bold", size: 24)
         titleLabel.textColor = UIColor(named: "AppWhite")
-        titleLabel.textAlignment = .left
-        titleLabel.numberOfLines = 0
-        titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+
         let topStackView = UIStackView(arrangedSubviews: [backButton, titleLabel])
         topStackView.axis = .horizontal
         topStackView.spacing = 8
+        topStackView.alignment = .center
         topStackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(topStackView)
 
         let inputStackView = UIStackView(arrangedSubviews: [usernameField, passwordField])
         inputStackView.axis = .vertical
-        inputStackView.spacing = 16
+        inputStackView.spacing = 8
         inputStackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(inputStackView)
 
         signInButton.setTitle(NSLocalizedString("sign_in", comment: ""), for: .normal)
         signInButton.configure(for: .disabled)
         signInButton.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
-
-        let bottomStackView = UIStackView(arrangedSubviews: [signInButton])
-        bottomStackView.axis = .vertical
-        bottomStackView.spacing = 16
-        bottomStackView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(bottomStackView)
+        view.addSubview(signInButton)
 
         NSLayoutConstraint.activate([
+            backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -261),
+
             topStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 22),
             topStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             topStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
@@ -84,37 +86,42 @@ final class SignInViewController: UIViewController {
             inputStackView.topAnchor.constraint(equalTo: topStackView.bottomAnchor, constant: 40),
             inputStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             inputStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+            inputStackView.widthAnchor.constraint(equalToConstant: 345),
 
-            bottomStackView.topAnchor.constraint(equalTo: inputStackView.bottomAnchor, constant: 40),
-            bottomStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            signInButton.heightAnchor.constraint(equalToConstant: 48),
+            signInButton.widthAnchor.constraint(equalToConstant: 345),
+            signInButton.topAnchor.constraint(equalTo: inputStackView.bottomAnchor, constant: 40),
+            signInButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            signInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+            signInButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -45)
         ])
-        
     }
 
+
     private func bindViewModel() {
-            viewModel.onLoginFailure = { [weak self] error in
-                self?.showError(error)
-            }
-
-            usernameField.onTextChanged = { [weak self] text in
-                self?.validateFields()
-            }
-            
-            passwordField.onTextChanged = { [weak self] text in
-                self?.validateFields()
-            }
+        viewModel.onLoginFailure = { [weak self] error in
+            self?.showError(error)
         }
 
-        private func validateFields() {
-            let isUsernameEmpty = usernameField.textField.text?.isEmpty ?? true
-            let isPasswordEmpty = passwordField.textField.text?.isEmpty ?? true
-
-            if isUsernameEmpty || isPasswordEmpty {
-                signInButton.configure(for: .disabled)
-            } else {
-                signInButton.configure(for: .default)
-            }
+        usernameField.onTextChanged = { [weak self] text in
+            self?.validateFields()
         }
+        
+        passwordField.onTextChanged = { [weak self] text in
+            self?.validateFields()
+        }
+    }
+
+    private func validateFields() {
+        let isUsernameEmpty = usernameField.textField.text?.isEmpty ?? true
+        let isPasswordEmpty = passwordField.textField.text?.isEmpty ?? true
+
+        if isUsernameEmpty || isPasswordEmpty {
+            signInButton.configure(for: .disabled)
+        } else {
+            signInButton.configure(for: .default)
+        }
+    }
 
     private func showError(_ error: Error) {
         print(error)
@@ -122,7 +129,7 @@ final class SignInViewController: UIViewController {
 
     // MARK: - Actions
     @objc private func didTapBack() {
-        
+        navigationController?.popViewController(animated: true)
     }
 
     @objc private func didTapSignIn() {
