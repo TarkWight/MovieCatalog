@@ -5,13 +5,6 @@
 //  Created by Tark Wight on 27.10.2024.
 //
 
-//
-//  AppRouter.swift
-//  MovieCatalog
-//
-//  Created by Tark Wight on 27.10.2024.
-//
-
 import UIKit
 import ClientAPI
 
