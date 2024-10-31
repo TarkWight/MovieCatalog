@@ -26,7 +26,7 @@ final class FeedViewController: UIViewController {
     }
     
     private func setupUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: "AppDark")
         
         view.addSubview(logoImageView)
         view.addSubview(loadingView)
@@ -51,8 +51,7 @@ final class FeedViewController: UIViewController {
             logoImageView.widthAnchor.constraint(equalToConstant: 60.72),
             logoImageView.heightAnchor.constraint(equalToConstant: 32),
             
-          movieCardView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 24),
-//            movieCardView.topAnchor.constraint(equalTo: view.topAnchor, constant: 134),
+            movieCardView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 24),
             movieCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             movieCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
             movieCardView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32)
@@ -70,7 +69,7 @@ final class FeedViewController: UIViewController {
         }
         
         viewModel.onError = { error in
-            print("Error: \(error.localizedDescription)")
+            print("Error: \(error)")
         }
     }
     

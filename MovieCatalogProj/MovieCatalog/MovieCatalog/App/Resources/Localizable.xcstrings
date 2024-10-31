@@ -1,12 +1,12 @@
 {
   "sourceLanguage" : "ru",
   "strings" : {
-    "%@ - %@" : {
+    "%@ • %@" : {
       "localizations" : {
         "ru" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$@ - %2$@"
+            "value" : "%1$@ • %2$@"
           }
         }
       }
