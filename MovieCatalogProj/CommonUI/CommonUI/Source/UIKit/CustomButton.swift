@@ -29,6 +29,7 @@ public class CustomButton: UIButton {
         self.layer.cornerRadius = 10
         self.clipsToBounds = true
         self.translatesAutoresizingMaskIntoConstraints = false
+        setGradientBackground() // Set gradient background by default
     }
     
     // MARK: - Gradient Color Method
@@ -40,6 +41,10 @@ public class CustomButton: UIButton {
     
     // MARK: - Configuration Methods
     public func setGradientBackground() {
+        if gradientLayer != nil {
+            gradientLayer?.removeFromSuperlayer()
+        }
+        
         let gradientLayer = CAGradientLayer()
         let (color1, color2) = getGradientColors()
         
@@ -48,7 +53,6 @@ public class CustomButton: UIButton {
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
         
         gradientLayer.frame = bounds
-        
         layer.insertSublayer(gradientLayer, at: 0)
         self.gradientLayer = gradientLayer
     }
@@ -95,8 +99,6 @@ public class CustomButton: UIButton {
         }
     }
 
-
-    
     // MARK: - Layout
     public override func layoutSubviews() {
         super.layoutSubviews()
