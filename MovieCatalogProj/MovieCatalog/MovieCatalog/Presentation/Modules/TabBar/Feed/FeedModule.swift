@@ -10,7 +10,7 @@ import UIKit
 enum FeedModule {
     public static func createModule() -> UIViewController {
         let viewModel = FeedViewModel()
-        let viewController = FeedViewController(viewModel: viewModel)
+        let viewController = FeedViewController()
         return viewController
     }
 }

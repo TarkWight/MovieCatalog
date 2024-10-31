@@ -1,6 +1,16 @@
 {
   "sourceLanguage" : "ru",
   "strings" : {
+    "%@ - %@" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ - %2$@"
+          }
+        }
+      }
+    },
     "add_favorites" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -496,6 +506,9 @@
           }
         }
       }
+    },
+    "Movie Details" : {
+
     },
     "movies" : {
       "extractionState" : "manual",
