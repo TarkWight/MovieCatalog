@@ -119,25 +119,23 @@ public class GenderPickerView: UIView {
     }
     
     private func updateUI(for gender: String) {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.maleView.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
-            self.femaleView.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
+        UIView.animate(withDuration: 0.3) {
+            self.maleView.backgroundColor = gender == "Мужчина" ? .clear : .darkGray
+            self.femaleView.backgroundColor = gender == "Женщина" ? .clear : .darkGray
             
             if gender == "Мужчина" {
-                self.setGradientBackground(for: self.maleView)
-                self.femaleView.backgroundColor = .darkGray
+                self.applyGradient(to: self.maleView)
+                self.removeGradient(from: self.femaleView)
             } else {
-                self.maleView.backgroundColor = .darkGray
-                self.setGradientBackground(for: self.femaleView, mirrored: true)
+                self.applyGradient(to: self.femaleView, mirrored: true)
+                self.removeGradient(from: self.maleView)
             }
-            
             self.setCornerRadius()
-        })
+        }
     }
     
-    private func setGradientBackground(for view: UIView, mirrored: Bool = false) {
+    private func applyGradient(to view: UIView, mirrored: Bool = false) {
         let gradientLayer = CAGradientLayer()
-        
         gradientLayer.colors = [UIColor.red.cgColor, UIColor.orange.cgColor]
         
         if mirrored {
@@ -149,10 +147,12 @@ public class GenderPickerView: UIView {
         }
         
         gradientLayer.frame = view.bounds
-        if let existingLayer = view.layer.sublayers?.first(where: { $0 is CAGradientLayer }) as? CAGradientLayer {
-            existingLayer.frame = view.bounds
-        } else {
-            view.layer.insertSublayer(gradientLayer, at: 0)
-        }
+        view.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
+        view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    private func removeGradient(from view: UIView) {
+        view.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
+        view.backgroundColor = .darkGray
     }
 }

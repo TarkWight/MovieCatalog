@@ -8,7 +8,7 @@
 import UIKit
 
 enum WelcomeModule {
-    static func createModule(router: RouterProtocol) -> UIViewController {
+    static func build(router: RouterProtocol) -> UIViewController {
         let viewModel = WelcomeViewModel(router: router)
         let viewController = WelcomeViewController(viewModel: viewModel)
         return viewController

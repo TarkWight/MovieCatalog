@@ -273,6 +273,9 @@
         }
       }
     },
+    "Favorites Screen" : {
+
+    },
     "feed" : {
       "extractionState" : "manual",
       "localizations" : {
