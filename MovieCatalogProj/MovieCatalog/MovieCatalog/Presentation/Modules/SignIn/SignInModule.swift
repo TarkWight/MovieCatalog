@@ -8,7 +8,7 @@
 import UIKit
 
 enum SignInModule {
-    static func createModule(router: RouterProtocol) -> UIViewController {
+    static func build(router: RouterProtocol) -> UIViewController {
         let viewModel = SignInViewModel(router: router)
         let viewController = SignInViewController(viewModel: viewModel)
         return viewController

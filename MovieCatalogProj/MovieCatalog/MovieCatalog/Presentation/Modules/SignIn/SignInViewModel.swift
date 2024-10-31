@@ -28,7 +28,7 @@ final class SignInViewModel {
         AuthAPI.login(body: credentials) { [weak self] success, error in
             if success {
                 print("Login is success!")
-                self?.router?.showFeedScreen()
+                self?.router?.showMainTabBarScreen()
             } else if let error = error {
                 self?.onLoginFailure?(error)
             }

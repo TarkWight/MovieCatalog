@@ -5,6 +5,13 @@
 //  Created by Tark Wight on 27.10.2024.
 //
 
+//
+//  AppRouter.swift
+//  MovieCatalog
+//
+//  Created by Tark Wight on 27.10.2024.
+//
+
 import UIKit
 import ClientAPI
 
@@ -12,8 +19,7 @@ protocol RouterProtocol: AnyObject {
     func showWelcomeScreen()
     func showSignInScreen()
     func showSignUpScreen()
-    func showFeedScreen()
-    // TODO: Остальные методы
+    func showMainTabBarScreen()
 }
 
 final class AppRouter: RouterProtocol {
@@ -25,7 +31,7 @@ final class AppRouter: RouterProtocol {
 
     func start() {
         if isUserAuthenticated() {
-            showFeedScreen()
+            showMainTabBarScreen()
         } else {
             showWelcomeScreen()
         }
@@ -36,32 +42,45 @@ final class AppRouter: RouterProtocol {
     }
 
     func showWelcomeScreen() {
-        let welcomeVC = WelcomeModule.createModule(router: self)
-        window.rootViewController = UINavigationController(rootViewController: welcomeVC)
-        window.makeKeyAndVisible()
+        let welcomeVC = WelcomeModule.build(router: self)
+        setRootViewController(UINavigationController(rootViewController: welcomeVC))
     }
 
-    func showFeedScreen() {
-        KeychainManager.shared.deleteToken()
-//        let feedVC = FeedModule.createModule(router: self)
-//        let tabBarController = UITabBarController()
-//        tabBarController.viewControllers = [UINavigationController(rootViewController: feedVC)]
-//        
-//        window.rootViewController = tabBarController
-//        window.makeKeyAndVisible()
+    func showMainTabBarScreen() {
+        // Create view controllers for each tab
+//        let feedVC = FeedModule.createModule()
+//        let moviesVC = MoviesModule.createModule()
+//        let favoritesVC = FavoritesModule.createModule()
+//        let profileVC = ProfileModule.createModule()
+        
+        // Initialize MainTabBarController with the view controllers
+        let mainTabBarController = MainTabBarController()
+
+        setRootViewController(mainTabBarController)
     }
 
     func showSignInScreen() {
-        let signInVC = SignInModule.createModule(router: self)
+        let signInVC = SignInModule.build(router: self)
         currentNavigationController?.pushViewController(signInVC, animated: true)
     }
 
     func showSignUpScreen() {
-//        let signUpVC = SignUpModule.createModule(router: self)
-//        currentNavigationController?.pushViewController(signUpVC, animated: true)
+        let signUpVC = SignUpModule.build(router: self)
+        currentNavigationController?.pushViewController(signUpVC, animated: true)
+    }
+
+    // Helper to set root view controller
+    private func setRootViewController(_ viewController: UIViewController) {
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
     }
 
     private var currentNavigationController: UINavigationController? {
-        return window.rootViewController as? UINavigationController
+        if let navigationController = window.rootViewController as? UINavigationController {
+            return navigationController
+        } else if let tabBarController = window.rootViewController as? UITabBarController {
+            return tabBarController.selectedViewController as? UINavigationController
+        }
+        return nil
     }
 }
