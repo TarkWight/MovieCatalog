@@ -7,8 +7,6 @@
 
 import UIKit
 
-import UIKit
-
 final class FeedViewController: UIViewController {
     private let viewModel = FeedViewModel()
     
@@ -38,7 +36,15 @@ final class FeedViewController: UIViewController {
         loadingView.startAnimating()
         
         movieCardView.isHidden = true
-        movieCardView.addGestureRecognizer(UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:))))
+
+        // Добавляем два жеста — для свайпа вправо и влево
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        swipeRight.direction = .right
+        movieCardView.addGestureRecognizer(swipeRight)
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        swipeLeft.direction = .left
+        movieCardView.addGestureRecognizer(swipeLeft)
         
         setupConstraints()
     }

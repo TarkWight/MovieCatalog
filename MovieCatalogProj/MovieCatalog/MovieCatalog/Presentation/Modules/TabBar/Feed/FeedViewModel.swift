@@ -43,7 +43,7 @@ final class FeedViewModel {
                 })
                 self?.showRandomMovie()
                 
-                // Load more movies if only 2 are left
+                // Подгружаем дополнительные фильмы, если осталось 2
                 if self?.moviesBuffer.count ?? 0 <= 2 {
                     self?.fetchMovies(page: page + 1)
                 }
@@ -65,7 +65,9 @@ final class FeedViewModel {
         useCase.addFavorite(movieId: movieId) { [weak self] error in
             if let error = error {
                 self?.onError?(error)
+                return
             }
+            self?.fetchRandomMovie()
         }
     }
     
