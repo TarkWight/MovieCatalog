@@ -35,7 +35,6 @@ final class MovieCardView: UIView {
         posterImageView.contentMode = .scaleAspectFill
         posterImageView.clipsToBounds = true
         
-        // Настройка шрифтов
         titleLabel.font = .boldSystemFont(ofSize: 24)
         titleLabel.textColor = UIColor(named: "AppWhite")
         titleLabel.numberOfLines = 1

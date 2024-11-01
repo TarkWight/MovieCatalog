@@ -198,6 +198,23 @@
         }
       }
     },
+    "error_401" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lost token!"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Потерян токен!"
+          }
+        }
+      }
+    },
     "error_general" : {
       "extractionState" : "manual",
       "localizations" : {

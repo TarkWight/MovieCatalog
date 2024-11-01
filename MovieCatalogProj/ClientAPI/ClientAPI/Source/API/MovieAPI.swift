@@ -8,11 +8,11 @@
 internal import Alamofire
 
 open class MovieAPI {
-
+    
     open class func getMovies(page: Int, completion: @escaping (_ data: MoviesPagedListModel?, _ error: Error?) -> Void) {
         guard let token = KeychainManager.shared.getToken() else {
             print("No token found")
-            completion(nil, NSError(domain: "", code: 401, userInfo: [NSLocalizedDescriptionKey: "No token found"]))
+            completion(nil, NSError(domain: "", code: 401, userInfo: [NSLocalizedDescriptionKey: "error_401"]))
             return
         }
         
@@ -24,10 +24,10 @@ open class MovieAPI {
             .validate()
             .responseDecodable(of: MoviesPagedListModel.self) { response in
                 switch response.result {
-                case .success(let data):
-                    completion(data, nil)
-                case .failure(let error):
-                    completion(nil, error)
+                    case .success(let data):
+                        completion(data, nil)
+                    case .failure(let error):
+                        completion(nil, error)
                 }
             }
     }
@@ -35,7 +35,7 @@ open class MovieAPI {
     open class func getMovieDetails(movieId: UUID, completion: @escaping (_ data: MovieDetailsModel?, _ error: Error?) -> Void) {
         guard let token = KeychainManager.shared.getToken() else {
             print("No token found")
-            completion(nil, NSError(domain: "", code: 401, userInfo: [NSLocalizedDescriptionKey: "No token found"]))
+            completion(nil, NSError(domain: "", code: 401, userInfo: [NSLocalizedDescriptionKey: "error_401"]))
             return
         }
         
@@ -47,13 +47,13 @@ open class MovieAPI {
             .validate()
             .responseDecodable(of: MovieDetailsModel.self) { response in
                 switch response.result {
-                case .success(let data):
-                    completion(data, nil)
-                case .failure(let error):
-                    completion(nil, error)
+                    case .success(let data):
+                        completion(data, nil)
+                    case .failure(let error):
+                        completion(nil, error)
                 }
             }
     }
     
+    
 }
-

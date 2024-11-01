@@ -80,8 +80,10 @@ final class FeedViewController: UIViewController {
         }
         
         if gesture.direction == .right {
+            print("direction == .right, id is \(movieId)")
             viewModel.addFavoriteMovie(movieId)
         } else if gesture.direction == .left {
+            print("direction == .left, id is \(movieId)")
             viewModel.hideMovie(movieId)
         }
     }

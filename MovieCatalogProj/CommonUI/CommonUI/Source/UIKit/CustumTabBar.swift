@@ -7,43 +7,48 @@
 
 import UIKit
 
-import UIKit
-
 open class CustomTabBarController: UITabBarController {
 
     // MARK: - Initialization
     public init(
-        feedViewController: UIViewController,
-        moviesViewController: UIViewController,
-        favoritesViewController: UIViewController,
-        profileViewController: UIViewController
+        viewControllers: [UIViewController],
+        tabTitles: [String],
+        tabImages: [String],
+        gradientColors: [CGColor],
+        unselectedItemColor: UIColor,
+        tabBarBackgroundColor: UIColor
     ) {
+        self.gradientColors = gradientColors
+        self.unselectedItemColor = unselectedItemColor
+        self.tabBarBackgroundColor = tabBarBackgroundColor
         super.init(nibName: nil, bundle: nil)
-        setupViewControllers(feedVC: feedViewController,
-                             moviesVC: moviesViewController,
-                             favoritesVC: favoritesViewController,
-                             profileVC: profileViewController)
+        setupViewControllers(viewControllers, tabTitles: tabTitles, tabImages: tabImages)
     }
 
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Properties
+    private var gradientColors: [CGColor]
+    private var unselectedItemColor: UIColor
+    private var tabBarBackgroundColor: UIColor
+    private var didSetInitialSelectedTab = false
+
     // MARK: - Setup
     private func setupViewControllers(
-        feedVC: UIViewController,
-        moviesVC: UIViewController,
-        favoritesVC: UIViewController,
-        profileVC: UIViewController
+        _ viewControllers: [UIViewController],
+        tabTitles: [String],
+        tabImages: [String]
     ) {
-        let feedTab = createTabBarItem(for: feedVC, title: NSLocalizedString("feed", comment: ""), imageName: "tabbar_feed")
-        let moviesTab = createTabBarItem(for: moviesVC, title: NSLocalizedString("movies", comment: ""), imageName: "tabbar_movies")
-        let favoritesTab = createTabBarItem(for: favoritesVC, title: NSLocalizedString("favorites", comment: ""), imageName: "tabbar_favorites")
-        let profileTab = createTabBarItem(for: profileVC, title: NSLocalizedString("user_profile", comment: ""), imageName: "tabbar_profile")
+        let tabs = zip(viewControllers, zip(tabTitles, tabImages)).map { vc, titleImage in
+            createTabBarItem(for: vc, title: titleImage.0, imageName: titleImage.1)
+        }
 
-        viewControllers = [feedTab, moviesTab, favoritesTab, profileTab]
-
+        self.viewControllers = tabs
         customizeTabBarAppearance()
+        
+        selectedIndex = 0
     }
 
     private func createTabBarItem(for viewController: UIViewController, title: String, imageName: String) -> UINavigationController {
@@ -53,70 +58,75 @@ open class CustomTabBarController: UITabBarController {
     }
 
     private func customizeTabBarAppearance() {
-        tabBar.backgroundColor = UIColor(named: "AppDarkFaded")
-        tabBar.tintColor = .clear
-        tabBar.unselectedItemTintColor = UIColor.blue // Синий цвет для невыбранных элементов
-        
-        tabBar.layer.cornerRadius = 16
-        tabBar.layer.masksToBounds = true
-        tabBar.frame = CGRect(x: 24,
-                              y: UIScreen.main.bounds.height - 64 - 29,
-                              width: UIScreen.main.bounds.width - 48,
-                              height: 64)
-
-        let appearance = UITabBarItem.appearance()
-        appearance.setTitleTextAttributes([.foregroundColor: UIColor.clear], for: .normal)
-        appearance.setTitleTextAttributes([.foregroundColor: UIColor.clear], for: .selected)
+        tabBar.backgroundColor = tabBarBackgroundColor
+        tabBar.unselectedItemTintColor = unselectedItemColor
     }
 
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        updateTabBarAppearance()
+        
+        DispatchQueue.main.async {
+            self.updateTabBarAppearance()
+        }
+    }
+
+
+    open override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if !didSetInitialSelectedTab {
+            updateTabBarAppearance()
+            didSetInitialSelectedTab = true
+        }
     }
 
     private func updateTabBarAppearance() {
         for (index, tabBarItem) in (tabBar.items ?? []).enumerated() {
-            guard let tabBarItemView = tabBar.subviews[safe: index + 1] else { continue }
+            guard index < tabBar.subviews.count else { continue }
+            let tabBarItemView = tabBar.subviews[index]
             let imageView = tabBarItemView.subviews.compactMap { $0 as? UIImageView }.first
             let titleLabel = tabBarItemView.subviews.compactMap { $0 as? UILabel }.first
 
             if tabBarItem == selectedViewController?.tabBarItem {
-                // градиент к изображению и тексту выбранного элемента
-                applyGradient(to: imageView)
-                applyGradient(to: titleLabel)
+                imageView?.layer.mask = nil
+                titleLabel?.layer.mask = nil
+
+                if let imageView = imageView {
+                    applyGradientMask(to: imageView, with: gradientColors)
+                    imageView.layer.mask?.frame = imageView.bounds
+                }
+                if let titleLabel = titleLabel {
+                    applyGradientMask(to: titleLabel, with: gradientColors)
+                    titleLabel.layer.mask?.frame = titleLabel.bounds
+                }
             } else {
-                // Синий цвет для невыбранных элементов
-                imageView?.tintColor = UIColor.blue
-                titleLabel?.textColor = UIColor.blue
-                removeGradient(from: imageView)
-                removeGradient(from: titleLabel)
+                imageView?.layer.mask = nil
+                imageView?.tintColor = unselectedItemColor
+                titleLabel?.layer.mask = nil
+                titleLabel?.textColor = unselectedItemColor
             }
         }
     }
 
-    private func applyGradient(to view: UIView?) {
-        guard let view = view else { return }
-        
+
+
+    private func applyGradientMask(to view: UIView, with colors: [CGColor]) {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [
-            UIColor(named: "gradientLeftColor")?.cgColor ?? UIColor.red.cgColor,
-            UIColor(named: "gradientRightColor")?.cgColor ?? UIColor.orange.cgColor
-        ]
+        gradientLayer.colors = colors
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
         gradientLayer.frame = view.bounds
-
-        view.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
-        view.layer.insertSublayer(gradientLayer, at: 0)
+        
+        view.layer.mask = nil
+        
+        let maskLayer = CALayer()
+        maskLayer.frame = gradientLayer.bounds
+        gradientLayer.mask = maskLayer
+        view.layer.mask = gradientLayer
     }
 
     private func removeGradient(from view: UIView?) {
         view?.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
     }
-}
 
-private extension Array {
-    subscript(safe index: Int) -> Element? {
-        return index >= 0 && index < count ? self[index] : nil
-    }
 }
