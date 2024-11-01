@@ -8,6 +8,7 @@
 import UIKit
 import SwiftUI
 import ClientAPI
+import CommonUI
 
 final class MovieCardView: UIView {
     var movie: MovieElementModel? {
@@ -17,7 +18,7 @@ final class MovieCardView: UIView {
     private let posterImageView = UIImageView()
     private let titleLabel = UILabel()
     private let detailsLabel = UILabel()
-    private let genresLabel = UILabel()
+    private let genresStackView = UIStackView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,11 +43,11 @@ final class MovieCardView: UIView {
         detailsLabel.font = .systemFont(ofSize: 16)
         detailsLabel.textColor = UIColor(named: "AppGray")
         
-        genresLabel.font = .systemFont(ofSize: 14)
-        genresLabel.textColor = UIColor(named: "AppWhite")
-        genresLabel.numberOfLines = 1
+        genresStackView.axis = .horizontal
+        genresStackView.spacing = 4
+        genresStackView.alignment = .leading
         
-        let textStackView = UIStackView(arrangedSubviews: [titleLabel, detailsLabel, genresLabel])
+        let textStackView = UIStackView(arrangedSubviews: [titleLabel, detailsLabel, genresStackView])
         textStackView.axis = .vertical
         textStackView.spacing = 4
         textStackView.alignment = .center
@@ -102,7 +103,12 @@ final class MovieCardView: UIView {
         
         titleLabel.text = movie.name ?? "Unknown Title"
         detailsLabel.text = "\(movie.country ?? "Unknown Country") • \(movie.year?.description ?? "Unknown Year")"
-        genresLabel.text = movie.genres?.compactMap { $0.name }.joined(separator: ", ") ?? "No Genres Available"
+        
+        genresStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        movie.genres?.forEach { genre in
+            let tag = TagView(text: genre.name ?? "Genre")
+            genresStackView.addArrangedSubview(tag)
+        }
     }
 
     private func loadImage(from url: URL) {
@@ -130,4 +136,3 @@ final class MovieCardView: UIView {
         task.resume()
     }
 }
-

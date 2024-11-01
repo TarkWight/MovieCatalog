@@ -7,64 +7,47 @@
 
 import UIKit
 
-enum TagState {
-    case active
-    case inactive
-}
-
-class TagView: UIView {
+public class TagView: UIView {
     private let label = UILabel()
-    private var tagState: TagState = .inactive {
-        didSet {
-            updateAppearance()
-        }
-    }
-    
+
     var text: String? {
-        didSet {
-            label.text = text
-            label.sizeToFit()
-            frame.size.width = label.bounds.width + 12
-        }
+        didSet { label.text = text }
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupUI()
+    var isActive: Bool = false {
+        didSet {
+            backgroundColor = isActive ? UIColor(named: "AccentColor") : UIColor(named: "AppGray")
+        }
+    }
+
+    public init(text: String, isActive: Bool = false) {
+        super.init(frame: .zero)
+        self.text = text
+        self.isActive = isActive
+        setupView()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupUI()
+        setupView()
     }
     
-    private func setupUI() {
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = .white
+    private func setupView() {
+        backgroundColor = isActive ? UIColor(named: "AccentColor") : UIColor(named: "AppGray")
+        layer.cornerRadius = 14
+        layer.masksToBounds = true
+        
+        label.font = .systemFont(ofSize: 16)
+        label.textColor = UIColor(named: "AppWhite")
+        label.text = text
         label.translatesAutoresizingMaskIntoConstraints = false
         addSubview(label)
         
         NSLayoutConstraint.activate([
-            label.centerYAnchor.constraint(equalTo: centerYAnchor),
             label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 6),
-            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -6)
+            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -6),
+            label.topAnchor.constraint(equalTo: topAnchor),
+            label.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
-        
-        layer.cornerRadius = 14
-        clipsToBounds = true
-    }
-    
-    func setState(_ state: TagState) {
-        self.tagState = state
-    }
-    
-    private func updateAppearance() {
-        switch tagState {
-        case .active:
-            applyGradient(colors: [UIColor.blue, UIColor.cyan], frame: bounds)
-        case .inactive:
-            backgroundColor = UIColor.gray
-        }
     }
 }
-
