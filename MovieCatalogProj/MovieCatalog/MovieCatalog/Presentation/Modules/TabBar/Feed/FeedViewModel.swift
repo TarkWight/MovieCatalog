@@ -42,6 +42,11 @@ final class FeedViewModel {
                     return false
                 })
                 self?.showRandomMovie()
+                
+                // Load more movies if only 2 are left
+                if self?.moviesBuffer.count ?? 0 <= 2 {
+                    self?.fetchMovies(page: page + 1)
+                }
             }
         }
     }

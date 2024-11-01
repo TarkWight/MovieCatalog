@@ -7,6 +7,8 @@
 
 import UIKit
 
+import UIKit
+
 final class FeedViewController: UIViewController {
     private let viewModel = FeedViewModel()
     
@@ -81,10 +83,24 @@ final class FeedViewController: UIViewController {
         
         if gesture.direction == .right {
             print("direction == .right, id is \(movieId)")
-            viewModel.addFavoriteMovie(movieId)
+            animateSwipe(direction: .right) {
+                self.viewModel.addFavoriteMovie(movieId)
+            }
         } else if gesture.direction == .left {
             print("direction == .left, id is \(movieId)")
-            viewModel.hideMovie(movieId)
+            animateSwipe(direction: .left) {
+                self.viewModel.hideMovie(movieId)
+            }
         }
+    }
+    
+    private func animateSwipe(direction: UISwipeGestureRecognizer.Direction, completion: @escaping () -> Void) {
+        UIView.animate(withDuration: 0.3, animations: {
+            let translation = direction == .right ? self.view.bounds.width : -self.view.bounds.width
+            self.movieCardView.transform = CGAffineTransform(translationX: translation, y: 0)
+        }, completion: { _ in
+            self.movieCardView.transform = .identity
+            completion()
+        })
     }
 }
