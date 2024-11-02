@@ -17,7 +17,7 @@ public class TagView: UIView {
         }
     }
     
-    var isActive: Bool = false {
+    public var isActive: Bool = false {
         didSet {
             backgroundColor = isActive ? UIColor(named: "AccentColor") : UIColor(named: "AppGray")
         }

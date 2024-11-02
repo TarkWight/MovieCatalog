@@ -105,10 +105,21 @@ final class MovieCardView: UIView {
         detailsLabel.text = "\(movie.country ?? "Unknown Country") • \(movie.year?.description ?? "Unknown Year")"
         
         genresStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        movie.genres?.forEach { genre in
-            let tag = TagView(text: genre.name ?? "Genre")
-            genresStackView.addArrangedSubview(tag)
-        }
+        
+        let favoriteGenres = getUserFavoriteGenres()
+        let genreTags = movie.genres?.prefix(3).compactMap { genre -> UIView? in
+            guard let genreName = genre.name else { return nil }
+            let tagView = TagView(text: genreName)
+            tagView.isActive = favoriteGenres.contains(genreName)
+            return tagView
+        } ?? []
+        
+        genreTags.forEach { genresStackView.addArrangedSubview($0) }
+    }
+
+
+    private func getUserFavoriteGenres() -> [String] {
+        return ["триллер", "драма"] //TODO: - убрать мок + добавить избранное
     }
 
     private func loadImage(from url: URL) {
