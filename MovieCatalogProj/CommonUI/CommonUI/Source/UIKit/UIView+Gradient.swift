@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIView {
-    func applyGradient(colors: [UIColor], frame: CGRect) {
+    open func applyGradient(colors: [UIColor], frame: CGRect) {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = colors.map { $0.cgColor }
         gradientLayer.frame = frame

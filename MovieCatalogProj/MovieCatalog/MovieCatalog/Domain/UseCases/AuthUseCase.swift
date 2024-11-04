@@ -9,33 +9,25 @@ import Foundation
 import ClientAPI
 
 protocol AuthUseCaseProtocol {
-    func login(credentials: LoginCredentials, completion: @escaping (Bool, Error?) -> Void)
-    func register(body: UserRegisterModel, completion: @escaping (Bool, Error?) -> Void)
-    func logout(completion: @escaping (Bool, Error?) -> Void)
+    func login(credentials: LoginCredentials) async throws -> Bool
+    func register(body: UserRegisterModel) async throws -> Bool
+    func logout() async throws -> Bool
 }
-
 
 final class AuthUseCase: AuthUseCaseProtocol {
     
     // MARK: - Login
-    func login(credentials: LoginCredentials, completion: @escaping (Bool, Error?) -> Void) {
-        AuthAPI.login(body: credentials) { success, error in
-            completion(success, error)
-        }
+    func login(credentials: LoginCredentials) async throws -> Bool {
+        return try await AuthAPI().login(body: credentials)
     }
     
     // MARK: - Register
-    func register(body: UserRegisterModel, completion: @escaping (Bool, Error?) -> Void) {
-        AuthAPI.register(body: body) { success, error in
-            completion(success, error)
-        }
+    func register(body: UserRegisterModel) async throws -> Bool {
+        return try await AuthAPI().register(body: body)
     }
     
     // MARK: - Logout
-    func logout(completion: @escaping (Bool, Error?) -> Void) {
-        AuthAPI.logout { success, error in
-            completion(success, error)
-        }
+    func logout() async throws -> Bool {
+        return try await AuthAPI().logout()
     }
 }
-
