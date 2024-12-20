@@ -1,63 +1,9 @@
-////
-////  ReviewAPI.swift
-////  ClientAPI
-////
-////  Created by Tark Wight on 15.10.2024.
-////
 //
-//import Foundation
-//internal import Alamofire
+//  ReviewAPI.swift
+//  ClientAPI
 //
-//open class ReviewAPI {
-//    
-//    open class  func reviewAdd(movieId: UUID, body: ReviewModifyModel?, completion: @escaping (Result<Void, Error>) -> Void) {
-//        let url = APIEndpoint.Rewiew.reviewAdd(movieId: movieId)
-//        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default)
-//            .validate()
-//            .response { response in
-//                switch response.result {
-//                case .success:
-//                    completion(.success(()))
-//                case .failure(let error):
-//                    completion(.failure(error))
-//                }
-//            }
-//    }
-//    
-//    open class  func reviewEdit(movieId: UUID, reviewId: UUID, body: ReviewModifyModel?, completion: @escaping (Result<Void, Error>) -> Void) {
-//        let url = APIEndpoint.Rewiew.reviewEdit(movieId: movieId, rewiewId: reviewId)
-//        AF.request(url, method: .put, parameters: body, encoder: JSONParameterEncoder.default)
-//            .validate()
-//            .response { response in
-//                switch response.result {
-//                case .success:
-//                    completion(.success(()))
-//                case .failure(let error):
-//                    completion(.failure(error))
-//                }
-//            }
-//    }
-//    
-//    open class  func reviewDelete(movieId: UUID, reviewId: UUID, completion: @escaping (Result<Void, Error>) -> Void) {
-//        let url = APIEndpoint.Rewiew.reviewDelete(movieId: movieId, rewiewId: reviewId)
-//        AF.request(url, method: .delete)
-//            .validate()
-//            .response { response in
-//                switch response.result {
-//                case .success:
-//                    completion(.success(()))
-//                case .failure(let error):
-//                    completion(.failure(error))
-//                }
-//            }
-//    }
-//}
-
-
-
-
-
-
+//  Created by Tark Wight on 15.10.2024.
+//
 
 import Foundation
 internal import Alamofire

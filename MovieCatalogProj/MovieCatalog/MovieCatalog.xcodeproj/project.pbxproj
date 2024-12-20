@@ -142,11 +142,12 @@
 				};
 			};
 			buildConfigurationList = 891C98F42CBE69AE00B65DB3 /* Build configuration list for PBXProject "MovieCatalog" */;
-			developmentRegion = en;
+			developmentRegion = ru;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 891C98F02CBE69AE00B65DB3;
 			minimizedProjectReferenceProxies = 1;
@@ -191,6 +192,7 @@
 				DEVELOPMENT_TEAM = L4LS264DFA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MovieCatalog/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -224,6 +226,7 @@
 				DEVELOPMENT_TEAM = L4LS264DFA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MovieCatalog/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -306,6 +309,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -362,6 +366,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

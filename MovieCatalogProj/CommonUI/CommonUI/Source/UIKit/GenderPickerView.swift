@@ -16,7 +16,7 @@ public class GenderPickerView: UIView {
     private let maleLabel = UILabel()
     private let femaleLabel = UILabel()
     
-    public var selectedGender: String = "Мужчина" {
+    public var selectedGender: String = NSLocalizedString("gender_male", comment: "Male gender") {
         didSet {
             updateUI(for: selectedGender)
             onGenderSelected?(selectedGender)
@@ -25,29 +25,29 @@ public class GenderPickerView: UIView {
     
     public var onGenderSelected: ((String) -> Void)?
     
-    public init(maleText: String = "Мужчина", femaleText: String = "Женщина", frame: CGRect = .zero) {
+    public override init(frame: CGRect = .zero) {
         super.init(frame: frame)
-        setupViews(maleText: maleText, femaleText: femaleText)
+        setupViews()
         addGestureRecognizers()
         updateUI(for: selectedGender)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupViews(maleText: "Мужчина", femaleText: "Женщина")
+        setupViews()
         addGestureRecognizers()
         updateUI(for: selectedGender)
     }
     
-    private func setupViews(maleText: String, femaleText: String) {
+    private func setupViews() {
         maleView.backgroundColor = .darkGray
-        maleLabel.text = maleText
+        maleLabel.text = NSLocalizedString("gender_male", comment: "Male gender")
         maleLabel.textColor = .white
         maleLabel.textAlignment = .center
         maleView.addSubview(maleLabel)
         
         femaleView.backgroundColor = .darkGray
-        femaleLabel.text = femaleText
+        femaleLabel.text = NSLocalizedString("gender_female", comment: "Female gender")
         femaleLabel.textColor = .white
         femaleLabel.textAlignment = .center
         femaleView.addSubview(femaleLabel)
@@ -111,33 +111,31 @@ public class GenderPickerView: UIView {
     }
     
     @objc private func selectMale() {
-        selectedGender = "Мужчина"
+        selectedGender = NSLocalizedString("gender_male", comment: "Male gender")
     }
     
     @objc private func selectFemale() {
-        selectedGender = "Женщина"
+        selectedGender = NSLocalizedString("gender_female", comment: "Female gender")
     }
     
     private func updateUI(for gender: String) {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.maleView.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
-            self.femaleView.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
+        UIView.animate(withDuration: 0.3) {
+            self.maleView.backgroundColor = gender == NSLocalizedString("gender_male", comment: "Male gender") ? .clear : .darkGray
+            self.femaleView.backgroundColor = gender == NSLocalizedString("gender_female", comment: "Female gender") ? .clear : .darkGray
             
-            if gender == "Мужчина" {
-                self.setGradientBackground(for: self.maleView)
-                self.femaleView.backgroundColor = .darkGray
+            if gender == NSLocalizedString("gender_male", comment: "Male gender") {
+                self.applyGradient(to: self.maleView)
+                self.removeGradient(from: self.femaleView)
             } else {
-                self.maleView.backgroundColor = .darkGray
-                self.setGradientBackground(for: self.femaleView, mirrored: true)
+                self.applyGradient(to: self.femaleView, mirrored: true)
+                self.removeGradient(from: self.maleView)
             }
-            
             self.setCornerRadius()
-        })
+        }
     }
     
-    private func setGradientBackground(for view: UIView, mirrored: Bool = false) {
+    private func applyGradient(to view: UIView, mirrored: Bool = false) {
         let gradientLayer = CAGradientLayer()
-        
         gradientLayer.colors = [UIColor.red.cgColor, UIColor.orange.cgColor]
         
         if mirrored {
@@ -149,10 +147,12 @@ public class GenderPickerView: UIView {
         }
         
         gradientLayer.frame = view.bounds
-        if let existingLayer = view.layer.sublayers?.first(where: { $0 is CAGradientLayer }) as? CAGradientLayer {
-            existingLayer.frame = view.bounds
-        } else {
-            view.layer.insertSublayer(gradientLayer, at: 0)
-        }
+        view.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
+        view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    private func removeGradient(from view: UIView) {
+        view.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
+        view.backgroundColor = .darkGray
     }
 }
