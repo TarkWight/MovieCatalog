@@ -36,5 +36,13 @@ public struct MovieElementModel: Codable {
         self.reviews = reviews
     }
 
+    public func getAverageRating() -> Double? {
+           let ratings = reviews?.compactMap { $0.rating } ?? []
+           guard !ratings.isEmpty else { return nil }
 
+           let totalRating = ratings.reduce(0, +)
+           let averageRating = Double(totalRating) / Double(ratings.count)
+           
+           return averageRating
+       }
 }
