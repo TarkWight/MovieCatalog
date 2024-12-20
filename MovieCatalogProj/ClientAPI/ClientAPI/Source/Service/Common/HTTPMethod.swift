@@ -1,6 +1,6 @@
 //
 //  HTTPMethod.swift
-//  MovieCatalog
+//  ClientAPI
 //
 //  Created by Tark Wight on 12.12.2024.
 //

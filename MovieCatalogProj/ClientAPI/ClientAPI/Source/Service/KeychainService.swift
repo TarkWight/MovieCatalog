@@ -1,12 +1,9 @@
 //
-//  KeychainManager.swift
+//  KeychainService.swift
 //  ClientAPI
 //
-//  Created by Tark Wight on 14.10.2024.
+//  Created by Tark Wight on 12.12.2024.
 //
-
-import Foundation
-import Security
 
 import Foundation
 import Security
