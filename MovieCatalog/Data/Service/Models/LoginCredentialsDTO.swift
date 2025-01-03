@@ -1,5 +1,5 @@
 //
-//  LoginCredentials.swift
+//  LoginCredentialsDTO.swift
 //  ClientAPI
 //
 //  Created by Tark Wight on 14.10.2024.
@@ -9,7 +9,7 @@ import Foundation
 
 
 
-public struct LoginCredentials: Codable {
+public struct LoginCredentialsDTO: Codable {
     public var username: String
     public var password: String
 }
