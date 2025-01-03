@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  MovieCatalog
 //
-//  Created by Tark Wight on 15.10.2024.
+//  Created by Tark Wight on 12.12.2024.
 //
 
 import UIKit

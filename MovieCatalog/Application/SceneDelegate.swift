@@ -2,22 +2,28 @@
 //  SceneDelegate.swift
 //  MovieCatalog
 //
-//  Created by Tark Wight on 15.10.2024.
+//  Created by Tark Wight on 12.12.2024.
 //
 
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+
     var window: UIWindow?
-    var router: AppRouter?
+
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        let window = UIWindow(windowScene: windowScene)
-        let appRouter = AppRouter(window: window)
 
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        let window = UIWindow(windowScene: windowScene)
+        let viewController = ViewController()
+        let navigation = UINavigationController(rootViewController: viewController)
+        window.rootViewController = navigation
+        
         self.window = window
-        self.router = appRouter
-        appRouter.start()
+        window.makeKeyAndVisible()
+
     }
+
 }
