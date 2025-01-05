@@ -25,9 +25,22 @@
 		893D7CEC2D281C6400F15B29 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7CCA2D281C6400F15B29 /* AuthRepository.swift */; };
 		893D7CED2D281C6400F15B29 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7CCC2D281C6400F15B29 /* LoginUseCase.swift */; };
 		893D7CEE2D281C6400F15B29 /* LocalizedKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7CD12D281C6400F15B29 /* LocalizedKey.swift */; };
-		893D7CEF2D281C6400F15B29 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7CDB2D281C6400F15B29 /* ViewController.swift */; };
 		893D7D102D28249B00F15B29 /* AuthNetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D0F2D28249B00F15B29 /* AuthNetworkConfig.swift */; };
 		893D7D122D28284A00F15B29 /* KinopoiskApiConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D112D28284A00F15B29 /* KinopoiskApiConfig.swift */; };
+		893D7D152D28308300F15B29 /* TokenInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D142D28308300F15B29 /* TokenInfo.swift */; };
+		893D7D1B2D2831A000F15B29 /* UserRegisterDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D1A2D2831A000F15B29 /* UserRegisterDTO.swift */; };
+		893D7D1D2D2831B400F15B29 /* GenderDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D1C2D2831B400F15B29 /* GenderDTO.swift */; };
+		893D7D462D2911A500F15B29 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D452D2911A500F15B29 /* WelcomeViewController.swift */; };
+		893D7D492D2919B000F15B29 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D482D2919B000F15B29 /* Coordinator.swift */; };
+		893D7D4C2D291A2800F15B29 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D4B2D291A2800F15B29 /* AuthCoordinator.swift */; };
+		893D7D522D291C0400F15B29 /* UserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D512D291C0400F15B29 /* UserInfoViewModel.swift */; };
+		893D7D542D291C3200F15B29 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D532D291C3200F15B29 /* Gender.swift */; };
+		893D7D562D291CD400F15B29 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D552D291CD400F15B29 /* WelcomeViewModel.swift */; };
+		893D7D582D291D0200F15B29 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D572D291D0200F15B29 /* ViewModel.swift */; };
+		893D7D5C2D291ED800F15B29 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D5B2D291ED800F15B29 /* RegistrationViewController.swift */; };
+		893D7D5F2D29614000F15B29 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D5E2D29614000F15B29 /* AppCoordinator.swift */; };
+		893D7D622D2A55CE00F15B29 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D612D2A55CE00F15B29 /* MainCoordinator.swift */; };
+		893D7D642D2A569500F15B29 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D632D2A569500F15B29 /* LoadingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,9 +63,22 @@
 		893D7CD32D281C6400F15B29 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		893D7CD82D281C6400F15B29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		893D7CD92D281C6400F15B29 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		893D7CDB2D281C6400F15B29 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		893D7D0F2D28249B00F15B29 /* AuthNetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNetworkConfig.swift; sourceTree = "<group>"; };
 		893D7D112D28284A00F15B29 /* KinopoiskApiConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinopoiskApiConfig.swift; sourceTree = "<group>"; };
+		893D7D142D28308300F15B29 /* TokenInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenInfo.swift; sourceTree = "<group>"; };
+		893D7D1A2D2831A000F15B29 /* UserRegisterDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterDTO.swift; sourceTree = "<group>"; };
+		893D7D1C2D2831B400F15B29 /* GenderDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderDTO.swift; sourceTree = "<group>"; };
+		893D7D452D2911A500F15B29 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		893D7D482D2919B000F15B29 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		893D7D4B2D291A2800F15B29 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		893D7D512D291C0400F15B29 /* UserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewModel.swift; sourceTree = "<group>"; };
+		893D7D532D291C3200F15B29 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
+		893D7D552D291CD400F15B29 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
+		893D7D572D291D0200F15B29 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		893D7D5B2D291ED800F15B29 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		893D7D5E2D29614000F15B29 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		893D7D612D2A55CE00F15B29 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		893D7D632D2A569500F15B29 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		898F0EBC2D0ABB1100FAE99D /* MovieCatalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieCatalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -112,7 +138,8 @@
 		893D7CF62D28207900F15B29 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				893D7CB72D281C6400F15B29 /* AuthError.swift */,
+				893D7D1A2D2831A000F15B29 /* UserRegisterDTO.swift */,
+				893D7D132D28307200F15B29 /* Common */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -170,8 +197,9 @@
 		893D7CFC2D2821B500F15B29 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				893D7CDB2D281C6400F15B29 /* ViewController.swift */,
+				893D7D602D2A55C400F15B29 /* Main */,
 				893D7CFD2D2821C300F15B29 /* Launch */,
+				893D7D202D28325000F15B29 /* Auth */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -187,6 +215,8 @@
 		893D7CFE2D2821D000F15B29 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				893D7D5D2D29613300F15B29 /* Coordinator */,
+				893D7D472D2919A100F15B29 /* Protocols */,
 				893D7D0E2D28236200F15B29 /* Common */,
 				893D7CFC2D2821B500F15B29 /* Scenes */,
 			);
@@ -215,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				893D7D0A2D28228400F15B29 /* LoginCredentials */,
+				893D7D532D291C3200F15B29 /* Gender.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -284,8 +315,112 @@
 			isa = PBXGroup;
 			children = (
 				893D7CFF2D28220900F15B29 /* Constants */,
+				893D7D632D2A569500F15B29 /* LoadingViewController.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		893D7D132D28307200F15B29 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D142D28308300F15B29 /* TokenInfo.swift */,
+				893D7CB72D281C6400F15B29 /* AuthError.swift */,
+				893D7D1C2D2831B400F15B29 /* GenderDTO.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		893D7D202D28325000F15B29 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D4A2D291A1500F15B29 /* Coordinator */,
+				893D7D212D28333700F15B29 /* Welcome */,
+				893D7D4D2D291AD400F15B29 /* Login */,
+				893D7D4E2D291AE200F15B29 /* Registration */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		893D7D212D28333700F15B29 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D232D28335B00F15B29 /* ViewModel */,
+				893D7D222D28334900F15B29 /* ViewController */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		893D7D222D28334900F15B29 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D452D2911A500F15B29 /* WelcomeViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		893D7D232D28335B00F15B29 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D552D291CD400F15B29 /* WelcomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		893D7D472D2919A100F15B29 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D482D2919B000F15B29 /* Coordinator.swift */,
+				893D7D572D291D0200F15B29 /* ViewModel.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		893D7D4A2D291A1500F15B29 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D4B2D291A2800F15B29 /* AuthCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		893D7D4D2D291AD400F15B29 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		893D7D4E2D291AE200F15B29 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D502D291B6700F15B29 /* ViewModel */,
+				893D7D5B2D291ED800F15B29 /* RegistrationViewController.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		893D7D502D291B6700F15B29 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D512D291C0400F15B29 /* UserInfoViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		893D7D5D2D29613300F15B29 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D5E2D29614000F15B29 /* AppCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		893D7D602D2A55C400F15B29 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D612D2A55CE00F15B29 /* MainCoordinator.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		898F0EB32D0ABB1100FAE99D = {
@@ -385,18 +520,31 @@
 				893D7CE32D281C6400F15B29 /* HTTPMethod.swift in Sources */,
 				893D7CE42D281C6400F15B29 /* HTTPStatusCode.swift in Sources */,
 				893D7CE52D281C6400F15B29 /* HTTPTask.swift in Sources */,
+				893D7D492D2919B000F15B29 /* Coordinator.swift in Sources */,
 				893D7D122D28284A00F15B29 /* KinopoiskApiConfig.swift in Sources */,
+				893D7D1B2D2831A000F15B29 /* UserRegisterDTO.swift in Sources */,
 				893D7CE62D281C6400F15B29 /* NetworkError.swift in Sources */,
+				893D7D582D291D0200F15B29 /* ViewModel.swift in Sources */,
+				893D7D4C2D291A2800F15B29 /* AuthCoordinator.swift in Sources */,
+				893D7D5F2D29614000F15B29 /* AppCoordinator.swift in Sources */,
+				893D7D542D291C3200F15B29 /* Gender.swift in Sources */,
+				893D7D1D2D2831B400F15B29 /* GenderDTO.swift in Sources */,
 				893D7CE72D281C6400F15B29 /* NetworkConfig.swift in Sources */,
 				893D7CE82D281C6400F15B29 /* URLParameterEncoder.swift in Sources */,
+				893D7D562D291CD400F15B29 /* WelcomeViewModel.swift in Sources */,
+				893D7D642D2A569500F15B29 /* LoadingViewController.swift in Sources */,
 				893D7CE92D281C6400F15B29 /* KeychainService.swift in Sources */,
+				893D7D622D2A55CE00F15B29 /* MainCoordinator.swift in Sources */,
+				893D7D462D2911A500F15B29 /* WelcomeViewController.swift in Sources */,
 				893D7CEA2D281C6400F15B29 /* NetworkService.swift in Sources */,
+				893D7D522D291C0400F15B29 /* UserInfoViewModel.swift in Sources */,
 				893D7CEB2D281C6400F15B29 /* LoginCredentials.swift in Sources */,
+				893D7D152D28308300F15B29 /* TokenInfo.swift in Sources */,
 				893D7CEC2D281C6400F15B29 /* AuthRepository.swift in Sources */,
 				893D7CED2D281C6400F15B29 /* LoginUseCase.swift in Sources */,
 				893D7CEE2D281C6400F15B29 /* LocalizedKey.swift in Sources */,
-				893D7CEF2D281C6400F15B29 /* ViewController.swift in Sources */,
 				893D7D102D28249B00F15B29 /* AuthNetworkConfig.swift in Sources */,
+				893D7D5C2D291ED800F15B29 /* RegistrationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
