@@ -41,6 +41,11 @@
 		893D7D5F2D29614000F15B29 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D5E2D29614000F15B29 /* AppCoordinator.swift */; };
 		893D7D622D2A55CE00F15B29 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D612D2A55CE00F15B29 /* MainCoordinator.swift */; };
 		893D7D642D2A569500F15B29 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D632D2A569500F15B29 /* LoadingViewController.swift */; };
+		893D7D682D2A8B0700F15B29 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D672D2A8B0700F15B29 /* CustomButton.swift */; };
+		893D7D6B2D2ABD6900F15B29 /* LocalizedKey + String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D6A2D2ABD6900F15B29 /* LocalizedKey + String.swift */; };
+		893D7D6F2D2ADCC800F15B29 /* Manrope-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 893D7D6D2D2ADCC800F15B29 /* Manrope-Light.ttf */; };
+		893D7D702D2ADCC800F15B29 /* Manrope-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 893D7D6C2D2ADCC800F15B29 /* Manrope-Bold.ttf */; };
+		893D7D712D2ADCC800F15B29 /* Manrope-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 893D7D6E2D2ADCC800F15B29 /* Manrope-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +84,11 @@
 		893D7D5E2D29614000F15B29 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		893D7D612D2A55CE00F15B29 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		893D7D632D2A569500F15B29 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		893D7D672D2A8B0700F15B29 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		893D7D6A2D2ABD6900F15B29 /* LocalizedKey + String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalizedKey + String.swift"; sourceTree = "<group>"; };
+		893D7D6C2D2ADCC800F15B29 /* Manrope-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Bold.ttf"; sourceTree = "<group>"; };
+		893D7D6D2D2ADCC800F15B29 /* Manrope-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Light.ttf"; sourceTree = "<group>"; };
+		893D7D6E2D2ADCC800F15B29 /* Manrope-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Regular.ttf"; sourceTree = "<group>"; };
 		898F0EBC2D0ABB1100FAE99D /* MovieCatalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieCatalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -188,6 +198,7 @@
 		893D7CFB2D28219C00F15B29 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				893D7D722D2B8F0100F15B29 /* Font */,
 				893D7CD82D281C6400F15B29 /* Assets.xcassets */,
 				893D7CD92D281C6400F15B29 /* Localizable.xcstrings */,
 			);
@@ -314,6 +325,8 @@
 		893D7D0E2D28236200F15B29 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				893D7D692D2ABD5100F15B29 /* Ex */,
+				893D7D652D2A8AB800F15B29 /* Styles */,
 				893D7CFF2D28220900F15B29 /* Constants */,
 				893D7D632D2A569500F15B29 /* LoadingViewController.swift */,
 			);
@@ -423,6 +436,40 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		893D7D652D2A8AB800F15B29 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D662D2A8AC900F15B29 /* ButtonStyle */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
+		893D7D662D2A8AC900F15B29 /* ButtonStyle */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D672D2A8B0700F15B29 /* CustomButton.swift */,
+			);
+			path = ButtonStyle;
+			sourceTree = "<group>";
+		};
+		893D7D692D2ABD5100F15B29 /* Ex */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D6A2D2ABD6900F15B29 /* LocalizedKey + String.swift */,
+			);
+			path = Ex;
+			sourceTree = "<group>";
+		};
+		893D7D722D2B8F0100F15B29 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D6C2D2ADCC800F15B29 /* Manrope-Bold.ttf */,
+				893D7D6D2D2ADCC800F15B29 /* Manrope-Light.ttf */,
+				893D7D6E2D2ADCC800F15B29 /* Manrope-Regular.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		898F0EB32D0ABB1100FAE99D = {
 			isa = PBXGroup;
 			children = (
@@ -501,6 +548,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				893D7D6F2D2ADCC800F15B29 /* Manrope-Light.ttf in Resources */,
+				893D7D702D2ADCC800F15B29 /* Manrope-Bold.ttf in Resources */,
+				893D7D712D2ADCC800F15B29 /* Manrope-Regular.ttf in Resources */,
 				893D7CDD2D281C6400F15B29 /* LaunchScreen.storyboard in Resources */,
 				893D7CDE2D281C6400F15B29 /* Assets.xcassets in Resources */,
 				893D7CDF2D281C6400F15B29 /* Localizable.xcstrings in Resources */,
@@ -537,7 +587,9 @@
 				893D7D622D2A55CE00F15B29 /* MainCoordinator.swift in Sources */,
 				893D7D462D2911A500F15B29 /* WelcomeViewController.swift in Sources */,
 				893D7CEA2D281C6400F15B29 /* NetworkService.swift in Sources */,
+				893D7D6B2D2ABD6900F15B29 /* LocalizedKey + String.swift in Sources */,
 				893D7D522D291C0400F15B29 /* UserInfoViewModel.swift in Sources */,
+				893D7D682D2A8B0700F15B29 /* CustomButton.swift in Sources */,
 				893D7CEB2D281C6400F15B29 /* LoginCredentials.swift in Sources */,
 				893D7D152D28308300F15B29 /* TokenInfo.swift in Sources */,
 				893D7CEC2D281C6400F15B29 /* AuthRepository.swift in Sources */,

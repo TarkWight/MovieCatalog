@@ -19,5 +19,11 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Manrope-Regular.ttf</string>
+		<string>Manrope-Bold.ttf</string>
+		<string>Manrope-Light.ttf</string>
+	</array>
 </dict>
 </plist>
