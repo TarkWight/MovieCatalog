@@ -35,7 +35,7 @@ final class WelcomeViewController: UIViewController {
         backgroundImage.contentMode = .scaleAspectFill
         view.insertSubview(backgroundImage, at: 0)
 
-        view.backgroundColor = .clear
+        view.backgroundColor = .appDark
 
         let welcomeLabel = UILabel()
         welcomeLabel.text = LocalizedKey.Welcome.title

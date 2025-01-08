@@ -7,10 +7,6 @@
 
 import Foundation
 
-
-
-import Foundation
-
 final class WelcomeViewModel: ViewModel {
     private let coordinator: AuthCoordinatorProtocol
 
