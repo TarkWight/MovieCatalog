@@ -235,6 +235,9 @@
         }
       }
     },
+    "Continue" : {
+
+    },
     "Country" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -366,10 +369,16 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Вход"
+            "value" : "Войти в аккаунт"
           }
         }
       }
+    },
+    "error" : {
+
+    },
+    "Error" : {
+
     },
     "Favorites" : {
       "extractionState" : "manual",
@@ -688,6 +697,9 @@
         }
       }
     },
+    "LoginButton" : {
+
+    },
     "LoginFailed" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -704,6 +716,9 @@
           }
         }
       }
+    },
+    "LoginTitle" : {
+
     },
     "LogOut" : {
       "extractionState" : "manual",
@@ -892,6 +907,9 @@
         }
       }
     },
+    "ok" : {
+
+    },
     "OK" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -925,6 +943,9 @@
           }
         }
       }
+    },
+    "PasswordTextField" : {
+
     },
     "Profile" : {
       "extractionState" : "manual",
@@ -1028,6 +1049,9 @@
         }
       }
     },
+    "RegisterButton" : {
+
+    },
     "Registration" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1061,6 +1085,9 @@
           }
         }
       }
+    },
+    "RegistrationTitle" : {
+
     },
     "RequestFailed" : {
       "extractionState" : "manual",
@@ -1180,6 +1207,12 @@
           }
         }
       }
+    },
+    "UsernameTextField" : {
+
+    },
+    "WelcomeLoginButton" : {
+
     },
     "WelcomeTitle" : {
       "extractionState" : "manual",

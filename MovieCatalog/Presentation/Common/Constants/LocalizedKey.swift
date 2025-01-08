@@ -18,26 +18,45 @@ enum LocalizedKey {
 
     enum Welcome {
         static let title = NSLocalizedString("WelcomeTitle", comment: "")
+        
+        enum Button {
+            static let login = NSLocalizedString("WelcomeLoginButton", comment: "")
+            static let register = NSLocalizedString("RegisterButton", comment: "")
+        }
     }
 
     enum Auth {
+        enum LigIn {
+            static let title = NSLocalizedString("LoginTitle", comment: "")
+            static let button = NSLocalizedString("LoginButton", comment: "")
+            
+            enum TextField {
+                static let username = NSLocalizedString("UsernameTextField", comment: "")
+                static let password = NSLocalizedString("PasswordTextField", comment: "")
+            }
+        }
+        
+        enum Registration {
+            static let title = NSLocalizedString("RegistrationTitle", comment: "")
+        }
+        
+        
+        
+        
         enum Label {
             static let entrance = NSLocalizedString("Entrance", comment: "")
             static let registration = NSLocalizedString("Registration", comment: "")
         }
 
+        enum Button {
+            static let login = NSLocalizedString("LoginButton", comment: "")
+            static let register = NSLocalizedString("RegisterButton", comment: "")
+        }
         enum Action {
             static let logIn = NSLocalizedString("LogIn", comment: "")
             static let logOut = NSLocalizedString("LogOut", comment: "")
             static let register = NSLocalizedString("Register", comment: "")
             static let `continue` = NSLocalizedString("Continue", comment: "")
-        }
-
-        enum Callout {
-            static let noAccountYet = NSLocalizedString("NotAccountYet", comment: "")
-            static let registerAccount = NSLocalizedString("RegisterAccount", comment: "")
-            static let alreadyHaveAccount = NSLocalizedString("AlreadyHaveAccount", comment: "")
-            static let logInToAccount = NSLocalizedString("LogInAccount", comment: "")
         }
     }
 
