@@ -98,7 +98,6 @@ extension KeychainService {
         }
     }
 
-    
     func deleteToken() throws {
         let query = [
             kSecClass: kSecClassGenericPassword,

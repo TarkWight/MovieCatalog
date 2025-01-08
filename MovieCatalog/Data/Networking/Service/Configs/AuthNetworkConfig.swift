@@ -13,7 +13,7 @@ enum AuthNetworkConfig: NetworkConfig {
     case register(Data)
     
     var path: String {
-        "/account"
+        "account/"
     }
     
     var endPoint: String {
