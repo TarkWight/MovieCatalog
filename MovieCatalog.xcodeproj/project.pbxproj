@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		891430242D2D4CAF00D1BA36 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891430232D2D4CAF00D1BA36 /* CustomTextField.swift */; };
+		891430262D2D51DC00D1BA36 /* AppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891430252D2D51DC00D1BA36 /* AppFactory.swift */; };
+		8914302A2D2D522F00D1BA36 /* SceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891430292D2D522F00D1BA36 /* SceneFactory.swift */; };
+		8914302C2D2D524700D1BA36 /* SceneFactoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8914302B2D2D524700D1BA36 /* SceneFactoryProtocols.swift */; };
+		8914302E2D2D533100D1BA36 /* SceneViewFactoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8914302D2D2D533100D1BA36 /* SceneViewFactoryProtocols.swift */; };
+		891430302D2D541600D1BA36 /* AuthRepositoryImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8914302F2D2D541600D1BA36 /* AuthRepositoryImplementation.swift */; };
+		891430322D2D562700D1BA36 /* AppCoordinatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891430312D2D562700D1BA36 /* AppCoordinatorViewController.swift */; };
+		891430342D2D680400D1BA36 /* AuthCoordinatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891430332D2D680400D1BA36 /* AuthCoordinatorViewController.swift */; };
+		891430362D2E72E500D1BA36 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891430352D2E72E500D1BA36 /* BaseViewController.swift */; };
+		891430392D2EBC5200D1BA36 /* ValidationErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891430382D2EBC5200D1BA36 /* ValidationErrorHandler.swift */; };
+		8914303C2D2EC51800D1BA36 /* ValidatePasswordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8914303B2D2EC51800D1BA36 /* ValidatePasswordUseCase.swift */; };
+		8914303E2D2EC52300D1BA36 /* ValidateUsernameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8914303D2D2EC52300D1BA36 /* ValidateUsernameUseCase.swift */; };
+		891430402D2EC53B00D1BA36 /* ValidateEmailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8914303F2D2EC53B00D1BA36 /* ValidateEmailUseCase.swift */; };
 		893D7CDD2D281C6400F15B29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 893D7CD42D281C6400F15B29 /* LaunchScreen.storyboard */; };
 		893D7CDE2D281C6400F15B29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 893D7CD82D281C6400F15B29 /* Assets.xcassets */; };
 		893D7CDF2D281C6400F15B29 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 893D7CD92D281C6400F15B29 /* Localizable.xcstrings */; };
@@ -46,9 +59,24 @@
 		893D7D6F2D2ADCC800F15B29 /* Manrope-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 893D7D6D2D2ADCC800F15B29 /* Manrope-Light.ttf */; };
 		893D7D702D2ADCC800F15B29 /* Manrope-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 893D7D6C2D2ADCC800F15B29 /* Manrope-Bold.ttf */; };
 		893D7D712D2ADCC800F15B29 /* Manrope-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 893D7D6E2D2ADCC800F15B29 /* Manrope-Regular.ttf */; };
+		893D7D882D2B94FC00F15B29 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D872D2B94FC00F15B29 /* LoginViewController.swift */; };
+		893D7D8A2D2B952700F15B29 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D7D892D2B952700F15B29 /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		891430232D2D4CAF00D1BA36 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		891430252D2D51DC00D1BA36 /* AppFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFactory.swift; sourceTree = "<group>"; };
+		891430292D2D522F00D1BA36 /* SceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneFactory.swift; sourceTree = "<group>"; };
+		8914302B2D2D524700D1BA36 /* SceneFactoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneFactoryProtocols.swift; sourceTree = "<group>"; };
+		8914302D2D2D533100D1BA36 /* SceneViewFactoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneViewFactoryProtocols.swift; sourceTree = "<group>"; };
+		8914302F2D2D541600D1BA36 /* AuthRepositoryImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepositoryImplementation.swift; sourceTree = "<group>"; };
+		891430312D2D562700D1BA36 /* AppCoordinatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorViewController.swift; sourceTree = "<group>"; };
+		891430332D2D680400D1BA36 /* AuthCoordinatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinatorViewController.swift; sourceTree = "<group>"; };
+		891430352D2E72E500D1BA36 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		891430382D2EBC5200D1BA36 /* ValidationErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationErrorHandler.swift; sourceTree = "<group>"; };
+		8914303B2D2EC51800D1BA36 /* ValidatePasswordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatePasswordUseCase.swift; sourceTree = "<group>"; };
+		8914303D2D2EC52300D1BA36 /* ValidateUsernameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateUsernameUseCase.swift; sourceTree = "<group>"; };
+		8914303F2D2EC53B00D1BA36 /* ValidateEmailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateEmailUseCase.swift; sourceTree = "<group>"; };
 		893D7CB32D281C6400F15B29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		893D7CB42D281C6400F15B29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		893D7CB52D281C6400F15B29 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +117,8 @@
 		893D7D6C2D2ADCC800F15B29 /* Manrope-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Bold.ttf"; sourceTree = "<group>"; };
 		893D7D6D2D2ADCC800F15B29 /* Manrope-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Light.ttf"; sourceTree = "<group>"; };
 		893D7D6E2D2ADCC800F15B29 /* Manrope-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Regular.ttf"; sourceTree = "<group>"; };
+		893D7D872D2B94FC00F15B29 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		893D7D892D2B952700F15B29 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		898F0EBC2D0ABB1100FAE99D /* MovieCatalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieCatalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -103,6 +133,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		891430222D2D4C7F00D1BA36 /* TextFieldStyles */ = {
+			isa = PBXGroup;
+			children = (
+				891430232D2D4CAF00D1BA36 /* CustomTextField.swift */,
+			);
+			path = TextFieldStyles;
+			sourceTree = "<group>";
+		};
+		891430272D2D51E300D1BA36 /* ScreenFactory */ = {
+			isa = PBXGroup;
+			children = (
+				891430292D2D522F00D1BA36 /* SceneFactory.swift */,
+				8914302B2D2D524700D1BA36 /* SceneFactoryProtocols.swift */,
+				8914302D2D2D533100D1BA36 /* SceneViewFactoryProtocols.swift */,
+			);
+			path = ScreenFactory;
+			sourceTree = "<group>";
+		};
+		891430282D2D51EF00D1BA36 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				893D7CB32D281C6400F15B29 /* AppDelegate.swift */,
+				893D7CB52D281C6400F15B29 /* SceneDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		891430372D2EBC4D00D1BA36 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				891430382D2EBC5200D1BA36 /* ValidationErrorHandler.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		8914303A2D2EC51300D1BA36 /* Validation */ = {
+			isa = PBXGroup;
+			children = (
+				8914303F2D2EC53B00D1BA36 /* ValidateEmailUseCase.swift */,
+				8914303D2D2EC52300D1BA36 /* ValidateUsernameUseCase.swift */,
+				8914303B2D2EC51800D1BA36 /* ValidatePasswordUseCase.swift */,
+			);
+			path = Validation;
+			sourceTree = "<group>";
+		};
 		893D7CF12D28200400F15B29 /* MovieCatalog */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,9 +193,10 @@
 		893D7CF22D28202700F15B29 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				891430282D2D51EF00D1BA36 /* Delegates */,
+				891430252D2D51DC00D1BA36 /* AppFactory.swift */,
+				891430272D2D51E300D1BA36 /* ScreenFactory */,
 				893D7CB42D281C6400F15B29 /* Info.plist */,
-				893D7CB32D281C6400F15B29 /* AppDelegate.swift */,
-				893D7CB52D281C6400F15B29 /* SceneDelegate.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -200,7 +276,6 @@
 			children = (
 				893D7D722D2B8F0100F15B29 /* Font */,
 				893D7CD82D281C6400F15B29 /* Assets.xcassets */,
-				893D7CD92D281C6400F15B29 /* Localizable.xcstrings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -237,6 +312,7 @@
 		893D7CFF2D28220900F15B29 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				893D7CD92D281C6400F15B29 /* Localizable.xcstrings */,
 				893D7CD12D281C6400F15B29 /* LocalizedKey.swift */,
 			);
 			path = Constants;
@@ -272,6 +348,7 @@
 		893D7D062D28224400F15B29 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				8914303A2D2EC51300D1BA36 /* Validation */,
 				893D7D072D28224B00F15B29 /* Auth */,
 			);
 			path = UseCases;
@@ -318,6 +395,7 @@
 		893D7D0D2D28232900F15B29 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				8914302F2D2D541600D1BA36 /* AuthRepositoryImplementation.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -325,10 +403,11 @@
 		893D7D0E2D28236200F15B29 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				893D7D692D2ABD5100F15B29 /* Ex */,
+				891430372D2EBC4D00D1BA36 /* Helpers */,
+				893D7D732D2B933B00F15B29 /* Components */,
+				893D7D692D2ABD5100F15B29 /* Extensions */,
 				893D7D652D2A8AB800F15B29 /* Styles */,
 				893D7CFF2D28220900F15B29 /* Constants */,
-				893D7D632D2A569500F15B29 /* LoadingViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -392,6 +471,7 @@
 			isa = PBXGroup;
 			children = (
 				893D7D4B2D291A2800F15B29 /* AuthCoordinator.swift */,
+				891430332D2D680400D1BA36 /* AuthCoordinatorViewController.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -399,6 +479,8 @@
 		893D7D4D2D291AD400F15B29 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				893D7D762D2B938F00F15B29 /* ViewController */,
+				893D7D752D2B938300F15B29 /* ViewModel */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -424,6 +506,7 @@
 			isa = PBXGroup;
 			children = (
 				893D7D5E2D29614000F15B29 /* AppCoordinator.swift */,
+				891430312D2D562700D1BA36 /* AppCoordinatorViewController.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -432,6 +515,10 @@
 			isa = PBXGroup;
 			children = (
 				893D7D612D2A55CE00F15B29 /* MainCoordinator.swift */,
+				893D7D792D2B939900F15B29 /* Feed */,
+				893D7D7E2D2B945500F15B29 /* Films */,
+				893D7D822D2B945700F15B29 /* Favorites */,
+				893D7D862D2B945800F15B29 /* Profile */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -439,6 +526,7 @@
 		893D7D652D2A8AB800F15B29 /* Styles */ = {
 			isa = PBXGroup;
 			children = (
+				891430222D2D4C7F00D1BA36 /* TextFieldStyles */,
 				893D7D662D2A8AC900F15B29 /* ButtonStyle */,
 			);
 			path = Styles;
@@ -452,12 +540,12 @@
 			path = ButtonStyle;
 			sourceTree = "<group>";
 		};
-		893D7D692D2ABD5100F15B29 /* Ex */ = {
+		893D7D692D2ABD5100F15B29 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				893D7D6A2D2ABD6900F15B29 /* LocalizedKey + String.swift */,
 			);
-			path = Ex;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		893D7D722D2B8F0100F15B29 /* Font */ = {
@@ -468,6 +556,163 @@
 				893D7D6E2D2ADCC800F15B29 /* Manrope-Regular.ttf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		893D7D732D2B933B00F15B29 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D742D2B935600F15B29 /* Views */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		893D7D742D2B935600F15B29 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				891430352D2E72E500D1BA36 /* BaseViewController.swift */,
+				893D7D632D2A569500F15B29 /* LoadingViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		893D7D752D2B938300F15B29 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D892D2B952700F15B29 /* LoginViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		893D7D762D2B938F00F15B29 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D872D2B94FC00F15B29 /* LoginViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		893D7D772D2B939900F15B29 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		893D7D782D2B939900F15B29 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		893D7D792D2B939900F15B29 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D7A2D2B93E100F15B29 /* Coordinator */,
+				893D7D772D2B939900F15B29 /* ViewController */,
+				893D7D782D2B939900F15B29 /* ViewModel */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		893D7D7A2D2B93E100F15B29 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		893D7D7B2D2B945500F15B29 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		893D7D7C2D2B945500F15B29 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		893D7D7D2D2B945500F15B29 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		893D7D7E2D2B945500F15B29 /* Films */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D7B2D2B945500F15B29 /* Coordinator */,
+				893D7D7C2D2B945500F15B29 /* ViewController */,
+				893D7D7D2D2B945500F15B29 /* ViewModel */,
+			);
+			path = Films;
+			sourceTree = "<group>";
+		};
+		893D7D7F2D2B945700F15B29 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		893D7D802D2B945700F15B29 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		893D7D812D2B945700F15B29 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		893D7D822D2B945700F15B29 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D7F2D2B945700F15B29 /* Coordinator */,
+				893D7D802D2B945700F15B29 /* ViewController */,
+				893D7D812D2B945700F15B29 /* ViewModel */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		893D7D832D2B945800F15B29 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		893D7D842D2B945800F15B29 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		893D7D852D2B945800F15B29 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		893D7D862D2B945800F15B29 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D832D2B945800F15B29 /* Coordinator */,
+				893D7D842D2B945800F15B29 /* ViewController */,
+				893D7D852D2B945800F15B29 /* ViewModel */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		898F0EB32D0ABB1100FAE99D = {
@@ -516,7 +761,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1610;
-				LastUpgradeCheck = 1610;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					898F0EBB2D0ABB1100FAE99D = {
 						CreatedOnToolsVersion = 16.1;
@@ -569,31 +814,46 @@
 				893D7CE22D281C6400F15B29 /* AuthError.swift in Sources */,
 				893D7CE32D281C6400F15B29 /* HTTPMethod.swift in Sources */,
 				893D7CE42D281C6400F15B29 /* HTTPStatusCode.swift in Sources */,
+				891430362D2E72E500D1BA36 /* BaseViewController.swift in Sources */,
 				893D7CE52D281C6400F15B29 /* HTTPTask.swift in Sources */,
 				893D7D492D2919B000F15B29 /* Coordinator.swift in Sources */,
+				8914302E2D2D533100D1BA36 /* SceneViewFactoryProtocols.swift in Sources */,
+				891430242D2D4CAF00D1BA36 /* CustomTextField.swift in Sources */,
 				893D7D122D28284A00F15B29 /* KinopoiskApiConfig.swift in Sources */,
 				893D7D1B2D2831A000F15B29 /* UserRegisterDTO.swift in Sources */,
+				891430392D2EBC5200D1BA36 /* ValidationErrorHandler.swift in Sources */,
+				891430302D2D541600D1BA36 /* AuthRepositoryImplementation.swift in Sources */,
 				893D7CE62D281C6400F15B29 /* NetworkError.swift in Sources */,
 				893D7D582D291D0200F15B29 /* ViewModel.swift in Sources */,
 				893D7D4C2D291A2800F15B29 /* AuthCoordinator.swift in Sources */,
 				893D7D5F2D29614000F15B29 /* AppCoordinator.swift in Sources */,
+				893D7D8A2D2B952700F15B29 /* LoginViewModel.swift in Sources */,
 				893D7D542D291C3200F15B29 /* Gender.swift in Sources */,
 				893D7D1D2D2831B400F15B29 /* GenderDTO.swift in Sources */,
 				893D7CE72D281C6400F15B29 /* NetworkConfig.swift in Sources */,
+				891430402D2EC53B00D1BA36 /* ValidateEmailUseCase.swift in Sources */,
 				893D7CE82D281C6400F15B29 /* URLParameterEncoder.swift in Sources */,
+				8914302A2D2D522F00D1BA36 /* SceneFactory.swift in Sources */,
 				893D7D562D291CD400F15B29 /* WelcomeViewModel.swift in Sources */,
 				893D7D642D2A569500F15B29 /* LoadingViewController.swift in Sources */,
 				893D7CE92D281C6400F15B29 /* KeychainService.swift in Sources */,
 				893D7D622D2A55CE00F15B29 /* MainCoordinator.swift in Sources */,
 				893D7D462D2911A500F15B29 /* WelcomeViewController.swift in Sources */,
 				893D7CEA2D281C6400F15B29 /* NetworkService.swift in Sources */,
+				891430322D2D562700D1BA36 /* AppCoordinatorViewController.swift in Sources */,
 				893D7D6B2D2ABD6900F15B29 /* LocalizedKey + String.swift in Sources */,
+				891430262D2D51DC00D1BA36 /* AppFactory.swift in Sources */,
 				893D7D522D291C0400F15B29 /* UserInfoViewModel.swift in Sources */,
 				893D7D682D2A8B0700F15B29 /* CustomButton.swift in Sources */,
 				893D7CEB2D281C6400F15B29 /* LoginCredentials.swift in Sources */,
 				893D7D152D28308300F15B29 /* TokenInfo.swift in Sources */,
 				893D7CEC2D281C6400F15B29 /* AuthRepository.swift in Sources */,
+				8914302C2D2D524700D1BA36 /* SceneFactoryProtocols.swift in Sources */,
 				893D7CED2D281C6400F15B29 /* LoginUseCase.swift in Sources */,
+				891430342D2D680400D1BA36 /* AuthCoordinatorViewController.swift in Sources */,
+				8914303C2D2EC51800D1BA36 /* ValidatePasswordUseCase.swift in Sources */,
+				893D7D882D2B94FC00F15B29 /* LoginViewController.swift in Sources */,
+				8914303E2D2EC52300D1BA36 /* ValidateUsernameUseCase.swift in Sources */,
 				893D7CEE2D281C6400F15B29 /* LocalizedKey.swift in Sources */,
 				893D7D102D28249B00F15B29 /* AuthNetworkConfig.swift in Sources */,
 				893D7D5C2D291ED800F15B29 /* RegistrationViewController.swift in Sources */,
@@ -681,6 +941,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -745,6 +1006,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
