@@ -10,11 +10,9 @@ import UIKit
 final class MainCoordinator {
 
     private let tabBarController: UITabBarController
-    private let showAuthSceneHandler: () -> Void
 
-    init(showAuthSceneHandler: @escaping () -> Void) {
+    init() {
         self.tabBarController = UITabBarController()
-        self.showAuthSceneHandler = showAuthSceneHandler
     }
 
     func start() -> UITabBarController {

@@ -7,44 +7,41 @@
 
 import UIKit
 
+@MainActor
 protocol AuthCoordinatorProtocol: AnyObject {
+    func showWelcome()
     func showLogin()
-    func showMainScene()
     func showRegistration()
 }
 
-final class AuthCoordinator: Coordinator {
-
+@MainActor
+final class AuthCoordinator {
     private(set) var navigationController: UINavigationController
-    private let showMainSceneHandler: () -> Void
+    private let sceneFactory: SceneFactory
 
-    init(navigationController: UINavigationController, showMainSceneHandler: @escaping () -> Void) {
+    init(navigationController: UINavigationController, sceneFactory: SceneFactory) {
         self.navigationController = navigationController
-        self.showMainSceneHandler = showMainSceneHandler
+        self.sceneFactory = sceneFactory
     }
 
     func start() {
-        showLogin()
+        showWelcome()
     }
 }
 
 extension AuthCoordinator: AuthCoordinatorProtocol {
+    func showWelcome() {
+        let welcomeVC = sceneFactory.makeWelcomeView(coordinator: self)
+        navigationController.setViewControllers([welcomeVC], animated: true)
+    }
 
     func showLogin() {
-            Task { @MainActor in
-                let viewModel = WelcomeViewModel(coordinator: self)
-                let loginVC = WelcomeViewController(viewModel: viewModel)
-                navigationController.setViewControllers([loginVC], animated: true)
-            }
-        }
-
-    func showMainScene() {
-        showMainSceneHandler()
+        let loginVC = sceneFactory.makeLoginView(coordinator: self)
+        navigationController.setViewControllers([loginVC], animated: true)
     }
 
     func showRegistration() {
-        let personalInfoVC = RegistrationViewController()
-        navigationController.pushViewController(personalInfoVC, animated: true)
+//        let registrationVC = sceneFactory.makeRegistrationView(coordinator: self)
+//        navigationController.pushViewController(registrationVC, animated: true)
     }
-
 }
