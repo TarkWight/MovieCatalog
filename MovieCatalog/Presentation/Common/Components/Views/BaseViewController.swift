@@ -10,12 +10,14 @@ import UIKit
 
 class BaseViewController: UIViewController {
     
+    // MARK: - Properties
+    private var shouldShowBackButton: Bool = true
+    
     // MARK: - UI Elements
     private let backButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.tintColor = UIColor(named: "AppDarkFaded")
-        button.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        button.setImage(UIImage(named: "ChevronLeft")?.withRenderingMode(.alwaysOriginal), for: .normal)
         return button
     }()
     
@@ -32,6 +34,12 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBaseUI()
+        
+        if !shouldShowBackButton {
+            hideCustomBackButton()
+        }
+        
+        hideSystemBackButton()
     }
     
     // MARK: - Public Methods
@@ -39,29 +47,26 @@ class BaseViewController: UIViewController {
         titleLabel.text = title
     }
     
-    func configureBackButton(action: Selector?) {
-        backButton.addTarget(self, action: action ?? #selector(didTapBackButton), for: .touchUpInside)
+    func hideBackButton() {
+        shouldShowBackButton = false
     }
     
-    
-    // MARK: - Actions
-    @objc private func didTapBackButton() {
-        navigationController?.popViewController(animated: true)
+    // MARK: - Private Methods
+    private func hideSystemBackButton() {
+        navigationItem.hidesBackButton = true
     }
     
-    // MARK: - Setup Methods
+    private func hideCustomBackButton() {
+        backButton.isHidden = true
+    }
+    
     private func setupBaseUI() {
         view.backgroundColor = UIColor(named: "AppDark")
-        
         view.addSubview(backButton)
         view.addSubview(titleLabel)
         
-        setupBaseConstraints()
-    }
-    
-    private func setupBaseConstraints() {
         NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 56),
+            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 78),
             backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             backButton.widthAnchor.constraint(equalToConstant: 40),
             backButton.heightAnchor.constraint(equalToConstant: 40),
@@ -69,7 +74,12 @@ class BaseViewController: UIViewController {
             titleLabel.centerYAnchor.constraint(equalTo: backButton.centerYAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: backButton.trailingAnchor, constant: 16)
         ])
+        
+        backButton.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
     }
     
-    
+    // MARK: - Actions
+    @objc private func didTapBackButton() {
+        navigationController?.popViewController(animated: true)
+    }
 }

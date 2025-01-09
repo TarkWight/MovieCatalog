@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class WelcomeViewController: UIViewController {
+final class WelcomeViewController: BaseViewController {
 
     // MARK: - Properties
     private let viewModel: WelcomeViewModel
@@ -24,7 +24,10 @@ final class WelcomeViewController: UIViewController {
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
+        hideBackButton()
+
         super.viewDidLoad()
+        
         setupUI()
     }
 

@@ -37,7 +37,7 @@ extension AuthCoordinator: AuthCoordinatorProtocol {
 
     func showLogin() {
         let loginVC = sceneFactory.makeLoginView(coordinator: self)
-        navigationController.setViewControllers([loginVC], animated: true)
+        navigationController.pushViewController(loginVC, animated: true)
     }
 
     func showRegistration() {
