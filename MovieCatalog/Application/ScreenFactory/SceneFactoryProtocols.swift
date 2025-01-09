@@ -16,3 +16,9 @@ protocol LoginViewFactory {
 protocol WelcomeViewFactory {
     func makeWelcomeView(coordinator: AuthCoordinatorProtocol) -> WelcomeViewController
 }
+
+@MainActor
+protocol RegisterViewFactory {
+    func makeRegisterView(personalInfo: UserInfoViewModel,
+                          coordinator: AuthCoordinatorProtocol) -> RegisterViewController
+}
