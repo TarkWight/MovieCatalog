@@ -41,7 +41,8 @@ extension AuthCoordinator: AuthCoordinatorProtocol {
     }
 
     func showRegistration() {
-//        let registrationVC = sceneFactory.makeRegistrationView(coordinator: self)
-//        navigationController.pushViewController(registrationVC, animated: true)
+        let personalInfo = UserInfoViewModel.default
+        let registrationVC = sceneFactory.makeRegisterView(personalInfo: personalInfo, coordinator: self)
+        navigationController.pushViewController(registrationVC, animated: true)
     }
 }
