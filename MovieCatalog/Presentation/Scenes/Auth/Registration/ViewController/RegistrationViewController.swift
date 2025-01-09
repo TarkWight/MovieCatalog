@@ -60,42 +60,42 @@ final class RegisterViewController: BaseViewController {
             usernameField.heightAnchor.constraint(equalToConstant: 48),
             usernameField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             usernameField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
-            usernameField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
+            usernameField.bottomAnchor.constraint(equalTo: emailField.topAnchor, constant: -Constants.Layout.inputStackSpacing),
             
             emailField.heightAnchor.constraint(equalToConstant: 48),
             emailField.leadingAnchor.constraint(equalTo: usernameField.leadingAnchor),
             emailField.trailingAnchor.constraint(equalTo: usernameField.trailingAnchor),
-            emailField.topAnchor.constraint(equalTo: usernameField.bottomAnchor, constant: 16),
+            emailField.bottomAnchor.constraint(equalTo: nameField.topAnchor, constant: -Constants.Layout.inputStackSpacing),
             
             nameField.heightAnchor.constraint(equalToConstant: 48),
             nameField.leadingAnchor.constraint(equalTo: usernameField.leadingAnchor),
             nameField.trailingAnchor.constraint(equalTo: usernameField.trailingAnchor),
-            nameField.topAnchor.constraint(equalTo: emailField.bottomAnchor, constant: 16),
+            nameField.bottomAnchor.constraint(equalTo: passwordField.topAnchor, constant: -Constants.Layout.inputStackSpacing),
             
             passwordField.heightAnchor.constraint(equalToConstant: 48),
             passwordField.leadingAnchor.constraint(equalTo: usernameField.leadingAnchor),
             passwordField.trailingAnchor.constraint(equalTo: usernameField.trailingAnchor),
-            passwordField.topAnchor.constraint(equalTo: nameField.bottomAnchor, constant: 16),
+            passwordField.bottomAnchor.constraint(equalTo: confirmPasswordField.topAnchor, constant: -Constants.Layout.inputStackSpacing),
             
             confirmPasswordField.heightAnchor.constraint(equalToConstant: 48),
             confirmPasswordField.leadingAnchor.constraint(equalTo: usernameField.leadingAnchor),
             confirmPasswordField.trailingAnchor.constraint(equalTo: usernameField.trailingAnchor),
-            confirmPasswordField.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: 16),
+            confirmPasswordField.bottomAnchor.constraint(equalTo: birthDateField.topAnchor, constant: -Constants.Layout.inputStackSpacing),
             
             birthDateField.heightAnchor.constraint(equalToConstant: 48),
             birthDateField.leadingAnchor.constraint(equalTo: usernameField.leadingAnchor),
             birthDateField.trailingAnchor.constraint(equalTo: usernameField.trailingAnchor),
-            birthDateField.topAnchor.constraint(equalTo: confirmPasswordField.bottomAnchor, constant: 16),
+            birthDateField.bottomAnchor.constraint(equalTo: genderPickerView.topAnchor, constant: -Constants.Layout.inputStackSpacing),
             
             genderPickerView.heightAnchor.constraint(equalToConstant: 48),
             genderPickerView.leadingAnchor.constraint(equalTo: usernameField.leadingAnchor),
             genderPickerView.trailingAnchor.constraint(equalTo: usernameField.trailingAnchor),
-            genderPickerView.topAnchor.constraint(equalTo: birthDateField.bottomAnchor, constant: 16),
+            genderPickerView.bottomAnchor.constraint(equalTo: registerButton.topAnchor, constant: -Constants.Layout.buttonTopOffset),
             
             registerButton.heightAnchor.constraint(equalToConstant: 48),
             registerButton.leadingAnchor.constraint(equalTo: usernameField.leadingAnchor),
             registerButton.trailingAnchor.constraint(equalTo: usernameField.trailingAnchor),
-            registerButton.topAnchor.constraint(equalTo: genderPickerView.bottomAnchor, constant: 32)
+            registerButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -Constants.Layout.safeAreaPadding)
         ])
     }
     
@@ -161,3 +161,15 @@ final class RegisterViewController: BaseViewController {
         viewModel.handle(.registerTapped)
     }
 }
+
+// MARK: - Constants
+private enum Constants {
+    enum Layout {
+        static let sidePadding: CGFloat = 24
+        static let inputStackSpacing: CGFloat = 8
+        static let buttonTopOffset: CGFloat = 32
+        static let inputFieldHeight: CGFloat = 48
+        static let safeAreaPadding: CGFloat = 24
+    }
+}
+

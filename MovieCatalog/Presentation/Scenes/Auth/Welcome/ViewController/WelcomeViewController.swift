@@ -25,9 +25,7 @@ final class WelcomeViewController: BaseViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         hideBackButton()
-
         super.viewDidLoad()
-        
         setupUI()
     }
 
