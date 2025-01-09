@@ -34,6 +34,8 @@ final class LoginViewController: BaseViewController {
 
     // MARK: - UI Setup
     private func setupUI() {
+        setBackgroundImage(named: "Background", topOffset: 0, heightMultiplier: 0.7)
+
         configureTitle(LocalizedKey.Auth.LigIn.title)
 
         [usernameField, passwordField, signInButton]

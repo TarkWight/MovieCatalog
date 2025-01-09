@@ -94,7 +94,7 @@ final class WelcomeViewController: BaseViewController {
 
     // MARK: - Constants
     private enum Constants {
-        static let backgroundImageName = "BackgroundPlaceholder"
+        static let backgroundImageName = "Background"
 
         static let welcomeFontName = "Manrope-Bold"
         static let welcomeFontSize: CGFloat = 36
