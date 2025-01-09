@@ -35,3 +35,20 @@ extension SceneFactory: WelcomeViewFactory {
         return viewController
     }
 }
+
+
+// MARK: - RegisterFactory
+extension SceneFactory: RegisterViewFactory {
+    func makeRegisterView(personalInfo: UserInfoViewModel, coordinator: AuthCoordinatorProtocol) -> RegisterViewController {
+        let viewModel = RegisterViewModel(
+            personalInfo: personalInfo,
+            coordinator: coordinator,
+            registerUseCase: appFactory.makeRegisterUseCase(),
+            validateUsernameUseCase: appFactory.makeValidateUsernameUseCase(),
+            validateEmailUseCase: appFactory.makeValidateEmailUseCase(),
+            validatePasswordUseCase: appFactory.makeValidatePasswordUseCase()            
+        )
+        let viewController = RegisterViewController(viewModel: viewModel)
+        return viewController
+    }
+}
