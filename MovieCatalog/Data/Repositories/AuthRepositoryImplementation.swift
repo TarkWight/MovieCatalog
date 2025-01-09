@@ -34,20 +34,20 @@ extension AuthRepositoryImplementation: AuthRepository {
         try keychainService.saveToken(tokenInfo.token)
     }
 
-//    func register(user: UserRegister) async throws {
-//        let userDto = UserRegisterDTO(
-//            userName: user.userName,
-//            name: user.name,
-//            password: user.password,
-//            email: user.email,
-//            birthDate: user.birthDate,
-//            gender: user.gender == .female ? .female : .male
-//        )
-//
-//        let data = try networkService.encode(userDto)
-//        let config = AuthNetworkConfig.register(data)
-//
-//        let tokenInfo: TokenInfo = try await networkService.request(with: config)
-//        try keychainService.saveToken(tokenInfo.token)
-//    }
+    func register(user: UserRegister) async throws {
+        let userDto = UserRegisterDTO(
+            userName: user.userName,
+            name: user.name,
+            password: user.password,
+            email: user.email,
+            birthDate: user.birthDate,
+            gender: user.gender == .female ? .female : .male
+        )
+
+        let data = try networkService.encode(userDto)
+        let config = AuthNetworkConfig.register(data)
+
+        let tokenInfo: TokenInfo = try await networkService.request(with: config)
+        try keychainService.saveToken(tokenInfo.token)
+    }
 }
