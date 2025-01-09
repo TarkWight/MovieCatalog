@@ -34,17 +34,17 @@ final class LoginViewController: BaseViewController {
 
     // MARK: - UI Setup
     private func setupUI() {
-        view.backgroundColor = UIColor(named: Constants.Colors.background)
+        configureTitle(LocalizedKey.Auth.LigIn.title)
 
-        view.addSubview(usernameField)
-        usernameField.translatesAutoresizingMaskIntoConstraints = false
+        [usernameField, passwordField, signInButton]
+            .forEach {
+                view.addSubview($0)
+                $0.translatesAutoresizingMaskIntoConstraints = false
+            }
 
-        view.addSubview(passwordField)
-        passwordField.translatesAutoresizingMaskIntoConstraints = false
-
-        view.addSubview(signInButton)
-        signInButton.translatesAutoresizingMaskIntoConstraints = false
-        signInButton.setTitle("Войти", for: .normal)
+        
+        
+        signInButton.setTitle(LocalizedKey.Auth.Button.login, for: .normal)
         signInButton.configure(for: .disabled)
         signInButton.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
 

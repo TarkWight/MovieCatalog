@@ -42,7 +42,10 @@ final class RegisterViewController: BaseViewController {
     private func setupUI() {
         configureTitle(LocalizedKey.Auth.Registration.title)
         
-        [usernameField, emailField, nameField, passwordField, confirmPasswordField, birthDateField, genderPickerView, registerButton]
+        [usernameField, emailField,
+         nameField, passwordField,
+         confirmPasswordField, birthDateField,
+         genderPickerView, registerButton]
             .forEach {
                 view.addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
