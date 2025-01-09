@@ -12,16 +12,33 @@ final class AppFactory {
     private lazy var networkService = NetworkService(keychainService: keychainService)
     private lazy var authRepository = AuthRepositoryImplementation(networkService: networkService, keychainService: keychainService)
 
-    // Auth
+
+}
+
+extension AppFactory {
+
+    func makeValidateEmailUseCase() -> ValidateEmailUseCase {
+        ValidateEmailUseCase()
+    }
+
+    func makeValidateUsernameUseCase() -> ValidateUsernameUseCase {
+        ValidateUsernameUseCase()
+    }
+
+    func makeValidatePasswordUseCase() -> ValidatePasswordUseCase {
+        ValidatePasswordUseCase()
+    }
+}
+
+extension AppFactory {
+
     func makeLoginUseCase() -> LoginUseCase {
         return LoginUseCase(authRepository: authRepository)
     }
 
-//    func makeRegisterUserUseCase() -> RegisterUserUseCase {
-//        return RegisterUserUseCase(authRepository: authRepository)
-//    }
+    func makeRegisterUseCase() -> RegisterUseCase {
+        return RegisterUseCase(authRepository: authRepository)
+    }
 
-//    func makeLogoutUseCase() -> LogoutUseCase {
-//        return LogoutUseCase(authRepository: authRepository)
-//    }
+    
 }

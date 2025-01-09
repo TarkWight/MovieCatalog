@@ -38,6 +38,18 @@ enum LocalizedKey {
         
         enum Registration {
             static let title = NSLocalizedString("RegistrationTitle", comment: "")
+            static let button = NSLocalizedString("RegistrationButton", comment: "")
+            static let genderMale = NSLocalizedString("GenderMale", comment: "")
+            static let genderFemale = NSLocalizedString("GenderFemale", comment: "")
+            
+            enum TextField {
+                static let username = NSLocalizedString("UsernameTextField", comment: "")
+                static let email = NSLocalizedString("EmailTextField", comment: "")
+                static let name = NSLocalizedString("NameTextField", comment: "")
+                static let password = NSLocalizedString("PasswordTextField", comment: "")
+                static let confirmPassword = NSLocalizedString("ConfirmPasswordTextField", comment: "")
+                static let birthDate = NSLocalizedString("BirthDateTextField", comment: "")
+            }
         }
         
         

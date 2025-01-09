@@ -88,9 +88,9 @@ final class LoginViewController: BaseViewController {
 
     private func updateSignInButtonState() {
         if isFormValid {
-            signInButton.configure(for: .default) // Активная кнопка
+            signInButton.configure(for: .default)
         } else {
-            signInButton.configure(for: .disabled) // Неактивная кнопка
+            signInButton.configure(for: .disabled)
         }
     }
 

@@ -17,7 +17,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         
-//        customizeNavigationBarAppearance()
         
         let appFactory = AppFactory()
         let sceneFactory = SceneFactory(appFactory: appFactory)
@@ -32,12 +31,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window = window
     }
-    
-    private func customizeNavigationBarAppearance() {
-           let backImage = UIImage(named: "ChevronLeft")?.withRenderingMode(.alwaysTemplate)
-           UINavigationBar.appearance().backIndicatorImage = backImage
-           UINavigationBar.appearance().backIndicatorTransitionMaskImage = backImage
-           UINavigationBar.appearance().tintColor = UIColor(named: "AppDarkFaded")
-           UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -1000, vertical: 0), for: .default)
-       }
 }

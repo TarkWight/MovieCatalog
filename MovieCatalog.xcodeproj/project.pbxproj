@@ -20,6 +20,10 @@
 		8914303C2D2EC51800D1BA36 /* ValidatePasswordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8914303B2D2EC51800D1BA36 /* ValidatePasswordUseCase.swift */; };
 		8914303E2D2EC52300D1BA36 /* ValidateUsernameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8914303D2D2EC52300D1BA36 /* ValidateUsernameUseCase.swift */; };
 		891430402D2EC53B00D1BA36 /* ValidateEmailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8914303F2D2EC53B00D1BA36 /* ValidateEmailUseCase.swift */; };
+		891430432D2FD70300D1BA36 /* GenderPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891430422D2FD70300D1BA36 /* GenderPickerView.swift */; };
+		891430452D2FD77C00D1BA36 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891430442D2FD77C00D1BA36 /* RegisterViewModel.swift */; };
+		891430482D2FDCD900D1BA36 /* RegisterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891430472D2FDCD900D1BA36 /* RegisterUseCase.swift */; };
+		8914304A2D2FDCFB00D1BA36 /* UserRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891430492D2FDCFB00D1BA36 /* UserRegister.swift */; };
 		893D7CDD2D281C6400F15B29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 893D7CD42D281C6400F15B29 /* LaunchScreen.storyboard */; };
 		893D7CDE2D281C6400F15B29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 893D7CD82D281C6400F15B29 /* Assets.xcassets */; };
 		893D7CDF2D281C6400F15B29 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 893D7CD92D281C6400F15B29 /* Localizable.xcstrings */; };
@@ -77,6 +81,10 @@
 		8914303B2D2EC51800D1BA36 /* ValidatePasswordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatePasswordUseCase.swift; sourceTree = "<group>"; };
 		8914303D2D2EC52300D1BA36 /* ValidateUsernameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateUsernameUseCase.swift; sourceTree = "<group>"; };
 		8914303F2D2EC53B00D1BA36 /* ValidateEmailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateEmailUseCase.swift; sourceTree = "<group>"; };
+		891430422D2FD70300D1BA36 /* GenderPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderPickerView.swift; sourceTree = "<group>"; };
+		891430442D2FD77C00D1BA36 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		891430472D2FDCD900D1BA36 /* RegisterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUseCase.swift; sourceTree = "<group>"; };
+		891430492D2FDCFB00D1BA36 /* UserRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegister.swift; sourceTree = "<group>"; };
 		893D7CB32D281C6400F15B29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		893D7CB42D281C6400F15B29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		893D7CB52D281C6400F15B29 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -176,6 +184,22 @@
 				8914303B2D2EC51800D1BA36 /* ValidatePasswordUseCase.swift */,
 			);
 			path = Validation;
+			sourceTree = "<group>";
+		};
+		891430412D2FD65600D1BA36 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				893D7D5B2D291ED800F15B29 /* RegistrationViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		891430462D2FDCB900D1BA36 /* RegisterUseCase */ = {
+			isa = PBXGroup;
+			children = (
+				891430472D2FDCD900D1BA36 /* RegisterUseCase.swift */,
+			);
+			path = RegisterUseCase;
 			sourceTree = "<group>";
 		};
 		893D7CF12D28200400F15B29 /* MovieCatalog */ = {
@@ -331,6 +355,7 @@
 		893D7D042D28223400F15B29 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				891430492D2FDCFB00D1BA36 /* UserRegister.swift */,
 				893D7D0A2D28228400F15B29 /* LoginCredentials */,
 				893D7D532D291C3200F15B29 /* Gender.swift */,
 			);
@@ -357,6 +382,7 @@
 		893D7D072D28224B00F15B29 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				891430462D2FDCB900D1BA36 /* RegisterUseCase */,
 				893D7D082D28225300F15B29 /* LoginUseCase */,
 			);
 			path = Auth;
@@ -488,8 +514,8 @@
 		893D7D4E2D291AE200F15B29 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
+				891430412D2FD65600D1BA36 /* ViewController */,
 				893D7D502D291B6700F15B29 /* ViewModel */,
-				893D7D5B2D291ED800F15B29 /* RegistrationViewController.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -497,6 +523,7 @@
 		893D7D502D291B6700F15B29 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				891430442D2FD77C00D1BA36 /* RegisterViewModel.swift */,
 				893D7D512D291C0400F15B29 /* UserInfoViewModel.swift */,
 			);
 			path = ViewModel;
@@ -569,6 +596,7 @@
 		893D7D742D2B935600F15B29 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				891430422D2FD70300D1BA36 /* GenderPickerView.swift */,
 				891430352D2E72E500D1BA36 /* BaseViewController.swift */,
 				893D7D632D2A569500F15B29 /* LoadingViewController.swift */,
 			);
@@ -823,6 +851,7 @@
 				893D7D1B2D2831A000F15B29 /* UserRegisterDTO.swift in Sources */,
 				891430392D2EBC5200D1BA36 /* ValidationErrorHandler.swift in Sources */,
 				891430302D2D541600D1BA36 /* AuthRepositoryImplementation.swift in Sources */,
+				891430432D2FD70300D1BA36 /* GenderPickerView.swift in Sources */,
 				893D7CE62D281C6400F15B29 /* NetworkError.swift in Sources */,
 				893D7D582D291D0200F15B29 /* ViewModel.swift in Sources */,
 				893D7D4C2D291A2800F15B29 /* AuthCoordinator.swift in Sources */,
@@ -830,6 +859,7 @@
 				893D7D8A2D2B952700F15B29 /* LoginViewModel.swift in Sources */,
 				893D7D542D291C3200F15B29 /* Gender.swift in Sources */,
 				893D7D1D2D2831B400F15B29 /* GenderDTO.swift in Sources */,
+				891430452D2FD77C00D1BA36 /* RegisterViewModel.swift in Sources */,
 				893D7CE72D281C6400F15B29 /* NetworkConfig.swift in Sources */,
 				891430402D2EC53B00D1BA36 /* ValidateEmailUseCase.swift in Sources */,
 				893D7CE82D281C6400F15B29 /* URLParameterEncoder.swift in Sources */,
@@ -840,6 +870,7 @@
 				893D7D622D2A55CE00F15B29 /* MainCoordinator.swift in Sources */,
 				893D7D462D2911A500F15B29 /* WelcomeViewController.swift in Sources */,
 				893D7CEA2D281C6400F15B29 /* NetworkService.swift in Sources */,
+				8914304A2D2FDCFB00D1BA36 /* UserRegister.swift in Sources */,
 				891430322D2D562700D1BA36 /* AppCoordinatorViewController.swift in Sources */,
 				893D7D6B2D2ABD6900F15B29 /* LocalizedKey + String.swift in Sources */,
 				891430262D2D51DC00D1BA36 /* AppFactory.swift in Sources */,
@@ -847,6 +878,7 @@
 				893D7D682D2A8B0700F15B29 /* CustomButton.swift in Sources */,
 				893D7CEB2D281C6400F15B29 /* LoginCredentials.swift in Sources */,
 				893D7D152D28308300F15B29 /* TokenInfo.swift in Sources */,
+				891430482D2FDCD900D1BA36 /* RegisterUseCase.swift in Sources */,
 				893D7CEC2D281C6400F15B29 /* AuthRepository.swift in Sources */,
 				8914302C2D2D524700D1BA36 /* SceneFactoryProtocols.swift in Sources */,
 				893D7CED2D281C6400F15B29 /* LoginUseCase.swift in Sources */,
