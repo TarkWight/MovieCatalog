@@ -36,7 +36,6 @@ final class LoginViewController: BaseViewController {
     private func setupUI() {
         view.backgroundColor = UIColor(named: Constants.Colors.background)
 
-        // Настройка полей и кнопки
         view.addSubview(usernameField)
         usernameField.translatesAutoresizingMaskIntoConstraints = false
 
@@ -45,8 +44,8 @@ final class LoginViewController: BaseViewController {
 
         view.addSubview(signInButton)
         signInButton.translatesAutoresizingMaskIntoConstraints = false
-        signInButton.setTitle("Войти", for: .normal) // Устанавливаем текст кнопки
-        signInButton.configure(for: .disabled) // Кнопка изначально неактивна
+        signInButton.setTitle("Войти", for: .normal)
+        signInButton.configure(for: .disabled)
         signInButton.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
 
         setupConstraints()

@@ -28,13 +28,11 @@ final class AppCoordinator {
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
 
-        print("Переход к проверке авторизации")
         checkAuthorization()
     }
 
     private func checkAuthorization() {
-        print("Переход к авторизации")
-        delegate?.didTransitionToLoading() 
+        delegate?.didTransitionToLoading()
         showAuthScene()
     }
 
@@ -45,7 +43,6 @@ final class AppCoordinator {
         )
         authCoordinator.start()
 
-        // После того как сцена авторизации показана, делаем уведомление через делегат.
         delegate?.didTransitionToAuthScene()
     }
 

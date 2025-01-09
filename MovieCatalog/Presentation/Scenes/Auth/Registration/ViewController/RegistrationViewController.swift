@@ -4,6 +4,7 @@
 //
 //  Created by Tark Wight on 04.01.2025.
 //
+
 import UIKit
 
 final class RegisterViewController: BaseViewController {
@@ -41,14 +42,12 @@ final class RegisterViewController: BaseViewController {
     private func setupUI() {
         configureTitle(LocalizedKey.Auth.Registration.title)
         
-        // Добавление всех полей и кнопки
         [usernameField, emailField, nameField, passwordField, confirmPasswordField, birthDateField, genderPickerView, registerButton]
             .forEach {
                 view.addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
             }
         
-        // Настройка кнопки регистрации
         registerButton.setTitle(LocalizedKey.Auth.Registration.button, for: .normal)
         registerButton.configure(for: .disabled)
         registerButton.addTarget(self, action: #selector(didTapRegister), for: .touchUpInside)

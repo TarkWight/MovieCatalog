@@ -26,7 +26,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             sceneFactory: sceneFactory
         )
         
-        print("В сцен делегате все ок. Стартую апп координатор")
         appCoordinator.start()
         
         self.window = window

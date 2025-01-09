@@ -31,17 +31,14 @@ class AppCoordinatorViewController: UIViewController, AppCoordinatorDelegate {
     // MARK: - AppCoordinatorDelegate
 
     func didTransitionToAuthScene() {
-        print("Создаю authorization coordinator")
         let authCoordinator = AuthCoordinator(
             navigationController: coordinator.navigationController,
             sceneFactory: SceneFactory(appFactory: AppFactory())
         )
-        print("перехожу на welcome")
         authCoordinator.start()
     }
 
     func didTransitionToLoading() {
-        print("показываю loading")
         let loadingView = UIActivityIndicatorView(style: .large)
         loadingView.center = view.center
         view.addSubview(loadingView)

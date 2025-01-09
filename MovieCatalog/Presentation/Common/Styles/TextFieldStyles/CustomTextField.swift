@@ -112,6 +112,7 @@ final class CustomTextField: UIView {
 
     private func configureTextFieldForPasswordType() {
         textField.isSecureTextEntry = true
+        textField.textContentType = .oneTimeCode 
         iconButton.setImage(UIImage(named: Constants.eyeIcon), for: .normal)
         iconButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
     }

@@ -5,12 +5,6 @@
 //  Created by Tark Wight on 12.12.2024.
 //
 
-//
-//  LocalizedKey.swift
-//  MovieCatalog
-//
-//  Created by Tark Wight on 12.12.2024.
-//
 
 import Foundation
 

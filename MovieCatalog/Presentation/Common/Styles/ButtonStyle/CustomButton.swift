@@ -101,11 +101,11 @@ final class CustomButton: UIButton {
 
     // MARK: - Constants
     private enum Constants {
-        // Fonts & Style
+        /// Fonts & Style
         static let font: UIFont = .systemFont(ofSize: 16, weight: .bold)
         static let cornerRadius: CGFloat = 10
 
-        // Gradient
+        /// Gradient
         static let gradientLeftColorName = "gradientLeftColor"
         static let gradientRightColorName = "gradientRightColor"
         static let defaultGradientLeftColor = UIColor.red
@@ -113,17 +113,17 @@ final class CustomButton: UIButton {
         static let gradientStartPoint = CGPoint(x: 0.0, y: 0.0)
         static let gradientEndPoint = CGPoint(x: 1.0, y: 0.0)
 
-        // Disabled State
+        /// Disabled State
         static let disabledBackgroundColorName = "AppDarkFaded"
         static let defaultDisabledBackgroundColor = UIColor.darkGray
         static let disabledTextColorName = "AppGrayFaded"
         static let defaultDisabledTextColor = UIColor.gray
 
-        // Secondary State
+        /// Secondary State
         static let secondaryBackgroundColorName = "AppDarkFaded"
         static let defaultSecondaryBackgroundColor = UIColor.darkGray
 
-        // Default Text Color
+        /// Default Text Color
         static let defaultTextColor = UIColor.white
     }
 }
