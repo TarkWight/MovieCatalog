@@ -144,12 +144,16 @@ final class RegisterViewController: BaseViewController {
     }
     
     private func updateRegisterButtonState() {
-        let isValid = !viewModel.username.isEmpty &&
-                      !viewModel.email.isEmpty &&
-                      !viewModel.name.isEmpty &&
-                      !viewModel.password.isEmpty &&
-                      !viewModel.confirmPassword.isEmpty
-        registerButton.configure(for: isValid ? .default : .disabled)
+        let areFieldsFilled = !usernameField.textField.text!.isEmpty &&
+                              !emailField.textField.text!.isEmpty &&
+                              !nameField.textField.text!.isEmpty &&
+                              !passwordField.textField.text!.isEmpty &&
+                              !confirmPasswordField.textField.text!.isEmpty
+
+        let doPasswordsMatch = passwordField.textField.text == confirmPasswordField.textField.text
+
+        registerButton.isUserInteractionEnabled = areFieldsFilled && doPasswordsMatch
+        registerButton.configure(for: areFieldsFilled && doPasswordsMatch ? .default : .disabled)
     }
 
     // MARK: - Actions

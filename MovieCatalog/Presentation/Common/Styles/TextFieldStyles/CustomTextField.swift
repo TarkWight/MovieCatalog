@@ -12,6 +12,11 @@ final class CustomTextField: UIView {
     public enum FieldType {
         case text, password, date
     }
+    
+    public enum FieldState {
+        case normal
+        case error
+    }
 
     // MARK: - Constants
     private enum Constants {
@@ -104,7 +109,6 @@ final class CustomTextField: UIView {
         )
     }
 
-    // MARK: - Field Type Configurations
     private func configureTextFieldForTextType() {
         iconButton.setImage(UIImage(named: Constants.closeIcon), for: .normal)
         iconButton.addTarget(self, action: #selector(clearText), for: .touchUpInside)
@@ -112,7 +116,7 @@ final class CustomTextField: UIView {
 
     private func configureTextFieldForPasswordType() {
         textField.isSecureTextEntry = true
-        textField.textContentType = .oneTimeCode 
+        textField.textContentType = .oneTimeCode // Disable strong password suggestions
         iconButton.setImage(UIImage(named: Constants.eyeIcon), for: .normal)
         iconButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
     }
@@ -122,6 +126,18 @@ final class CustomTextField: UIView {
         iconButton.tintColor = Constants.textFieldPlaceholderColor
         iconButton.isHidden = false
         iconButton.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
+    }
+
+    // MARK: - State Handling
+    public func setState(_ state: FieldState) {
+        switch state {
+        case .normal:
+            textField.layer.borderColor = UIColor.clear.cgColor
+            textField.layer.borderWidth = 0
+        case .error:
+            textField.layer.borderColor = UIColor.red.cgColor
+            textField.layer.borderWidth = 1.5
+        }
     }
 
     // MARK: - Actions
@@ -161,10 +177,10 @@ final class CustomTextField: UIView {
     @objc private func donePickingDate() {
         if let datePicker = textField.inputView as? UIDatePicker {
             let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .long
+            dateFormatter.dateFormat = "d MMMM yyyy"
+            dateFormatter.locale = Locale.current
             textField.text = dateFormatter.string(from: datePicker.date)
             onTextChanged?(textField.text ?? "")
-            iconButton.tintColor = Constants.textFieldTextColor
         }
         textField.resignFirstResponder()
     }
