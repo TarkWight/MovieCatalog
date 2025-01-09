@@ -14,3 +14,15 @@ struct UserInfoViewModel: Equatable, Hashable {
     let birthDate: Date
     let gender: Gender
 }
+
+extension UserInfoViewModel {
+    static var `default`: UserInfoViewModel {
+        return UserInfoViewModel(
+            userName: "",
+            name: "",
+            email: "",
+            birthDate: Date.now,
+            gender: .male
+        )
+    }
+}
