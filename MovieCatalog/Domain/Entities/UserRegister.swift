@@ -2,9 +2,8 @@
 //  UserRegister.swift
 //  MovieCatalog
 //
-//  Created by Tark Wight on 09.01.2025.
+//  Created by Tark Wight on 20.12.2024
 //
-
 
 import Foundation
 
