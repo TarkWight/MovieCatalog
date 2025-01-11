@@ -8,17 +8,43 @@
 import UIKit
 
 @MainActor
-protocol LoginViewFactory {
-    func makeLoginView(coordinator: AuthCoordinatorProtocol) -> LoginViewController
+protocol WelcomeSceneFactory {
+    func makeWelcomeScene(coordinator: AuthCoordinatorProtocol) -> WelcomeViewController
 }
 
 @MainActor
-protocol WelcomeViewFactory {
-    func makeWelcomeView(coordinator: AuthCoordinatorProtocol) -> WelcomeViewController
+protocol LoginSceneFactory {
+    func makeLoginScene(coordinator: AuthCoordinatorProtocol) -> LoginViewController
 }
 
 @MainActor
-protocol RegisterViewFactory {
-    func makeRegisterView(personalInfo: UserInfoViewModel,
+protocol RegisterSceneFactory {
+    func makeRegisterScene(personalInfo: UserInfoViewModel,
                           coordinator: AuthCoordinatorProtocol) -> RegisterViewController
+}
+
+
+@MainActor
+protocol FeedSceneFactory {
+    func makeFeedScene(coordinator: FeedCoordinatorProtocol) -> FeedViewController
+}
+
+@MainActor
+protocol MoviesSceneFactory {
+    func makeMoviesScene(coordinator: MoviesCoordinatorProtocol) -> MoviesViewController
+}
+
+@MainActor
+protocol FavoritesViewFactory {
+    func makeFavoritesView(coordinator: FavoritesCoordinatorProtocol) -> FavoritesScreen
+}
+
+@MainActor
+protocol ProfileSceneFactory {
+    func makeProfileScene(coordinator: ProfileCoordinatorProtocol) -> ProfileViewController
+}
+
+@MainActor
+protocol MovieDetailsViewFactory {
+    func makeMovieDetailsView(movieId: UUID) -> UIViewController
 }
