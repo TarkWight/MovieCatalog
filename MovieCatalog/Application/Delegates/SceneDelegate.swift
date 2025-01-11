@@ -17,16 +17,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         
-        
         let appFactory = AppFactory()
         let sceneFactory = SceneFactory(appFactory: appFactory)
         
+        let keychainService = KeychainService()
+        let networkService = NetworkService(keychainService: keychainService)
+        
         let appCoordinator = AppCoordinator(
             window: window,
-            sceneFactory: sceneFactory
+            sceneFactory: sceneFactory,
+            networkService: networkService
         )
-        
-        appCoordinator.start()
         
         self.window = window
     }

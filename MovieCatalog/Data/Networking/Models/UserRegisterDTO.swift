@@ -2,8 +2,9 @@
 //  UserRegisterDTO.swift
 //  MovieCatalog
 //
-//  Created by Tark Wight on 03.01.2025.
+//  Created by Tark Wight on 12.12.2024.
 //
+
 
 import Foundation
 
