@@ -295,6 +295,9 @@
         }
       }
     },
+    "Details for Movie %@" : {
+
+    },
     "Director" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -389,6 +392,9 @@
     "Error" : {
 
     },
+    "favorites" : {
+
+    },
     "Favorites" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -405,6 +411,12 @@
           }
         }
       }
+    },
+    "FavoritesScreen" : {
+
+    },
+    "feed" : {
+
     },
     "Fees" : {
       "extractionState" : "manual",
@@ -826,6 +838,12 @@
         }
       }
     },
+    "MovieNotFound" : {
+
+    },
+    "movies" : {
+
+    },
     "MyReview" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -914,6 +932,9 @@
         }
       }
     },
+    "NoStringAvailable" : {
+
+    },
     "NotAccountYet" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -987,6 +1008,9 @@
           }
         }
       }
+    },
+    "ProfileDeleteFailed" : {
+
     },
     "ProfileNotFound" : {
       "extractionState" : "manual",
@@ -1217,6 +1241,9 @@
           }
         }
       }
+    },
+    "user_profile" : {
+
     },
     "Username" : {
       "extractionState" : "manual",

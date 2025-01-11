@@ -66,7 +66,15 @@ enum LocalizedKey {
         }
     }
 
+    enum TabBarTitle {
+        static let feed = NSLocalizedString("feed", comment: "")
+        static let movies = NSLocalizedString("movies", comment: "")
+        static let favorites = NSLocalizedString("favorites", comment: "")
+        static let user_profile = NSLocalizedString("user_profile", comment: "")
+    }
+    
     enum ErrorMessage {
+        static let noStringAvailable = NSLocalizedString("NoStringAvailable", comment: "")
         static let error = NSLocalizedString("Error", comment: "")
         static let unknownError = NSLocalizedString("UnknownError", comment: "")
         static let invalidUsername = NSLocalizedString("InvalidUsername", comment: "")
@@ -88,6 +96,16 @@ enum LocalizedKey {
             static let invalidTopLevelDomain = NSLocalizedString("InvalidTopLevelDomain", comment: "")
         }
 
+        enum Profile {
+            static let notFound = NSLocalizedString("ProfileNotFound", comment: "")
+            static let updateFailed = NSLocalizedString("ProfileUpdateFailed", comment: "")
+            static let deleteFailed = NSLocalizedString("ProfileDeleteFailed", comment: "")
+        }
+        
+        enum Movie {
+            static let notFound = NSLocalizedString("MovieNotFound", comment: "")
+        }
+        
         enum Network {
             static let missingURL = NSLocalizedString("MissingURL", comment: "")
             static let noConnect = NSLocalizedString("NoConnect", comment: "")
@@ -99,3 +117,5 @@ enum LocalizedKey {
         }
     }
 }
+
+
