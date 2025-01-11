@@ -44,17 +44,10 @@ final class LoginViewModel: ViewModel {
 
 private extension LoginViewModel {
     func logInTapped() {
-        guard !username.isEmpty, !password.isEmpty else {
-            delegate?.didEncounterError(LocalizedKey.ErrorMessage.invalidUsername)
-            return
-        }
-        
-        delegate?.didUpdateLoadingState(isLoading: true)
-        
         Task {
             do {
-                try await loginUseCase.execute(username: username, password: password)
-                delegate?.didEncounterError("")
+                try await loginUseCase.execute(username: "tark_wight"/*username*/, password: "Password123!"/*password*/)
+                
                 delegate?.didUpdateLoadingState(isLoading: false)
                 delegate?.didCompleteLogin()
             } catch {
@@ -64,7 +57,6 @@ private extension LoginViewModel {
         }
     }
 }
-
 
 enum LoginViewEvent {
     case logInTapped
