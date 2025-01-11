@@ -137,8 +137,6 @@
 		893E4C6E2D3257EE00851589 /* GenreEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893E4C6D2D3257EE00851589 /* GenreEntity.swift */; };
 		893E4C702D3257F600851589 /* ReviewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893E4C6F2D3257F600851589 /* ReviewEntity.swift */; };
 		893E4C722D32580000851589 /* UserShortEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893E4C712D32580000851589 /* UserShortEntity.swift */; };
-		893E4C742D3284DE00851589 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893E4C732D3284DE00851589 /* Friend.swift */; };
-		893E4C762D3284E900851589 /* LikedMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893E4C752D3284E900851589 /* LikedMovie.swift */; };
 		893E4C7A2D32923C00851589 /* AddFriendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893E4C792D32923C00851589 /* AddFriendUseCase.swift */; };
 		893E4C7C2D3293E800851589 /* ReviewRepositoryImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893E4C7B2D3293E800851589 /* ReviewRepositoryImplementation.swift */; };
 		895226BD2D32F23700319414 /* FeedCoordinatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895226BC2D32F23600319414 /* FeedCoordinatorViewController.swift */; };
@@ -276,8 +274,6 @@
 		893E4C6D2D3257EE00851589 /* GenreEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreEntity.swift; sourceTree = "<group>"; };
 		893E4C6F2D3257F600851589 /* ReviewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewEntity.swift; sourceTree = "<group>"; };
 		893E4C712D32580000851589 /* UserShortEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserShortEntity.swift; sourceTree = "<group>"; };
-		893E4C732D3284DE00851589 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
-		893E4C752D3284E900851589 /* LikedMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedMovie.swift; sourceTree = "<group>"; };
 		893E4C792D32923C00851589 /* AddFriendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendUseCase.swift; sourceTree = "<group>"; };
 		893E4C7B2D3293E800851589 /* ReviewRepositoryImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRepositoryImplementation.swift; sourceTree = "<group>"; };
 		895226BC2D32F23600319414 /* FeedCoordinatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinatorViewController.swift; sourceTree = "<group>"; };
@@ -516,7 +512,6 @@
 		893D7D042D28223400F15B29 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				893E4C772D3284F300851589 /* Friend */,
 				893E4C092D31108000851589 /* LoginCredentials.swift */,
 				893E4BBD2D30703800851589 /* Gender.swift */,
 				893E4BBE2D30703800851589 /* UserRegister.swift */,
@@ -949,15 +944,6 @@
 			path = BlackList;
 			sourceTree = "<group>";
 		};
-		893E4C772D3284F300851589 /* Friend */ = {
-			isa = PBXGroup;
-			children = (
-				893E4C752D3284E900851589 /* LikedMovie.swift */,
-				893E4C732D3284DE00851589 /* Friend.swift */,
-			);
-			path = Friend;
-			sourceTree = "<group>";
-		};
 		893E4C7D2D3296D900851589 /* AppFactory */ = {
 			isa = PBXGroup;
 			children = (
@@ -1090,7 +1076,6 @@
 				893D7CE32D281C6400F15B29 /* HTTPMethod.swift in Sources */,
 				893D7CE42D281C6400F15B29 /* HTTPStatusCode.swift in Sources */,
 				893E4C122D311D4200851589 /* LogoutUseCase.swift in Sources */,
-				893E4C762D3284E900851589 /* LikedMovie.swift in Sources */,
 				891430362D2E72E500D1BA36 /* BaseViewController.swift in Sources */,
 				895226BD2D32F23700319414 /* FeedCoordinatorViewController.swift in Sources */,
 				893D7CE52D281C6400F15B29 /* HTTPTask.swift in Sources */,
@@ -1183,7 +1168,6 @@
 				893D7CEE2D281C6400F15B29 /* LocalizedKey.swift in Sources */,
 				893D7D102D28249B00F15B29 /* AuthNetworkConfig.swift in Sources */,
 				893D7D5C2D291ED800F15B29 /* RegistrationViewController.swift in Sources */,
-				893E4C742D3284DE00851589 /* Friend.swift in Sources */,
 				893E4B7B2D304C7300851589 /* FeedCoordinator.swift in Sources */,
 				893E4C692D324F7A00851589 /* FriendLocalDataSource.swift in Sources */,
 				893E4C502D3146E500851589 /* FriendRepositoryImplementation.swift in Sources */,
