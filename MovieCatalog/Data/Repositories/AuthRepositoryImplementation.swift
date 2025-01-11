@@ -1,4 +1,3 @@
-//
 //  AuthRepositoryImplementation.swift
 //  MovieCatalog
 //
@@ -16,6 +15,12 @@ final class AuthRepositoryImplementation {
         self.networkService = networkService
         self.keychainService = keychainService
     }
+
+    // MARK: - Private Methods
+    private func fetchUserProfileAndSaveUserId() async throws {
+        let profile: ProfileDTO = try await networkService.request(with: UserNetworkConfig.getProfile, useToken: true)
+        try keychainService.saveUserId(profile.id)
+    }
 }
 
 extension AuthRepositoryImplementation: AuthRepository {
@@ -24,14 +29,17 @@ extension AuthRepositoryImplementation: AuthRepository {
         let config = AuthNetworkConfig.logout
         try await networkService.request(with: config)
         try keychainService.deleteToken()
+        try keychainService.deleteUserId()
     }
 
     func logIn(credentials: LoginCredentials) async throws {
         let data = try networkService.encode(credentials)
         let config = AuthNetworkConfig.login(data)
-
         let tokenInfo: TokenInfo = try await networkService.request(with: config)
+        print("\n\ntokenInfo is \(tokenInfo)")
         try keychainService.saveToken(tokenInfo.token)
+
+        try await fetchUserProfileAndSaveUserId()
     }
 
     func register(user: UserRegister) async throws {
@@ -43,11 +51,13 @@ extension AuthRepositoryImplementation: AuthRepository {
             birthDate: user.birthDate,
             gender: user.gender == .female ? .female : .male
         )
-
         let data = try networkService.encode(userDto)
         let config = AuthNetworkConfig.register(data)
-
+        
         let tokenInfo: TokenInfo = try await networkService.request(with: config)
+        
+        
         try keychainService.saveToken(tokenInfo.token)
+        try await fetchUserProfileAndSaveUserId()
     }
 }
