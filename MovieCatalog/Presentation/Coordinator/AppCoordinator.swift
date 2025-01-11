@@ -1,39 +1,58 @@
+//
 //  AppCoordinator.swift
 //  MovieCatalog
+//
 //  Created by Tark Wight on 04.01.2025.
+//
 
 import UIKit
-
-protocol AppCoordinatorDelegate: AnyObject {
-    func didTransitionToAuthScene()
-    func didTransitionToLoading()
-}
 
 @MainActor
 final class AppCoordinator {
 
-    weak var delegate: AppCoordinatorDelegate?
-
     private let window: UIWindow
-    let navigationController: UINavigationController
+    private let navigationController: UINavigationController
     private let sceneFactory: SceneFactory
+    let networkService: NetworkService
 
-    init(window: UIWindow, sceneFactory: SceneFactory) {
+    init(window: UIWindow, sceneFactory: SceneFactory, networkService: NetworkService) {
         self.window = window
         self.navigationController = UINavigationController()
         self.sceneFactory = sceneFactory
+        self.networkService = networkService
+
+        configureNetworkCallbacks()
+        configureRootViewController()
     }
 
-    func start() {
+    private func configureRootViewController() {
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
 
         checkAuthorization()
     }
 
+    private func configureNetworkCallbacks() {
+        networkService.onLoginSuccess = { [weak self] in
+            Task { @MainActor in
+                self?.showMainScene()
+            }
+        }
+
+        networkService.onUnauthorized = { [weak self] in
+            Task { @MainActor in
+                self?.showAuthScene()
+            }
+        }
+    }
+
     private func checkAuthorization() {
-        delegate?.didTransitionToLoading()
-        showAuthScene()
+        do {
+            let _ = try networkService.keychainService.retrieveToken()
+            showMainScene()
+        } catch {
+            showAuthScene()
+        }
     }
 
     func showAuthScene() {
@@ -41,14 +60,11 @@ final class AppCoordinator {
             navigationController: navigationController,
             sceneFactory: sceneFactory
         )
-        authCoordinator.start()
-
-        delegate?.didTransitionToAuthScene()
+        navigationController.setViewControllers([authCoordinator.navigationController], animated: true)
     }
 
     func showMainScene() {
-        let mainCoordinator = MainCoordinator()
-        let mainTabBar = mainCoordinator.start()
-        navigationController.setViewControllers([mainTabBar], animated: true)
+        let mainCoordinatorViewController = MainCoordinatorViewController(factory: sceneFactory)
+        navigationController.setViewControllers([mainCoordinatorViewController], animated: true)
     }
 }
