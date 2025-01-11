@@ -16,7 +16,14 @@ final class LoginUseCase {
     
     func execute(username: String, password: String) async throws {
         let credentials = LoginCredentials(username: username, password: password)
-        try await authRepository.logIn(credentials: credentials)
+        print("In LoginUseCase username: \(credentials.username)\npassword: \(credentials.password)")
+        do {
+                try await authRepository.logIn(credentials: credentials)
+                print("Login successful in LoginUseCase")
+            } catch {
+                print("Error in LoginUseCase: \(error)")
+                throw error
+            }
         
     }
 }
