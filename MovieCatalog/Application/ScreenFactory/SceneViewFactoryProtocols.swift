@@ -7,6 +7,12 @@
 
 import Foundation
 
-protocol AuthCoordinatorFactory: LoginViewFactory,
-                                 WelcomeViewFactory
-{}
+protocol AuthCoordinatorFactory: LoginSceneFactory,
+                                 WelcomeSceneFactory,
+                                 RegisterSceneFactory {}
+
+protocol FeedCoordinatorFactory: FeedSceneFactory, MovieDetailsViewFactory {}
+protocol MoviesCoordinatorFactory: MoviesSceneFactory {}
+protocol FavoritesCoordinatorFactory: FavoritesViewFactory, MovieDetailsViewFactory {}
+protocol ProfileCoordinatorFactory: ProfileSceneFactory {}
+
