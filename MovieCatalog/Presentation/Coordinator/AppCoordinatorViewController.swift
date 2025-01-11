@@ -1,13 +1,17 @@
+//
 //  AppCoordinatorViewController.swift
 //  MovieCatalog
+//
 //  Created by Tark Wight on 07.01.2025.
+//
 
 import UIKit
 
-class AppCoordinatorViewController: UIViewController, AppCoordinatorDelegate {
+final class AppCoordinatorViewController: UIViewController {
 
     private let coordinator: AppCoordinator
 
+    // MARK: - Initializer
     init(coordinator: AppCoordinator) {
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
@@ -17,31 +21,40 @@ class AppCoordinatorViewController: UIViewController, AppCoordinatorDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        coordinator.delegate = self
-        coordinator.start()
+        handleAuthorization()
     }
 
+    // MARK: - Setup
     private func setupView() {
         view.backgroundColor = .white
+        setupLoadingIndicator()
     }
 
-    // MARK: - AppCoordinatorDelegate
-
-    func didTransitionToAuthScene() {
-        let authCoordinator = AuthCoordinator(
-            navigationController: coordinator.navigationController,
-            sceneFactory: SceneFactory(appFactory: AppFactory())
-        )
-        authCoordinator.start()
-    }
-
-    func didTransitionToLoading() {
+    private func setupLoadingIndicator() {
         let loadingView = UIActivityIndicatorView(style: .large)
         loadingView.center = view.center
         view.addSubview(loadingView)
         loadingView.startAnimating()
+    }
+
+    private func handleAuthorization() {
+        if coordinatorHasValidToken() {
+            coordinator.showMainScene()
+        } else {
+            coordinator.showAuthScene()
+        }
+    }
+
+    private func coordinatorHasValidToken() -> Bool {
+        do {
+            let _ = try coordinator.networkService.keychainService.retrieveToken()
+            return true
+        } catch {
+            return false
+        }
     }
 }
