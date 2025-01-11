@@ -33,36 +33,93 @@ final class KeychainService {
         }
     }
 
-    private enum Key: String {
+    fileprivate enum Key: String {
         case accessToken
+        case userId
     }
 }
 
-
+// MARK: - Token Management
 extension KeychainService {
     
     func saveToken(_ token: String) throws {
-        guard let data = token.data(using: .utf8) else {
+        try save(value: token, for: .accessToken)
+    }
+
+    func retrieveToken() throws -> String {
+        return try retrieveValue(for: .accessToken)
+    }
+    
+    func updateToken(_ newToken: String) throws {
+        try update(value: newToken, for: .accessToken)
+    }
+
+    func deleteToken() throws {
+        try deleteValue(for: .accessToken)
+    }
+}
+
+// MARK: - User ID Management
+extension KeychainService {
+
+    func saveUserId(_ userId: UUID) throws {
+        try save(value: userId.uuidString, for: .userId)
+    }
+
+    func retrieveUserId() throws -> UUID {
+        let userIdString = try retrieveValue(for: .userId)
+        guard let userId = UUID(uuidString: userIdString) else {
+            throw KeychainError.invalidData
+        }
+        return userId
+    }
+    
+    func updateUserId(_ newUserId: UUID) throws {
+        try update(value: newUserId.uuidString, for: .userId)
+    }
+
+    func deleteUserId() throws {
+        try deleteValue(for: .userId)
+    }
+}
+
+// MARK: - Private Keychain Methods
+private extension KeychainService {
+
+    func save(value: String, for key: Key) throws {
+        guard let data = value.data(using: .utf8) else {
             throw KeychainError.invalidData
         }
 
         let query = [
             kSecClass: kSecClassGenericPassword,
-            kSecValueData: data,
-            kSecAttrAccount: Key.accessToken.rawValue
+            kSecAttrAccount: key.rawValue
         ] as CFDictionary
 
-        let status = SecItemAdd(query, nil)
+        let attributesToUpdate = [kSecValueData: data] as CFDictionary
 
-        guard status == errSecSuccess else {
+        let status = SecItemUpdate(query, attributesToUpdate)
+
+        if status == errSecItemNotFound {
+            let addQuery = [
+                kSecClass: kSecClassGenericPassword,
+                kSecValueData: data,
+                kSecAttrAccount: key.rawValue
+            ] as CFDictionary
+
+            let addStatus = SecItemAdd(addQuery, nil)
+
+            guard addStatus == errSecSuccess else {
+                throw convertError(addStatus)
+            }
+        } else if status != errSecSuccess {
             throw convertError(status)
         }
     }
-
-    func retrieveToken() throws -> String {
+    func retrieveValue(for key: Key) throws -> String {
         let query = [
             kSecClass: kSecClassGenericPassword,
-            kSecAttrAccount: Key.accessToken.rawValue,
+            kSecAttrAccount: key.rawValue,
             kSecMatchLimit: kSecMatchLimitOne,
             kSecReturnData: kCFBooleanTrue as Any
         ] as CFDictionary
@@ -74,21 +131,23 @@ extension KeychainService {
             throw convertError(status)
         }
 
-        guard let data = result as? Data else {
+        guard let data = result as? Data, let value = String(data: data, encoding: .utf8) else {
             throw KeychainError.invalidData
         }
 
-        let token = String(decoding: data, as: UTF8.self)
-        return token
+        return value
     }
-    
-    func updateToken(_ newToken: String) throws {
-        guard let data = newToken.data(using: .utf8) else { return }
+
+    func update(value: String, for key: Key) throws {
+        guard let data = value.data(using: .utf8) else {
+            throw KeychainError.invalidData
+        }
 
         let query = [
             kSecClass: kSecClassGenericPassword,
-            kSecAttrAccount: Key.accessToken
+            kSecAttrAccount: key.rawValue
         ] as CFDictionary
+
         let attributesToUpdate = [kSecValueData: data] as CFDictionary
 
         let status = SecItemUpdate(query, attributesToUpdate)
@@ -98,23 +157,18 @@ extension KeychainService {
         }
     }
 
-    
-    func deleteToken() throws {
+    func deleteValue(for key: Key) throws {
         let query = [
             kSecClass: kSecClassGenericPassword,
-            kSecAttrAccount: Key.accessToken.rawValue
+            kSecAttrAccount: key.rawValue
         ] as CFDictionary
 
         let status = SecItemDelete(query)
 
-        guard status == errSecSuccess else {
+        guard status == errSecSuccess || status == errSecItemNotFound else {
             throw convertError(status)
         }
     }
-
-}
-
-private extension KeychainService {
 
     func convertError(_ status: OSStatus) -> KeychainError {
         switch status {
