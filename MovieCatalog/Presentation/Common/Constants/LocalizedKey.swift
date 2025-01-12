@@ -67,10 +67,10 @@ enum LocalizedKey {
     }
 
     enum TabBarTitle {
-        static let feed = NSLocalizedString("feed", comment: "")
-        static let movies = NSLocalizedString("movies", comment: "")
-        static let favorites = NSLocalizedString("favorites", comment: "")
-        static let user_profile = NSLocalizedString("user_profile", comment: "")
+        static let feed = NSLocalizedString("tb-feed", comment: "")
+        static let movie = NSLocalizedString("tb-movie", comment: "")
+        static let favorite = NSLocalizedString("tb-favorite", comment: "")
+        static let user_profile = NSLocalizedString("tb-profile", comment: "")
     }
     
     enum ErrorMessage {

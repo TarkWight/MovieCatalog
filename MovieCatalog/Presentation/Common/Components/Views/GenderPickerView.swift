@@ -15,7 +15,7 @@ final class GenderPickerView: UIView {
     private let maleLabel = UILabel()
     private let femaleLabel = UILabel()
     
-    var selectedGender: String = NSLocalizedString("gender_male", comment: "Male gender") {
+    var selectedGender: String = LocalizedKey.Auth.Registration.genderMale {
         didSet {
             updateUI(for: selectedGender)
             onGenderSelected?(selectedGender)
@@ -40,13 +40,13 @@ final class GenderPickerView: UIView {
     
     private func setupViews() {
         maleView.backgroundColor = .darkGray
-        maleLabel.text = NSLocalizedString("gender_male", comment: "Male gender")
+        maleLabel.text = LocalizedKey.Auth.Registration.genderMale
         maleLabel.textColor = .white
         maleLabel.textAlignment = .center
         maleView.addSubview(maleLabel)
         
         femaleView.backgroundColor = .darkGray
-        femaleLabel.text = NSLocalizedString("gender_female", comment: "Female gender")
+        femaleLabel.text = LocalizedKey.Auth.Registration.genderFemale
         femaleLabel.textColor = .white
         femaleLabel.textAlignment = .center
         femaleView.addSubview(femaleLabel)
@@ -110,19 +110,19 @@ final class GenderPickerView: UIView {
     }
     
     @objc private func selectMale() {
-        selectedGender = NSLocalizedString("gender_male", comment: "Male gender")
+        selectedGender = LocalizedKey.Auth.Registration.genderMale
     }
     
     @objc private func selectFemale() {
-        selectedGender = NSLocalizedString("gender_female", comment: "Female gender")
+        selectedGender = LocalizedKey.Auth.Registration.genderFemale
     }
     
     private func updateUI(for gender: String) {
         UIView.animate(withDuration: 0.3) {
-            self.maleView.backgroundColor = gender == NSLocalizedString("gender_male", comment: "Male gender") ? .clear : .darkGray
-            self.femaleView.backgroundColor = gender == NSLocalizedString("gender_female", comment: "Female gender") ? .clear : .darkGray
+            self.maleView.backgroundColor = gender == LocalizedKey.Auth.Registration.genderMale ? .clear : .darkGray
+            self.femaleView.backgroundColor = gender == LocalizedKey.Auth.Registration.genderFemale ? .clear : .darkGray
             
-            if gender == NSLocalizedString("gender_male", comment: "Male gender") {
+            if gender == LocalizedKey.Auth.Registration.genderMale {
                 self.applyGradient(to: self.maleView)
                 self.removeGradient(from: self.femaleView)
             } else {
