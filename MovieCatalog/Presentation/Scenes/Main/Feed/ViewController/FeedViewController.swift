@@ -128,7 +128,6 @@ final class FeedViewController: BaseViewController {
 
         viewModel.onError = { [weak self] errorMessage in
             guard let self else { return }
-            // Show an error alert
             let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             self.present(alert, animated: true)
@@ -138,6 +137,7 @@ final class FeedViewController: BaseViewController {
     // MARK: - Card Configuration
     private func configureCard(with movie: MovieDetailsItemViewModel) {
         movieCardView.configure(with: movie.posterURL ?? "")
+        print("\n\n\n\n url \(String(describing: movie.posterURL))\n\n\n\n")
         movieTitleLabel.text = movie.title
         movieSubtitleLabel.text = "\(movie.country) • \(movie.year)"
 

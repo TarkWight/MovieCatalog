@@ -5,8 +5,8 @@
 //  Created by Tark Wight on 12.01.2025.
 //
 
-
 import UIKit
+
 
 final class MovieCardView: UIView {
     // MARK: - UI Elements
@@ -15,6 +15,7 @@ final class MovieCardView: UIView {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
+        imageView.backgroundColor = UIColor(named: "AddDarkFaded")
         return imageView
     }()
     
@@ -29,7 +30,7 @@ final class MovieCardView: UIView {
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .center
-        imageView.tintColor = UIColor(named: "AppWhite")
+        imageView.tintColor = UIColor(named: "AddDarkFaded")
         imageView.alpha = 0
         return imageView
     }()
@@ -78,8 +79,20 @@ final class MovieCardView: UIView {
 
     // MARK: - Configuration
     func configure(with posterURL: String) {
-        // Загрузка постера
-        posterImageView.image = UIImage(named: posterURL) // Либо загрузка из URL
+        guard let url = URL(string: posterURL) else {
+            print("Invalid URL: \(posterURL)")
+            return
+        }
+
+        Task {
+            if let image = await ImageManagerActor.shared.loadImage(from: url) {
+                DispatchQueue.main.async {
+                    self.posterImageView.contentMode = .scaleAspectFill
+                    self.posterImageView.image = image
+                    self.backgroundColor = .clear
+                }
+            }
+        }
     }
 
     func applySwipeEffect(direction: UISwipeGestureRecognizer.Direction) {
