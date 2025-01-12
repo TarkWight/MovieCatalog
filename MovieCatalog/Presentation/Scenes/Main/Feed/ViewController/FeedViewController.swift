@@ -130,13 +130,8 @@ final class FeedViewController: BaseViewController {
     }
 
     private func setupGestures() {
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
-        swipeRight.direction = .right
-        movieCardView.addGestureRecognizer(swipeRight)
-
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
-        swipeLeft.direction = .left
-        movieCardView.addGestureRecognizer(swipeLeft)
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        movieCardView.addGestureRecognizer(panGesture)
     }
 
     // MARK: - ViewModel Binding
@@ -200,22 +195,39 @@ final class FeedViewController: BaseViewController {
     }
 
     // MARK: - Swipe Handling
-    @objc private func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
-        guard let movie = viewModel.getCurrentMovie() else { return }
+    @objc private func handleSwipe(_ gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: view)
+        let progress = min(max(abs(translation.x / view.bounds.width), 0), 1)
 
-        if gesture.direction == .right {
-            movieCardView.applySwipeEffect(direction: .right)
-            animateSwipe(direction: .right) { [weak self] in
-                self?.viewModel.handle(.addFavorite(movie.id))
+        switch gesture.state {
+        case .changed:
+            if translation.x > 0 {
+                movieCardView.applySwipeEffect(direction: .right, progress: progress)
+            } else {
+                movieCardView.applySwipeEffect(direction: .left, progress: progress)
             }
-        } else if gesture.direction == .left {
-            movieCardView.applySwipeEffect(direction: .left)
-            animateSwipe(direction: .left) { [weak self] in
-                self?.viewModel.handle(.hideMovie(movie.id))
+        case .ended:
+            let velocity = gesture.velocity(in: view).x
+            let shouldDismiss = abs(translation.x) > view.bounds.width * 0.5 || abs(velocity) > 500
+            if shouldDismiss {
+                let direction: UISwipeGestureRecognizer.Direction = translation.x > 0 ? .right : .left
+                movieCardView.animateCardFall(direction: direction) { [weak self] in
+                    guard let self = self else { return }
+                    guard let currentMovie = self.viewModel.getCurrentMovie() else { return }
+                    if direction == .right {
+                        self.viewModel.handle(.addFavorite(currentMovie.id))
+                    } else {
+                        self.viewModel.handle(.hideMovie(currentMovie.id))
+                    }
+                }
+            } else {
+                movieCardView.resetSwipeEffect()
             }
+        default:
+            movieCardView.resetSwipeEffect()
         }
     }
-
+    
     private func animateSwipe(direction: UISwipeGestureRecognizer.Direction, completion: @escaping () -> Void) {
         UIView.animate(withDuration: 0.3, animations: {
             let translation = direction == .right ? self.view.bounds.width : -self.view.bounds.width

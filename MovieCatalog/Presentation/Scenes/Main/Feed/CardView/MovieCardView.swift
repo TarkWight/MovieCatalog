@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 final class MovieCardView: UIView {
     // MARK: - UI Elements
     private let posterImageView: UIImageView = {
@@ -15,7 +14,7 @@ final class MovieCardView: UIView {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
-        imageView.backgroundColor = UIColor(named: "AddDarkFaded")
+        imageView.backgroundColor = UIColor(named: "AppDarkFaded")
         return imageView
     }()
     
@@ -30,7 +29,7 @@ final class MovieCardView: UIView {
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .center
-        imageView.tintColor = UIColor(named: "AddDarkFaded")
+        imageView.tintColor = UIColor(named: "AppDarkFaded")
         imageView.alpha = 0
         return imageView
     }()
@@ -95,7 +94,7 @@ final class MovieCardView: UIView {
         }
     }
 
-    func applySwipeEffect(direction: UISwipeGestureRecognizer.Direction) {
+    func applySwipeEffect(direction: UISwipeGestureRecognizer.Direction, progress: CGFloat) {
         switch direction {
         case .left:
             overlayView.backgroundColor = UIColor.systemGray.withAlphaComponent(0.5)
@@ -122,5 +121,54 @@ final class MovieCardView: UIView {
         }, completion: { _ in
             self.iconImageView.image = nil
         })
+    }
+
+    func animateCardFall(direction: UISwipeGestureRecognizer.Direction, completion: @escaping () -> Void) {
+        let rotationAngle: CGFloat = direction == .right ? .pi / 6 : -.pi / 6
+        let translationX: CGFloat = direction == .right ? 200 : -200
+        let translationY: CGFloat = 300
+
+        let originalAnchorPoint = layer.anchorPoint
+        let originalPosition = layer.position
+        layer.anchorPoint = CGPoint(x: 0.5, y: 1.0)
+        layer.position = CGPoint(x: bounds.midX, y: bounds.maxY)
+
+        UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseIn, animations: {
+            self.transform = CGAffineTransform(rotationAngle: rotationAngle)
+                .concatenating(CGAffineTransform(translationX: translationX, y: translationY))
+            self.alpha = 0
+        }, completion: { _ in
+            self.layer.anchorPoint = originalAnchorPoint
+            self.layer.position = originalPosition
+            self.transform = .identity
+            self.alpha = 1
+            completion()
+        })
+    }
+}
+
+// MARK: - Constants
+extension MovieCardView {
+    enum Constants {
+        enum Layout {
+            static let cornerRadius: CGFloat = 8
+            static let iconSize: CGFloat = 80
+        }
+        
+        enum Colors {
+            static let overlayBackground = "AppDarkFaded"
+            static let iconTint = "AppGray"
+            static let likeOverlay = "LikeOverlay"
+            static let dislikeOverlay = "DislikeOverlay"
+        }
+        
+        enum Images {
+            static let likeIcon = "Like"
+            static let dislikeIcon = "Dislike"
+        }
+        
+        enum Animation {
+            static let duration: TimeInterval = 2
+        }
     }
 }
