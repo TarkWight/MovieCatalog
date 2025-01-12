@@ -5,14 +5,12 @@
 //  Created by Tark Wight on 10.01.2025.
 //
 
-
 import UIKit
 
 final class FeedViewController: BaseViewController {
     // MARK: - Properties
     private let viewModel: FeedViewModel
     private var currentCardView = MovieCardView()
-    private var nextCardView = MovieCardView()
 
     // MARK: - UI Elements
     private let logoImageView: UIImageView = {
@@ -81,7 +79,6 @@ final class FeedViewController: BaseViewController {
         view.backgroundColor = UIColor(named: Constants.Colors.background)
 
         view.addSubview(logoImageView)
-        view.addSubview(nextCardView)
         view.addSubview(currentCardView)
         view.addSubview(movieInfoStackView)
         view.addSubview(loadingView)
@@ -95,13 +92,11 @@ final class FeedViewController: BaseViewController {
         loadingView.center = view.center
         loadingView.startAnimating()
         currentCardView.isHidden = true
-        nextCardView.isHidden = true
     }
 
     private func setupConstraints() {
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         currentCardView.translatesAutoresizingMaskIntoConstraints = false
-        nextCardView.translatesAutoresizingMaskIntoConstraints = false
         movieInfoStackView.translatesAutoresizingMaskIntoConstraints = false
         loadingView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -115,11 +110,6 @@ final class FeedViewController: BaseViewController {
             currentCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Layout.sidePadding),
             currentCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.Layout.sidePadding),
             currentCardView.heightAnchor.constraint(equalTo: currentCardView.widthAnchor, multiplier: Constants.Layout.cardHeightMultiplier),
-
-            nextCardView.topAnchor.constraint(equalTo: currentCardView.topAnchor),
-            nextCardView.leadingAnchor.constraint(equalTo: currentCardView.leadingAnchor),
-            nextCardView.trailingAnchor.constraint(equalTo: currentCardView.trailingAnchor),
-            nextCardView.bottomAnchor.constraint(equalTo: currentCardView.bottomAnchor),
 
             movieInfoStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Layout.sidePadding),
             movieInfoStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.Layout.sidePadding),
@@ -143,98 +133,72 @@ final class FeedViewController: BaseViewController {
             guard let self else { return }
             self.loadingView.isHidden = !isLoading
             self.currentCardView.isHidden = isLoading
-            self.nextCardView.isHidden = isLoading
         }
 
-        viewModel.onViewDataUpdated = { [weak self] viewData in
-            guard let self else { return }
-            guard let movie = viewData.cardItems.first else { return }
-            self.configureCards(with: movie)
-        }
+        viewModel.onViewDataUpdated = { [weak self] in
+                self?.configureCard()
+            }
     }
 
     // MARK: - Card Configuration
-    private func configureCards(with movie: MovieDetailsItemViewModel) {
-        logoImageView.isHidden = true
-        
-        currentCardView.configure(with: movie.posterURL ?? "")
-        movieTitleLabel.text = movie.title
-        movieSubtitleLabel.text = "\(movie.country) • \(movie.year)"
-
-        if let nextMovie = viewModel.getNextMovie() {
-            nextCardView.configure(with: nextMovie.poster ?? "")
-        }
-
-        tagsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        for genre in movie.genres {
-            let tagView = TagView(text: genre.name ?? "")
-            tagsStackView.addArrangedSubview(tagView)
-        }
-    }
-
-    // MARK: - Swipe Handling
-    @objc private func handleSwipe(_ gesture: UIPanGestureRecognizer) {
-        let translation = gesture.translation(in: view)
-        let progress = min(max(abs(translation.x / view.bounds.width), 0), 1)
-
-        switch gesture.state {
-        case .changed:
-            currentCardView.applySwipeEffect(direction: translation.x > 0 ? .right : .left, progress: progress)
-            nextCardView.transform = CGAffineTransform(translationX: translation.x * 0.2, y: 0)
-        case .ended:
-            let currentMovie = viewModel.getCurrentMovie()
-            let velocity = gesture.velocity(in: view).x
-            let shouldDismiss = abs(translation.x) > view.bounds.width * 0.5 || abs(velocity) > 500
-
-            if shouldDismiss, let currentMovie = currentMovie {
-                let direction: UISwipeGestureRecognizer.Direction = translation.x > 0 ? .right : .left
-                currentCardView.animateCardFall(direction: direction) { [weak self] in
-                    guard let self = self else { return }
-                    if direction == .right {
-                        self.viewModel.handle(.addFavorite(currentMovie.id))
-                    } else {
-                        self.viewModel.handle(.hideMovie(currentMovie.id))
-                    }
-                    self.swapCards()
-                    
-                    Task {
-                        await self.viewModel.fetchMoviesIfNeeded()
-                        self.updateUI()
-                    }
+    private func configureCard() {
+        if let currentMovie = viewModel.getCurrentMovie() {
+            logoImageView.isHidden = true
+            currentCardView.configure(with: currentMovie.poster ?? "")
+            movieTitleLabel.text = currentMovie.name
+            movieSubtitleLabel.text = "\(currentMovie.country ?? "Unknown") • \(currentMovie.year)"
+            
+            tagsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+            if let genres = currentMovie.genres {
+                for genre in genres {
+                    let tagView = TagView(text: genre.name ?? "")
+                    tagsStackView.addArrangedSubview(tagView)
                 }
-            } else {
-                currentCardView.resetSwipeEffect()
-                nextCardView.transform = .identity
             }
-        default:
-            currentCardView.resetSwipeEffect()
-            nextCardView.transform = .identity
-        }
-    }
-    
-    private func updateUI() {
-        if viewModel.isPlaceholderNeeded() {
+        } else {
             showPlaceholder()
-        } else if let currentMovie = viewModel.getCurrentMovie() {
-            let currentMovieViewModel = MovieDetailsItemViewModel(movie: currentMovie)
-            configureCards(with: currentMovieViewModel)
         }
     }
 
     private func showPlaceholder() {
         currentCardView.isHidden = true
-        nextCardView.isHidden = true
         movieTitleLabel.text = nil
         movieSubtitleLabel.text = nil
         tagsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         logoImageView.isHidden = false
     }
 
-    private func swapCards() {
-        let temp = currentCardView
-        currentCardView.transform = .identity
-        currentCardView = nextCardView
-        nextCardView = temp
+    // MARK: - Swipe Handling
+    @objc private func handleSwipe(_ gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: view)
+        let progress = min(max(abs(translation.x / UIScreen.main.bounds.width), 0), 1)
+
+        switch gesture.state {
+        case .changed:
+            currentCardView.applySwipeEffect(direction: translation.x > 0 ? .right : .left, progress: progress)
+        case .ended:
+            let velocity = gesture.velocity(in: view).x
+            let shouldDismiss = progress > 0.5 || abs(velocity) > 500
+
+            if shouldDismiss {
+                let direction: UISwipeGestureRecognizer.Direction = translation.x > 0 ? .right : .left
+                currentCardView.animateCardDismiss(direction: direction) { [weak self] in
+                    guard let self = self else { return }
+                    if let currentMovie = self.viewModel.getCurrentMovie() {
+                        if direction == .right {
+                            self.viewModel.handle(.addFavorite(currentMovie.id))
+                        } else {
+                            self.viewModel.handle(.hideMovie(currentMovie.id))
+                        }
+                    }
+                    self.configureCard()
+                }
+            } else {
+                currentCardView.resetSwipeEffect()
+            }
+        default:
+            currentCardView.resetSwipeEffect()
+        }
     }
 }
 

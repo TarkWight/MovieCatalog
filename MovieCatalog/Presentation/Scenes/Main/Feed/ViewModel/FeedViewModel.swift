@@ -27,7 +27,7 @@ final class FeedViewModel: ViewModel {
     private var pagination = Pagination()
 
     var onLoading: ((Bool) -> Void)?
-    var onViewDataUpdated: ((ViewData) -> Void)?
+    var onViewDataUpdated: (() -> Void)?
     var onError: ((String) -> Void)?
 
     init(coordinator: FeedCoordinatorProtocol,
@@ -81,7 +81,7 @@ private extension FeedViewModel {
             let filteredMovies = detailedMovies.filter { !hiddenMovies.contains($0.id) }
 
             moviesBuffer.append(contentsOf: filteredMovies)
-            onViewDataUpdated?(makeViewData())
+            onViewDataUpdated?()
 
             if pagination.isLimitReached {
                 print("Достигнут предел страниц")
@@ -112,7 +112,7 @@ private extension FeedViewModel {
     func hideMovie(id: UUID) async {
         hiddenMovies.insert(id)
         moviesBuffer.removeAll { $0.id == id }
-        onViewDataUpdated?(makeViewData())
+        onViewDataUpdated?()
         await fetchMoreMovies()
     }
 
