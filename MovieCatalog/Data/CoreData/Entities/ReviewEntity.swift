@@ -6,18 +6,18 @@
 //
 
 
-import CoreData
-
-@objc(ReviewEntity)
-final class ReviewEntity: NSManagedObject {
-    @NSManaged var id: UUID
-    @NSManaged var rating: Int32
-    @NSManaged var reviewText: String?
-    @NSManaged var isAnonymous: Bool
-    @NSManaged var createDateTime: Date
-    @NSManaged var author: UserShortEntity?
-}
-
+//import CoreData
+//
+//@objc(ReviewEntity)
+//final class ReviewEntity: NSManagedObject {
+//    @NSManaged var id: UUID
+//    @NSManaged var rating: Int32
+//    @NSManaged var reviewText: String?
+//    @NSManaged var isAnonymous: Bool
+//    @NSManaged var createDateTime: Date
+//    @NSManaged var author: UserShortEntity?
+//}
+//
 extension ReviewEntity {
     func toDomain() -> Review {
         Review(
@@ -29,28 +29,29 @@ extension ReviewEntity {
             author: author?.toDomain()
         )
     }
-
-    func update(from review: Review, context: NSManagedObjectContext) {
-        id = review.id
-        rating = Int32(review.rating)
-        reviewText = review.reviewText
-        isAnonymous = review.isAnonymous
-        createDateTime = review.createDateTime
-        if let author = review.author {
-            self.author = author.toEntity(context: context)
-        }
-    }
 }
-
-extension Review {
-    func toEntity(context: NSManagedObjectContext) -> ReviewEntity {
-        let entity = ReviewEntity(context: context)
-        entity.id = id
-        entity.rating = Int32(rating)
-        entity.reviewText = reviewText
-        entity.isAnonymous = isAnonymous
-        entity.createDateTime = createDateTime
-        entity.author = author?.toEntity(context: context)
-        return entity
-    }
-}
+//
+//    func update(from review: Review, context: NSManagedObjectContext) {
+//        id = review.id
+//        rating = Int32(review.rating)
+//        reviewText = review.reviewText
+//        isAnonymous = review.isAnonymous
+//        createDateTime = review.createDateTime
+//        if let author = review.author {
+//            self.author = author.toEntity(context: context)
+//        }
+//    }
+//}
+//
+//extension Review {
+//    func toEntity(context: NSManagedObjectContext) -> ReviewEntity {
+//        let entity = ReviewEntity(context: context)
+//        entity.id = id
+//        entity.rating = Int32(rating)
+//        entity.reviewText = reviewText
+//        entity.isAnonymous = isAnonymous
+//        entity.createDateTime = createDateTime
+//        entity.author = author?.toEntity(context: context)
+//        return entity
+//    }
+//}
