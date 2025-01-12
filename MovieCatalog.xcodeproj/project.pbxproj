@@ -805,12 +805,10 @@
 		893E4B792D304C6F00851589 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				895228ED2D3405CB00319414 /* MovieCardView.swift */,
-				895228E92D33F65000319414 /* ViewData.swift */,
-				893E4C2F2D31301C00851589 /* FeedViewModel.swift */,
-				893E4B7C2D304C8700851589 /* FeedViewController.swift */,
-				893E4B7A2D304C7300851589 /* FeedCoordinator.swift */,
-				895226BC2D32F23600319414 /* FeedCoordinatorViewController.swift */,
+				895229342D34258500319414 /* ViewController */,
+				895229332D34257500319414 /* ViewModel */,
+				895229322D34255B00319414 /* Coordinator */,
+				895229352D34259B00319414 /* CardView */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -1006,6 +1004,40 @@
 				895229262D341A4F00319414 /* UserShortEntity+CoreDataProperties.swift */,
 			);
 			path = GenEntities;
+			sourceTree = "<group>";
+		};
+		895229322D34255B00319414 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				893E4B7A2D304C7300851589 /* FeedCoordinator.swift */,
+				895226BC2D32F23600319414 /* FeedCoordinatorViewController.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		895229332D34257500319414 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				893E4C2F2D31301C00851589 /* FeedViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		895229342D34258500319414 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				893E4B7C2D304C8700851589 /* FeedViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		895229352D34259B00319414 /* CardView */ = {
+			isa = PBXGroup;
+			children = (
+				895228ED2D3405CB00319414 /* MovieCardView.swift */,
+				895228E92D33F65000319414 /* ViewData.swift */,
+			);
+			path = CardView;
 			sourceTree = "<group>";
 		};
 		898F0EB32D0ABB1100FAE99D = {
