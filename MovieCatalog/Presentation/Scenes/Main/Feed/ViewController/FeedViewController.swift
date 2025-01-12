@@ -142,8 +142,21 @@ final class FeedViewController: BaseViewController {
 
         tagsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         for genre in movie.genres {
-            let tagView = TagView(text: genre)
+            let isFavorite = GlobalFavoriteTagsManager.shared.isFavorite(tagId: genre.id)
+            let tagView = TagView(text: genre.name ?? "", isActive: isFavorite) { [weak self] in
+                GlobalFavoriteTagsManager.shared.toggleFavorite(tagId: genre.id)
+                self?.updateTagViews(for: movie)
+            }
             tagsStackView.addArrangedSubview(tagView)
+        }
+    }
+
+    private func updateTagViews(for movie: MovieDetailsItemViewModel) {
+        for case let tagView as TagView in tagsStackView.arrangedSubviews {
+            if let genreName = tagView.text,
+               let genre = movie.genres.first(where: { $0.name == genreName }) {
+                tagView.isActive = GlobalFavoriteTagsManager.shared.isFavorite(tagId: genre.id)
+            }
         }
     }
 

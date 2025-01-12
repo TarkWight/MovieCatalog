@@ -20,7 +20,7 @@ struct MovieDetailsItemViewModel: Identifiable, Equatable {
     let country: String
     let posterURL: String?
     let rating: String
-    let genres: [String]
+    let genres: [Genre]
 
     init(movie: MovieDetails) {
         self.id = movie.id
@@ -30,6 +30,6 @@ struct MovieDetailsItemViewModel: Identifiable, Equatable {
         self.posterURL = movie.poster
         self.rating = movie.rating != nil ? "\(movie.rating!)" : LocalizedKey.ErrorMessage.noStringAvailable
         
-        self.genres = movie.genres?.compactMap { $0.name } ?? []
+        self.genres = movie.genres ?? []
     }
 }

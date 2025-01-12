@@ -157,6 +157,7 @@
 		8952292F2D341A4F00319414 /* UserShortEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895229252D341A4F00319414 /* UserShortEntity+CoreDataClass.swift */; };
 		895229302D341A4F00319414 /* UserShortEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895229262D341A4F00319414 /* UserShortEntity+CoreDataProperties.swift */; };
 		895229372D342D9C00319414 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895229362D342D9C00319414 /* ImageManager.swift */; };
+		8952293A2D343AA900319414 /* GlobalFavoriteTagsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895229392D343AA900319414 /* GlobalFavoriteTagsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -311,6 +312,7 @@
 		895229252D341A4F00319414 /* UserShortEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserShortEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		895229262D341A4F00319414 /* UserShortEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserShortEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		895229362D342D9C00319414 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		895229392D343AA900319414 /* GlobalFavoriteTagsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFavoriteTagsManager.swift; sourceTree = "<group>"; };
 		898F0EBC2D0ABB1100FAE99D /* MovieCatalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieCatalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -538,6 +540,7 @@
 		893D7D032D28222B00F15B29 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				895229382D343A9E00319414 /* Common */,
 				893D7D062D28224400F15B29 /* UseCases */,
 				893D7D052D28223E00F15B29 /* Repositories */,
 				893D7D042D28223400F15B29 /* Entities */,
@@ -1043,6 +1046,14 @@
 			path = CardView;
 			sourceTree = "<group>";
 		};
+		895229382D343A9E00319414 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				895229392D343AA900319414 /* GlobalFavoriteTagsManager.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		898F0EB32D0ABB1100FAE99D = {
 			isa = PBXGroup;
 			children = (
@@ -1171,6 +1182,7 @@
 				895226BD2D32F23700319414 /* FeedCoordinatorViewController.swift in Sources */,
 				893D7CE52D281C6400F15B29 /* HTTPTask.swift in Sources */,
 				893E4B7D2D304C8700851589 /* FeedViewController.swift in Sources */,
+				8952293A2D343AA900319414 /* GlobalFavoriteTagsManager.swift in Sources */,
 				893E4B862D304D2700851589 /* ProfileCoordinator.swift in Sources */,
 				895228F02D34063400319414 /* TagView.swift in Sources */,
 				893E4BAD2D306CE600851589 /* ProfileEntity.swift in Sources */,

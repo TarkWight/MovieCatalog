@@ -5,8 +5,8 @@
 //  Created by Tark Wight on 12.01.2025.
 //
 
-
 import UIKit
+
 
 final class TagView: UIView {
     private let label = UILabel()
@@ -25,10 +25,13 @@ final class TagView: UIView {
         }
     }
 
-    init(text: String, isActive: Bool = false) {
+    var onToggleFavorite: (() -> Void)?
+
+    init(text: String, isActive: Bool = false, onToggleFavorite: (() -> Void)? = nil) {
+        self.isActive = isActive
+        self.onToggleFavorite = onToggleFavorite
         super.init(frame: .zero)
         self.text = text
-        self.isActive = isActive
         setupView()
         addTapGesture()
     }
@@ -96,5 +99,6 @@ final class TagView: UIView {
 
     @objc private func toggleActiveState() {
         isActive.toggle()
+        onToggleFavorite?()
     }
 }
