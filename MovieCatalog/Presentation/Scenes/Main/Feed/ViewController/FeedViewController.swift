@@ -31,7 +31,7 @@ final class FeedViewController: BaseViewController {
     private let movieSubtitleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14)
-        label.textColor = UIColor(named: "AppGray")
+        label.textColor = UIColor(named: "AppDarkFaded")
         return label
     }()
     private let tagsStackView: UIStackView = {
@@ -137,7 +137,6 @@ final class FeedViewController: BaseViewController {
     // MARK: - Card Configuration
     private func configureCard(with movie: MovieDetailsItemViewModel) {
         movieCardView.configure(with: movie.posterURL ?? "")
-        print("\n\n\n\n url \(String(describing: movie.posterURL))\n\n\n\n")
         movieTitleLabel.text = movie.title
         movieSubtitleLabel.text = "\(movie.country) • \(movie.year)"
 
@@ -176,3 +175,4 @@ final class FeedViewController: BaseViewController {
         })
     }
 }
+
