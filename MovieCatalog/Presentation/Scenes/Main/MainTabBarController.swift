@@ -10,27 +10,29 @@ import UIKit
 
 final class MainCoordinatorViewController: UITabBarController {
 
+    // MARK: - TabBarItem Enum
     enum TabBarItem: Int, CaseIterable {
         case feed
         case movies
         case favorites
         case profile
     }
-    
-    private let selected = TabBarItem.feed
-    
+
+    // MARK: - Properties
     private let factory: SceneFactory
     private let feedCoordinator: FeedCoordinator
     private let moviesCoordinator: MoviesCoordinator
     private let favoritesCoordinator: FavoritesCoordinator
     private let profileCoordinator: ProfileCoordinator
 
+    // MARK: - Initializer
     init(factory: SceneFactory) {
         self.factory = factory
-        feedCoordinator = .init(factory: factory)
-        moviesCoordinator = .init(sceneFactory: factory)
-        favoritesCoordinator = .init(sceneFactory: factory)
-        profileCoordinator = .init(factory: factory)
+        
+        self.feedCoordinator = FeedCoordinator(factory: factory)
+        self.moviesCoordinator = MoviesCoordinator(sceneFactory: factory)
+        self.favoritesCoordinator = FavoritesCoordinator(sceneFactory: factory)
+        self.profileCoordinator = ProfileCoordinator(factory: factory)
 
         super.init(nibName: nil, bundle: nil)
 
@@ -41,33 +43,34 @@ final class MainCoordinatorViewController: UITabBarController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Configuration
     private func configureTabBar() {
         let feedNavController = feedCoordinator.navigationController
         feedNavController.tabBarItem = UITabBarItem(
             title: "Лента",
-            image: UIImage(systemName: "list.bullet"),
-            tag: 0
+            image: UIImage(named: "tab-bar-feed"),
+            tag: TabBarItem.feed.rawValue
         )
 
         let moviesNavController = moviesCoordinator.navigationController
         moviesNavController.tabBarItem = UITabBarItem(
             title: "Фильмы",
-            image: UIImage(systemName: "film"),
-            tag: 1
+            image: UIImage(named: "tab-bar-movie"),
+            tag: TabBarItem.movies.rawValue
         )
 
         let favoritesNavController = favoritesCoordinator.navigationController
         favoritesNavController.tabBarItem = UITabBarItem(
             title: "Избранное",
-            image: UIImage(systemName: "star"),
-            tag: 2
+            image: UIImage(named: "tab-bar-favorite"),
+            tag: TabBarItem.favorites.rawValue
         )
 
         let profileNavController = profileCoordinator.navigationController
         profileNavController.tabBarItem = UITabBarItem(
             title: "Профиль",
-            image: UIImage(systemName: "person"),
-            tag: 3
+            image: UIImage(named: "tab-bar-profile"),
+            tag: TabBarItem.profile.rawValue
         )
 
         viewControllers = [feedNavController, moviesNavController, favoritesNavController, profileNavController]
@@ -75,14 +78,25 @@ final class MainCoordinatorViewController: UITabBarController {
         setupTabBarAppearance()
     }
 
-    @MainActor
+    // MARK: - TabBar Appearance
     private func setupTabBarAppearance() {
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor.systemBackground
+        appearance.backgroundColor = UIColor(named: "AppDarkFaded") ?? .darkGray
 
-        UITabBar.appearance().tintColor = UIColor.systemBlue
-        UITabBar.appearance().standardAppearance = appearance
-        UITabBar.appearance().scrollEdgeAppearance = appearance
+        appearance.stackedLayoutAppearance.selected.iconColor = UIColor(named: "gradientLeftColor")
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [
+            .foregroundColor: UIColor(named: "gradientLeftColor") ?? .orange
+        ]
+        
+        appearance.stackedLayoutAppearance.normal.iconColor = .lightGray
+        appearance.stackedLayoutAppearance.normal.titleTextAttributes = [
+            .foregroundColor: UIColor.lightGray
+        ]
+
+        self.tabBar.standardAppearance = appearance
+        if #available(iOS 15.0, *) {
+            self.tabBar.scrollEdgeAppearance = appearance
+        }
     }
 }
