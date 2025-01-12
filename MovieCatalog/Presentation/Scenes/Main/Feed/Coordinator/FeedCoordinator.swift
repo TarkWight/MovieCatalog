@@ -14,7 +14,12 @@ protocol FeedCoordinatorProtocol {
 
 final class FeedCoordinator {
     // MARK: - Properties
-    let navigationController: UINavigationController
+    lazy var feedViewController: FeedCoordinatorViewController = {
+        FeedCoordinatorViewController(
+            coordinator: self,
+            feedFactory: feedFactory
+        )
+    }()
     private let movieDetailsFactory: MovieDetailsViewFactory
     private let feedFactory: FeedSceneFactory
 
@@ -22,17 +27,6 @@ final class FeedCoordinator {
     init(factory: MovieDetailsViewFactory, feedFactory: FeedSceneFactory) {
         self.movieDetailsFactory = factory
         self.feedFactory = feedFactory
-        self.navigationController = UINavigationController()
-        setupFeedScene()
-    }
-
-    // MARK: - Private Setup
-    private func setupFeedScene() {
-        let feedCoordinatorViewController = FeedCoordinatorViewController(
-            coordinator: self,
-            feedFactory: feedFactory
-        )
-        navigationController.viewControllers = [feedCoordinatorViewController]
     }
 }
 
@@ -40,6 +34,6 @@ final class FeedCoordinator {
 extension FeedCoordinator: FeedCoordinatorProtocol {
     func showMovieDetails(movieId: UUID) {
         let movieDetailsViewController = movieDetailsFactory.makeMovieDetailsView(movieId: movieId)
-        navigationController.pushViewController(movieDetailsViewController, animated: true)
+        feedViewController.present(movieDetailsViewController, animated: true)
     }
 }

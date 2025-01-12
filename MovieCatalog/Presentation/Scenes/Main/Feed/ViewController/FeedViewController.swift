@@ -13,35 +13,46 @@ final class FeedViewController: BaseViewController {
     private let viewModel: FeedViewModel
 
     // MARK: - UI Elements
+    private let logoImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: Constants.Images.logo))
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+
     private let movieCardView = MovieCardView()
+
     private let movieInfoStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 8
+        stackView.spacing = Constants.Layout.movieInfoStackSpacing
         stackView.alignment = .leading
         return stackView
     }()
+
     private let movieTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 18)
-        label.textColor = UIColor(named: "AppWhite")
+        label.font = Constants.Fonts.movieTitle
+        label.textColor = UIColor(named: Constants.Colors.movieTitle)
         label.numberOfLines = 0
         return label
     }()
+
     private let movieSubtitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
-        label.textColor = UIColor(named: "AppDarkFaded")
+        label.font = Constants.Fonts.movieSubtitle
+        label.textColor = UIColor(named: Constants.Colors.movieSubtitle)
         return label
     }()
+
     private let tagsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 8
+        stackView.spacing = Constants.Layout.tagsSpacing
         stackView.alignment = .center
-        stackView.distribution = .fill
+        stackView.distribution = .fillProportionally
         return stackView
     }()
+
     private let loadingView = UIActivityIndicatorView(style: .large)
 
     // MARK: - Initializer
@@ -56,17 +67,21 @@ final class FeedViewController: BaseViewController {
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
+        hideBackButton()
         super.viewDidLoad()
         setupUI()
         setupGestures()
         bindViewModel()
         viewModel.handle(.fetchInitialMovies)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+
     }
 
     // MARK: - UI Setup
     private func setupUI() {
-        view.backgroundColor = UIColor(named: "AppDark")
-        
+        view.backgroundColor = UIColor(named: Constants.Colors.background)
+
+        view.addSubview(logoImageView)
         view.addSubview(movieCardView)
         view.addSubview(movieInfoStackView)
         view.addSubview(loadingView)
@@ -83,22 +98,31 @@ final class FeedViewController: BaseViewController {
     }
 
     private func setupConstraints() {
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
         movieCardView.translatesAutoresizingMaskIntoConstraints = false
         movieInfoStackView.translatesAutoresizingMaskIntoConstraints = false
         loadingView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            movieCardView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            movieCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            movieCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            movieCardView.heightAnchor.constraint(equalTo: movieCardView.widthAnchor, multiplier: 1.4),
-            
-            movieInfoStackView.topAnchor.constraint(equalTo: movieCardView.bottomAnchor, constant: 16),
-            movieInfoStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            movieInfoStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            
+            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.Layout.logoTopPadding),
+            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoImageView.widthAnchor.constraint(equalToConstant: Constants.Layout.logoWidth),
+            logoImageView.heightAnchor.constraint(equalToConstant: Constants.Layout.logoHeight),
+
+            movieCardView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: Constants.Layout.cardTopPadding),
+            movieCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Layout.sidePadding),
+            movieCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.Layout.sidePadding),
+            movieCardView.heightAnchor.constraint(equalTo: movieCardView.widthAnchor, multiplier: Constants.Layout.cardHeightMultiplier),
+
+            movieInfoStackView.topAnchor.constraint(equalTo: movieCardView.bottomAnchor, constant: Constants.Layout.movieInfoTopPadding),
+            movieInfoStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Layout.sidePadding),
+            movieInfoStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.Layout.sidePadding),
+
             loadingView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loadingView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            loadingView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+
+            tagsStackView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -Constants.Layout.sidePadding),
+            tagsStackView.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: Constants.Layout.sidePadding),
         ])
     }
 
@@ -189,3 +213,34 @@ final class FeedViewController: BaseViewController {
     }
 }
 
+// MARK: - Constants
+extension FeedViewController {
+    enum Constants {
+        enum Colors {
+            static let background = "AppDark"
+            static let movieTitle = "AppWhite"
+            static let movieSubtitle = "AppDarkFaded"
+        }
+
+        enum Fonts {
+            static let movieTitle = UIFont.boldSystemFont(ofSize: 24)
+            static let movieSubtitle = UIFont.systemFont(ofSize: 16)
+        }
+
+        enum Layout {
+            static let logoWidth: CGFloat = 60.72
+            static let logoHeight: CGFloat = 32
+            static let logoTopPadding: CGFloat = 78
+            static let cardTopPadding: CGFloat = 16
+            static let cardHeightMultiplier: CGFloat = 1.4
+            static let movieInfoTopPadding: CGFloat = 16
+            static let movieInfoStackSpacing: CGFloat = 8
+            static let tagsSpacing: CGFloat = 4
+            static let sidePadding: CGFloat = 24
+        }
+
+        enum Images {
+            static let logo = "Logo"
+        }
+    }
+}

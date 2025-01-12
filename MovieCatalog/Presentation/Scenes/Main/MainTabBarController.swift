@@ -24,6 +24,7 @@ final class MainCoordinatorViewController: UITabBarController, UITabBarControlle
     private let moviesCoordinator: MoviesCoordinator
     private let favoritesCoordinator: FavoritesCoordinator
     private let profileCoordinator: ProfileCoordinator
+    
 
     // MARK: - Initializer
     init(factory: SceneFactory) {
@@ -56,7 +57,7 @@ extension MainCoordinatorViewController {
     private func generateTabBar() {
         viewControllers = [
             generateVC(
-                viewController: feedCoordinator.navigationController,
+                viewController: feedCoordinator.feedViewController,
                 title: Constants.titles.feed,
                 image: Constants.images.feed
             ),
