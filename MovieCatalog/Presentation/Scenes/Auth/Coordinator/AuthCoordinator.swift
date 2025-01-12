@@ -17,7 +17,7 @@ protocol AuthCoordinatorProtocol: AnyObject {
 
 @MainActor
 final class AuthCoordinator {
-    private(set) var navigationController: UINavigationController
+    private let navigationController: UINavigationController
     private let sceneFactory: SceneFactory
 
     init(navigationController: UINavigationController, sceneFactory: SceneFactory) {
@@ -47,7 +47,7 @@ extension AuthCoordinator: AuthCoordinatorProtocol {
 //    func didCompleteLogin() {
 //        let appCoordinator = AppCoordinator(
 //            window: UIApplication.shared.windows.first!,
-//            sceneFactory: sceneFactory, networkService
+//            sceneFactory: sceneFactory, networkService: networkService
 //        )
 //        appCoordinator.showMainScene()
 //    }

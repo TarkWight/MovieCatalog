@@ -64,8 +64,10 @@ extension SceneFactory: FeedSceneFactory {
     func makeFeedScene(coordinator: FeedCoordinatorProtocol) -> FeedViewController {
         let viewModel = FeedViewModel(
             coordinator: coordinator,
-            fetchFeedUseCase: appFactory.makeFetchMovieListUseCase(),
-            fetchMovieDetailsUseCase: appFactory.makeFetchFavoriteMoviesUseCase()
+            fetchMovieListUseCase: appFactory.makeFetchMovieListUseCase(),
+            fetchMovieDetailsUseCase: appFactory.makeFetchMovieDetailsUseCase(),
+            ignoreListUseCase: appFactory.makeAddMovieToIgnoreListUseCase(),
+            addFavoriteUseCase: appFactory.makeAddFavoriteMovieUseCase()
         )
         return FeedViewController(viewModel: viewModel)
     }
