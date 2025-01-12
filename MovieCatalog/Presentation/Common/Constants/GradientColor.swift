@@ -8,6 +8,6 @@
 import UIKit
 
 enum GradientColor {
-    static let start = UIColor(named: "leftGradientColor") ?? .orange
-    static let end = UIColor(named: "rightGradientColor") ?? .red
+    static let start = UIColor(named: "leftGradientColor") ?? .red
+    static let end = UIColor(named: "rightGradientColor") ?? .orange
 }

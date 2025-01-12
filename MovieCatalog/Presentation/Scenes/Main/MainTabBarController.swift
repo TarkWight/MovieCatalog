@@ -8,8 +8,8 @@
 
 import UIKit
 
-final class MainCoordinatorViewController: UITabBarController {
-    
+final class MainCoordinatorViewController: UITabBarController, UITabBarControllerDelegate {
+
     // MARK: - TabBarItem Enum
     enum TabBarItem: Int, CaseIterable {
         case feed
@@ -25,7 +25,6 @@ final class MainCoordinatorViewController: UITabBarController {
     private let favoritesCoordinator: FavoritesCoordinator
     private let profileCoordinator: ProfileCoordinator
 
-
     // MARK: - Initializer
     init(factory: SceneFactory) {
         self.factory = factory
@@ -38,54 +37,22 @@ final class MainCoordinatorViewController: UITabBarController {
 
         generateTabBar()
         setupTabBarAppearance()
+        self.delegate = self // Set delegate for UITabBarController
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }
 
+// MARK: - Tab Bar Configuration
 extension MainCoordinatorViewController {
     private func generateVC(viewController: UIViewController, title: String, image: UIImage?) -> UIViewController {
         viewController.tabBarItem.title = title
         viewController.tabBarItem.image = image
         return viewController
     }
-}
 
-extension MainCoordinatorViewController {
-    private func setupTabBarAppearance() {
-        let width = tabBar.bounds.width - Constants.tabBar.positionOnX * 2
-        let height = Constants.tabBar.height
-        let roundLayer = CAShapeLayer()
-        
-        let bezierPath = UIBezierPath(
-            roundedRect: CGRect(
-                x: Constants.tabBar.positionOnX,
-                y: tabBar.bounds.minY - Constants.tabBar.positionOnY,
-                width: width,
-                height: height
-            ),
-            cornerRadius: Constants.tabBar.radius
-        )
-        
-        roundLayer.path = bezierPath.cgPath
-        roundLayer.fillColor = Constants.color.background
-        tabBar.layer.insertSublayer(roundLayer, at: 0)
-
-        print(width)
-        print(width - (Constants.tabBar.sidePadding * 2))
-        print((width - (Constants.tabBar.sidePadding * 2)) / Constants.tabBar.countOfItems)
-        tabBar.itemWidth = (width - (Constants.tabBar.sidePadding * 2)) / Constants.tabBar.countOfItems
-        tabBar.itemSpacing = 0.01
-        tabBar.itemPositioning = .centered
-
-        tabBar.unselectedItemTintColor = Constants.color.unselected
-    }
-}
-
-extension MainCoordinatorViewController {
     private func generateTabBar() {
         viewControllers = [
             generateVC(
@@ -110,11 +77,78 @@ extension MainCoordinatorViewController {
             )
         ]
     }
+
+    private func setupTabBarAppearance() {
+        let width = tabBar.bounds.width - Constants.tabBar.positionOnX * 2
+        let height = Constants.tabBar.height
+        let roundLayer = CAShapeLayer()
+        
+        let bezierPath = UIBezierPath(
+            roundedRect: CGRect(
+                x: Constants.tabBar.positionOnX,
+                y: tabBar.bounds.minY - Constants.tabBar.positionOnY,
+                width: width,
+                height: height
+            ),
+            cornerRadius: Constants.tabBar.radius
+        )
+        
+        roundLayer.path = bezierPath.cgPath
+        roundLayer.fillColor = Constants.color.background
+        tabBar.layer.insertSublayer(roundLayer, at: 0)
+
+        tabBar.itemWidth = (width - (Constants.tabBar.sidePadding * 2)) / Constants.tabBar.countOfItems
+        tabBar.itemSpacing = 0.01
+        tabBar.itemPositioning = .centered
+
+        tabBar.unselectedItemTintColor = Constants.color.unselected
+    }
 }
 
+// MARK: - UITabBarControllerDelegate
 extension MainCoordinatorViewController {
-   
-    
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        applyGradientToSelectedTab()
+    }
+
+    private func applyGradientToSelectedTab() {
+        // Проверяем, что индекс находится в пределах массива items
+        guard selectedIndex < (tabBar.items?.count ?? 0) else { return }
+        
+        let item = tabBar.items?[selectedIndex]
+        
+        // Gradient for the icon
+        if let originalImage = item?.image {
+            let gradientImage = UIImage.qImage(
+                frame: CGRect(origin: .zero, size: originalImage.size),
+                colors: [GradientColor.start, GradientColor.end]
+            )
+            let blendedImage = blendImage(originalImage, with: gradientImage)
+            item?.selectedImage = blendedImage.withRenderingMode(.alwaysOriginal)
+        }
+        
+        // Gradient for the title
+        let gradientTextImage = UIImage.qImage(
+            frame: CGRect(x: 0, y: 0, width: 100, height: 20),
+            colors: [GradientColor.start, GradientColor.end]
+        )
+        let gradientTextColor = UIColor(patternImage: gradientTextImage)
+        item?.setTitleTextAttributes([.foregroundColor: gradientTextColor], for: .selected)
+    }
+
+    private func blendImage(_ image: UIImage, with gradient: UIImage) -> UIImage {
+        let size = image.size
+        UIGraphicsBeginImageContextWithOptions(size, false, image.scale)
+        image.draw(in: CGRect(origin: .zero, size: size))
+        gradient.draw(in: CGRect(origin: .zero, size: size), blendMode: .sourceIn, alpha: 1.0)
+        let blendedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return blendedImage ?? image
+    }
+}
+
+// MARK: - Constants
+extension MainCoordinatorViewController {
     enum Constants {
         enum titles {
             static let feed = LocalizedKey.TabBarTitle.feed
@@ -131,25 +165,17 @@ extension MainCoordinatorViewController {
         }
         
         enum tabBar {
-                    static let height: CGFloat = 64
-                    static let positionOnX: CGFloat = 24
-                    static let positionOnY: CGFloat = 8
-                    static let radius: CGFloat = 16
-                    static let countOfItems: CGFloat = 4
-                    static let sidePadding: CGFloat = 8
-                }
+            static let height: CGFloat = 64
+            static let positionOnX: CGFloat = 24
+            static let positionOnY: CGFloat = 8
+            static let radius: CGFloat = 16
+            static let countOfItems: CGFloat = 4
+            static let sidePadding: CGFloat = 8
+        }
         
         enum color {
             static let background = UIColor(named: "AppDarkFaded")?.cgColor
             static let unselected = UIColor(named: "AppGrayFaded")
-            
-        }
-        
-        enum mask {
-            func gradient(frame: CGRect) -> UIImage {
-                let colors = [GradientColor.start, GradientColor.end]
-                return  UIImage.qImage(frame: frame, colors: colors)
-            }
         }
     }
 }
