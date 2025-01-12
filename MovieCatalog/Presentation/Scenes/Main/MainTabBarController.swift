@@ -37,7 +37,7 @@ final class MainCoordinatorViewController: UITabBarController, UITabBarControlle
 
         generateTabBar()
         setupTabBarAppearance()
-        self.delegate = self // Set delegate for UITabBarController
+        self.delegate = self
     }
 
     required init?(coder: NSCoder) {
@@ -76,6 +76,7 @@ extension MainCoordinatorViewController {
                 image: Constants.images.profile
             )
         ]
+        applyGradientToSelectedTab()
     }
 
     private func setupTabBarAppearance() {
@@ -112,12 +113,10 @@ extension MainCoordinatorViewController {
     }
 
     private func applyGradientToSelectedTab() {
-        // Проверяем, что индекс находится в пределах массива items
         guard selectedIndex < (tabBar.items?.count ?? 0) else { return }
         
         let item = tabBar.items?[selectedIndex]
         
-        // Gradient for the icon
         if let originalImage = item?.image {
             let gradientImage = UIImage.qImage(
                 frame: CGRect(origin: .zero, size: originalImage.size),
@@ -127,7 +126,6 @@ extension MainCoordinatorViewController {
             item?.selectedImage = blendedImage.withRenderingMode(.alwaysOriginal)
         }
         
-        // Gradient for the title
         let gradientTextImage = UIImage.qImage(
             frame: CGRect(x: 0, y: 0, width: 100, height: 20),
             colors: [GradientColor.start, GradientColor.end]
@@ -177,5 +175,11 @@ extension MainCoordinatorViewController {
             static let background = UIColor(named: "AppDarkFaded")?.cgColor
             static let unselected = UIColor(named: "AppGrayFaded")
         }
+    }
+}
+
+extension MainCoordinatorViewController {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        applyGradientToSelectedTab()
     }
 }
