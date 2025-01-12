@@ -28,7 +28,7 @@ final class MainCoordinatorViewController: UITabBarController, UITabBarControlle
     // MARK: - Initializer
     init(factory: SceneFactory) {
         self.factory = factory
-        self.feedCoordinator = FeedCoordinator(factory: factory)
+        self.feedCoordinator = FeedCoordinator(factory: factory, feedFactory: factory)
         self.moviesCoordinator = MoviesCoordinator(sceneFactory: factory)
         self.favoritesCoordinator = FavoritesCoordinator(sceneFactory: factory)
         self.profileCoordinator = ProfileCoordinator(factory: factory)
