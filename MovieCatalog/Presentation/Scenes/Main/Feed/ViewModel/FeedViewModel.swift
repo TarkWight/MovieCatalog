@@ -72,7 +72,7 @@ private extension FeedViewModel {
         await fetchMovies()
     }
 
-    func fetchMovies() async {
+    private func fetchMovies() async {
         onLoading?(true)
 
         do {
@@ -83,14 +83,24 @@ private extension FeedViewModel {
             moviesBuffer.append(contentsOf: filteredMovies)
             onViewDataUpdated?(makeViewData())
 
-            pagination.pageCount = movies.count < 20 ? pagination.currentPage : nil
+            if pagination.isLimitReached {
+                print("Достигнут предел страниц")
+            } else if moviesBuffer.count <= 2 {
+                await fetchMoreMovies()
+            }
         } catch {
-            onError?(error.localizedDescription)
+            if let repositoryError = error as? MovieRepositoryImplementation.MovieRepositoryError,
+               repositoryError == .maxPagesReached {
+                print("Достигнут предел страниц_")
+            } else {
+                onError?(error.localizedDescription)
+            }
         }
 
         onLoading?(false)
     }
-
+    
+    
     func addFavoriteMovie(id: UUID) async {
         do {
             try await addFavoriteUseCase.execute(movieId: id)
@@ -110,6 +120,11 @@ private extension FeedViewModel {
         let numberOfCards = 4
         let cardItems = moviesBuffer.prefix(numberOfCards).map { MovieDetailsItemViewModel(movie: $0) }
         let listItems = moviesBuffer.dropFirst(numberOfCards).map { MovieDetailsItemViewModel(movie: $0) }
+        
+        if cardItems.isEmpty {
+            return ViewData(cardItems: [], listItems: [])
+        }
+        
         return ViewData(cardItems: Array(cardItems), listItems: Array(listItems))
     }
 }
@@ -117,5 +132,23 @@ private extension FeedViewModel {
 extension FeedViewModel {
     func getCurrentMovie() -> MovieDetails? {
         return moviesBuffer.first
+    }
+    
+    func getNextMovie() -> MovieDetails? {
+        guard moviesBuffer.count > 1 else { return nil }
+        return moviesBuffer[1]
+    }
+}
+
+extension FeedViewModel {
+    func fetchMoviesIfNeeded() async {
+        guard moviesBuffer.count <= 2 && !pagination.isLimitReached else { return }
+        await fetchMoreMovies()
+    }
+}
+
+extension FeedViewModel {
+    func isPlaceholderNeeded() -> Bool {
+        return moviesBuffer.isEmpty
     }
 }

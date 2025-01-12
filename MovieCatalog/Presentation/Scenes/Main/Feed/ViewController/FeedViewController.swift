@@ -11,6 +11,8 @@ import UIKit
 final class FeedViewController: BaseViewController {
     // MARK: - Properties
     private let viewModel: FeedViewModel
+    private var currentCardView = MovieCardView()
+    private var nextCardView = MovieCardView()
 
     // MARK: - UI Elements
     private let logoImageView: UIImageView = {
@@ -18,8 +20,6 @@ final class FeedViewController: BaseViewController {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-
-    private let movieCardView = MovieCardView()
 
     private let movieInfoStackView: UIStackView = {
         let stackView = UIStackView()
@@ -51,7 +51,6 @@ final class FeedViewController: BaseViewController {
         stackView.axis = .horizontal
         stackView.spacing = Constants.Layout.tagsSpacing
         stackView.alignment = .center
-        stackView.distribution = .fill
         return stackView
     }()
 
@@ -75,7 +74,6 @@ final class FeedViewController: BaseViewController {
         setupGestures()
         bindViewModel()
         viewModel.handle(.fetchInitialMovies)
-
     }
 
     // MARK: - UI Setup
@@ -83,7 +81,8 @@ final class FeedViewController: BaseViewController {
         view.backgroundColor = UIColor(named: Constants.Colors.background)
 
         view.addSubview(logoImageView)
-        view.addSubview(movieCardView)
+        view.addSubview(nextCardView)
+        view.addSubview(currentCardView)
         view.addSubview(movieInfoStackView)
         view.addSubview(loadingView)
 
@@ -95,12 +94,14 @@ final class FeedViewController: BaseViewController {
 
         loadingView.center = view.center
         loadingView.startAnimating()
-        movieCardView.isHidden = true
+        currentCardView.isHidden = true
+        nextCardView.isHidden = true
     }
 
     private func setupConstraints() {
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
-        movieCardView.translatesAutoresizingMaskIntoConstraints = false
+        currentCardView.translatesAutoresizingMaskIntoConstraints = false
+        nextCardView.translatesAutoresizingMaskIntoConstraints = false
         movieInfoStackView.translatesAutoresizingMaskIntoConstraints = false
         loadingView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -110,17 +111,19 @@ final class FeedViewController: BaseViewController {
             logoImageView.widthAnchor.constraint(equalToConstant: Constants.Layout.logoWidth),
             logoImageView.heightAnchor.constraint(equalToConstant: Constants.Layout.logoHeight),
 
-            movieCardView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: Constants.Layout.cardTopPadding),
-            movieCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Layout.sidePadding),
-            movieCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.Layout.sidePadding),
-            movieCardView.heightAnchor.constraint(equalTo: movieCardView.widthAnchor, multiplier: Constants.Layout.cardHeightMultiplier),
+            currentCardView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: Constants.Layout.cardTopPadding),
+            currentCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Layout.sidePadding),
+            currentCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.Layout.sidePadding),
+            currentCardView.heightAnchor.constraint(equalTo: currentCardView.widthAnchor, multiplier: Constants.Layout.cardHeightMultiplier),
+
+            nextCardView.topAnchor.constraint(equalTo: currentCardView.topAnchor),
+            nextCardView.leadingAnchor.constraint(equalTo: currentCardView.leadingAnchor),
+            nextCardView.trailingAnchor.constraint(equalTo: currentCardView.trailingAnchor),
+            nextCardView.bottomAnchor.constraint(equalTo: currentCardView.bottomAnchor),
 
             movieInfoStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Layout.sidePadding),
             movieInfoStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.Layout.sidePadding),
-//            movieInfoStackView.bottomAnchor.constraint(equalTo: tagsStackView.topAnchor, constant: Constants.Layout.movieInfoStackSpacing * 2),
-            
-            loadingView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loadingView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            movieInfoStackView.topAnchor.constraint(equalTo: currentCardView.bottomAnchor, constant: Constants.Layout.movieInfoTopPadding),
 
             tagsStackView.heightAnchor.constraint(equalToConstant: 28),
             tagsStackView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -Constants.Layout.sidePadding),
@@ -131,7 +134,7 @@ final class FeedViewController: BaseViewController {
 
     private func setupGestures() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
-        movieCardView.addGestureRecognizer(panGesture)
+        currentCardView.addGestureRecognizer(panGesture)
     }
 
     // MARK: - ViewModel Binding
@@ -139,58 +142,33 @@ final class FeedViewController: BaseViewController {
         viewModel.onLoading = { [weak self] isLoading in
             guard let self else { return }
             self.loadingView.isHidden = !isLoading
-            self.movieCardView.isHidden = isLoading
+            self.currentCardView.isHidden = isLoading
+            self.nextCardView.isHidden = isLoading
         }
 
         viewModel.onViewDataUpdated = { [weak self] viewData in
             guard let self else { return }
             guard let movie = viewData.cardItems.first else { return }
-            self.configureCard(with: movie)
-        }
-
-        viewModel.onError = { [weak self] errorMessage in
-            guard let self else { return }
-            let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            self.present(alert, animated: true)
+            self.configureCards(with: movie)
         }
     }
 
     // MARK: - Card Configuration
-    private func configureCard(with movie: MovieDetailsItemViewModel) {
-        movieCardView.configure(with: movie.posterURL ?? "")
+    private func configureCards(with movie: MovieDetailsItemViewModel) {
+        logoImageView.isHidden = true
+        
+        currentCardView.configure(with: movie.posterURL ?? "")
         movieTitleLabel.text = movie.title
         movieSubtitleLabel.text = "\(movie.country) • \(movie.year)"
 
-        tagsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-
-        var availableWidth = view.bounds.width - 2 * Constants.Layout.sidePadding
-        for genre in movie.genres {
-            let isFavorite = GlobalFavoriteTagsManager.shared.isFavorite(tagId: genre.id)
-            let tagView = TagView(text: genre.name ?? "", isActive: isFavorite) { [weak self] in
-                GlobalFavoriteTagsManager.shared.toggleFavorite(tagId: genre.id)
-                self?.updateTagViews(for: movie)
-            }
-
-            tagView.translatesAutoresizingMaskIntoConstraints = false
-            tagView.heightAnchor.constraint(equalToConstant: 28).isActive = false
-
-            let tagWidth = tagView.label.intrinsicContentSize.width + 16
-            if tagWidth > availableWidth {
-                break
-            }
-
-            tagsStackView.addArrangedSubview(tagView)
-            availableWidth -= (tagWidth + Constants.Layout.tagsSpacing)
+        if let nextMovie = viewModel.getNextMovie() {
+            nextCardView.configure(with: nextMovie.poster ?? "")
         }
-    }
 
-    private func updateTagViews(for movie: MovieDetailsItemViewModel) {
-        for case let tagView as TagView in tagsStackView.arrangedSubviews {
-            if let genreName = tagView.text,
-               let genre = movie.genres.first(where: { $0.name == genreName }) {
-                tagView.isActive = GlobalFavoriteTagsManager.shared.isFavorite(tagId: genre.id)
-            }
+        tagsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        for genre in movie.genres {
+            let tagView = TagView(text: genre.name ?? "")
+            tagsStackView.addArrangedSubview(tagView)
         }
     }
 
@@ -201,42 +179,62 @@ final class FeedViewController: BaseViewController {
 
         switch gesture.state {
         case .changed:
-            if translation.x > 0 {
-                movieCardView.applySwipeEffect(direction: .right, progress: progress)
-            } else {
-                movieCardView.applySwipeEffect(direction: .left, progress: progress)
-            }
+            currentCardView.applySwipeEffect(direction: translation.x > 0 ? .right : .left, progress: progress)
+            nextCardView.transform = CGAffineTransform(translationX: translation.x * 0.2, y: 0)
         case .ended:
+            let currentMovie = viewModel.getCurrentMovie()
             let velocity = gesture.velocity(in: view).x
             let shouldDismiss = abs(translation.x) > view.bounds.width * 0.5 || abs(velocity) > 500
-            if shouldDismiss {
+
+            if shouldDismiss, let currentMovie = currentMovie {
                 let direction: UISwipeGestureRecognizer.Direction = translation.x > 0 ? .right : .left
-                movieCardView.animateCardFall(direction: direction) { [weak self] in
+                currentCardView.animateCardFall(direction: direction) { [weak self] in
                     guard let self = self else { return }
-                    guard let currentMovie = self.viewModel.getCurrentMovie() else { return }
                     if direction == .right {
                         self.viewModel.handle(.addFavorite(currentMovie.id))
                     } else {
                         self.viewModel.handle(.hideMovie(currentMovie.id))
                     }
+                    self.swapCards()
+                    
+                    Task {
+                        await self.viewModel.fetchMoviesIfNeeded()
+                        self.updateUI()
+                    }
                 }
             } else {
-                movieCardView.resetSwipeEffect()
+                currentCardView.resetSwipeEffect()
+                nextCardView.transform = .identity
             }
         default:
-            movieCardView.resetSwipeEffect()
+            currentCardView.resetSwipeEffect()
+            nextCardView.transform = .identity
         }
     }
     
-    private func animateSwipe(direction: UISwipeGestureRecognizer.Direction, completion: @escaping () -> Void) {
-        UIView.animate(withDuration: 0.3, animations: {
-            let translation = direction == .right ? self.view.bounds.width : -self.view.bounds.width
-            self.movieCardView.transform = CGAffineTransform(translationX: translation, y: 0)
-        }, completion: { _ in
-            self.movieCardView.transform = .identity
-            self.movieCardView.resetSwipeEffect()
-            completion()
-        })
+    private func updateUI() {
+        if viewModel.isPlaceholderNeeded() {
+            showPlaceholder()
+        } else if let currentMovie = viewModel.getCurrentMovie() {
+            let currentMovieViewModel = MovieDetailsItemViewModel(movie: currentMovie)
+            configureCards(with: currentMovieViewModel)
+        }
+    }
+
+    private func showPlaceholder() {
+        currentCardView.isHidden = true
+        nextCardView.isHidden = true
+        movieTitleLabel.text = nil
+        movieSubtitleLabel.text = nil
+        tagsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        logoImageView.isHidden = false
+    }
+
+    private func swapCards() {
+        let temp = currentCardView
+        currentCardView.transform = .identity
+        currentCardView = nextCardView
+        nextCardView = temp
     }
 }
 

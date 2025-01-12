@@ -95,22 +95,21 @@ final class MovieCardView: UIView {
     }
 
     func applySwipeEffect(direction: UISwipeGestureRecognizer.Direction, progress: CGFloat) {
-        switch direction {
-        case .left:
-            overlayView.backgroundColor = UIColor.systemGray.withAlphaComponent(0.5)
-            iconImageView.image = UIImage(systemName: "heart.slash.fill")
-            iconImageView.tintColor = .systemGray
-        case .right:
-            overlayView.backgroundColor = UIColor.systemOrange.withAlphaComponent(0.5)
-            iconImageView.image = UIImage(systemName: "heart.fill")
-            iconImageView.tintColor = .systemOrange
-        default:
+        let rotation = progress * Constants.Animation.rotationAngle * (direction == .right ? 1 : -1)
+        self.transform = CGAffineTransform(rotationAngle: rotation * (.pi / 180))
+
+        if abs(rotation) > Constants.Animation.rotationAngle {
+            overlayView.backgroundColor = direction == .right
+            ? UIColor.systemOrange.withAlphaComponent(Constants.Animation.overlayEndAlpha)
+            : UIColor.systemGray.withAlphaComponent(Constants.Animation.overlayEndAlpha)
+            iconImageView.image = direction == .right
+                ? UIImage(systemName: "heart.fill")
+                : UIImage(systemName: "heart.slash.fill")
+            iconImageView.alpha = progress
+        } else {
             overlayView.backgroundColor = .clear
             iconImageView.image = nil
-        }
-        
-        UIView.animate(withDuration: 0.2) {
-            self.iconImageView.alpha = 1.0
+            iconImageView.alpha = 0
         }
     }
 
@@ -152,7 +151,7 @@ extension MovieCardView {
     enum Constants {
         enum Layout {
             static let cornerRadius: CGFloat = 8
-            static let iconSize: CGFloat = 80
+            static let iconSize: CGFloat = 125
         }
         
         enum Colors {
@@ -168,6 +167,9 @@ extension MovieCardView {
         }
         
         enum Animation {
+            static let overlayStartAlpha: CGFloat = 0
+            static let overlayEndAlpha: CGFloat = 0.5
+            static let rotationAngle: CGFloat = 3
             static let duration: TimeInterval = 2
         }
     }

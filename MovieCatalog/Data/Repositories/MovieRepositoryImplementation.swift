@@ -149,6 +149,11 @@ extension MovieRepositoryImplementation: MovieRepository {
         }
 
         let moviesPagedListDto = try await remoteDataSource.fetchMoviesPagedList(page: pagination.currentPage)
+
+        if pagination.pageCount == nil {
+            pagination.pageCount = moviesPagedListDto.pageInfo.pageCount
+        }
+
         let movieShorts = moviesPagedListDto.movies
 
         return try await withThrowingTaskGroup(of: Movie.self, returning: [Movie].self) { taskGroup in
