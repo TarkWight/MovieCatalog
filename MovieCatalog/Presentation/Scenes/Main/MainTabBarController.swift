@@ -60,7 +60,6 @@ extension MainCoordinatorViewController {
         let height = Constants.tabBar.height
         let roundLayer = CAShapeLayer()
         
-        // Создаем кастомный фон для таббара
         let bezierPath = UIBezierPath(
             roundedRect: CGRect(
                 x: Constants.tabBar.positionOnX,
@@ -79,6 +78,7 @@ extension MainCoordinatorViewController {
         print(width - (Constants.tabBar.sidePadding * 2))
         print((width - (Constants.tabBar.sidePadding * 2)) / Constants.tabBar.countOfItems)
         tabBar.itemWidth = (width - (Constants.tabBar.sidePadding * 2)) / Constants.tabBar.countOfItems
+        tabBar.itemSpacing = 0.01
         tabBar.itemPositioning = .centered
 
         tabBar.unselectedItemTintColor = Constants.color.unselected
