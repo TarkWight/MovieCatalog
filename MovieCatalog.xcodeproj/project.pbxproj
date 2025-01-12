@@ -140,6 +140,8 @@
 		893E4C7A2D32923C00851589 /* AddFriendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893E4C792D32923C00851589 /* AddFriendUseCase.swift */; };
 		893E4C7C2D3293E800851589 /* ReviewRepositoryImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893E4C7B2D3293E800851589 /* ReviewRepositoryImplementation.swift */; };
 		895226BD2D32F23700319414 /* FeedCoordinatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895226BC2D32F23600319414 /* FeedCoordinatorViewController.swift */; };
+		895226C72D33D4DC00319414 /* UIImage+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895226C62D33D4DC00319414 /* UIImage+Gradient.swift */; };
+		895226C92D33D74C00319414 /* GradientColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895226C82D33D74C00319414 /* GradientColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -277,6 +279,8 @@
 		893E4C792D32923C00851589 /* AddFriendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendUseCase.swift; sourceTree = "<group>"; };
 		893E4C7B2D3293E800851589 /* ReviewRepositoryImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRepositoryImplementation.swift; sourceTree = "<group>"; };
 		895226BC2D32F23600319414 /* FeedCoordinatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinatorViewController.swift; sourceTree = "<group>"; };
+		895226C62D33D4DC00319414 /* UIImage+Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Gradient.swift"; sourceTree = "<group>"; };
+		895226C82D33D74C00319414 /* GradientColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientColor.swift; sourceTree = "<group>"; };
 		898F0EBC2D0ABB1100FAE99D /* MovieCatalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieCatalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -495,6 +499,7 @@
 			children = (
 				893D7CD92D281C6400F15B29 /* Localizable.xcstrings */,
 				893D7CD12D281C6400F15B29 /* LocalizedKey.swift */,
+				895226C82D33D74C00319414 /* GradientColor.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -719,6 +724,7 @@
 			children = (
 				893E4C2D2D311F6D00851589 /* DateFormatter+iso.swift */,
 				893D7D6A2D2ABD6900F15B29 /* LocalizedKey + String.swift */,
+				895226C62D33D4DC00319414 /* UIImage+Gradient.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1121,9 +1127,11 @@
 				893E4BF62D30727000851589 /* MovieDTO.swift in Sources */,
 				893E4BF72D30727000851589 /* ReviewModifyDTO.swift in Sources */,
 				893D7CE82D281C6400F15B29 /* URLParameterEncoder.swift in Sources */,
+				895226C72D33D4DC00319414 /* UIImage+Gradient.swift in Sources */,
 				893E4BB52D306D0E00851589 /* ProfileRepositoryImplementation.swift in Sources */,
 				893E4BB12D306CFE00851589 /* ProfileLocalDataSource.swift in Sources */,
 				893E4B8B2D30559E00851589 /* MovieDetailsScreen.swift in Sources */,
+				895226C92D33D74C00319414 /* GradientColor.swift in Sources */,
 				8914302A2D2D522F00D1BA36 /* SceneFactory.swift in Sources */,
 				893E4C1A2D311D8400851589 /* FetchMovieUseCase.swift in Sources */,
 				893D7D562D291CD400F15B29 /* WelcomeViewModel.swift in Sources */,

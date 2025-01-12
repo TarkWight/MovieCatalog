@@ -9,7 +9,7 @@
 import UIKit
 
 final class MainCoordinatorViewController: UITabBarController {
-
+    
     // MARK: - TabBarItem Enum
     enum TabBarItem: Int, CaseIterable {
         case feed
@@ -113,6 +113,8 @@ extension MainCoordinatorViewController {
 }
 
 extension MainCoordinatorViewController {
+   
+    
     enum Constants {
         enum titles {
             static let feed = LocalizedKey.TabBarTitle.feed
@@ -139,8 +141,15 @@ extension MainCoordinatorViewController {
         
         enum color {
             static let background = UIColor(named: "AppDarkFaded")?.cgColor
-            static let gl = UIColor(named: "gradientLeftColor")
             static let unselected = UIColor(named: "AppGrayFaded")
+            
+        }
+        
+        enum mask {
+            func gradient(frame: CGRect) -> UIImage {
+                let colors = [GradientColor.start, GradientColor.end]
+                return  UIImage.qImage(frame: frame, colors: colors)
+            }
         }
     }
 }
