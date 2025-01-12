@@ -25,10 +25,10 @@ final class MainCoordinatorViewController: UITabBarController {
     private let favoritesCoordinator: FavoritesCoordinator
     private let profileCoordinator: ProfileCoordinator
 
+
     // MARK: - Initializer
     init(factory: SceneFactory) {
         self.factory = factory
-        
         self.feedCoordinator = FeedCoordinator(factory: factory)
         self.moviesCoordinator = MoviesCoordinator(sceneFactory: factory)
         self.favoritesCoordinator = FavoritesCoordinator(sceneFactory: factory)
@@ -36,67 +36,111 @@ final class MainCoordinatorViewController: UITabBarController {
 
         super.init(nibName: nil, bundle: nil)
 
-        configureTabBar()
+        generateTabBar()
+        setupTabBarAppearance()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - Configuration
-    private func configureTabBar() {
-        let feedNavController = feedCoordinator.navigationController
-        feedNavController.tabBarItem = UITabBarItem(
-            title: "Лента",
-            image: UIImage(named: "tab-bar-feed"),
-            tag: TabBarItem.feed.rawValue
-        )
+}
 
-        let moviesNavController = moviesCoordinator.navigationController
-        moviesNavController.tabBarItem = UITabBarItem(
-            title: "Фильмы",
-            image: UIImage(named: "tab-bar-movie"),
-            tag: TabBarItem.movies.rawValue
-        )
-
-        let favoritesNavController = favoritesCoordinator.navigationController
-        favoritesNavController.tabBarItem = UITabBarItem(
-            title: "Избранное",
-            image: UIImage(named: "tab-bar-favorite"),
-            tag: TabBarItem.favorites.rawValue
-        )
-
-        let profileNavController = profileCoordinator.navigationController
-        profileNavController.tabBarItem = UITabBarItem(
-            title: "Профиль",
-            image: UIImage(named: "tab-bar-profile"),
-            tag: TabBarItem.profile.rawValue
-        )
-
-        viewControllers = [feedNavController, moviesNavController, favoritesNavController, profileNavController]
-
-        setupTabBarAppearance()
+extension MainCoordinatorViewController {
+    private func generateVC(viewController: UIViewController, title: String, image: UIImage?) -> UIViewController {
+        viewController.tabBarItem.title = title
+        viewController.tabBarItem.image = image
+        return viewController
     }
+}
 
-    // MARK: - TabBar Appearance
+extension MainCoordinatorViewController {
     private func setupTabBarAppearance() {
-        let appearance = UITabBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(named: "AppDarkFaded") ?? .darkGray
-
-        appearance.stackedLayoutAppearance.selected.iconColor = UIColor(named: "gradientLeftColor")
-        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [
-            .foregroundColor: UIColor(named: "gradientLeftColor") ?? .orange
-        ]
+        let width = tabBar.bounds.width - Constants.tabBar.positionOnX * 2
+        let height = Constants.tabBar.height
+        let roundLayer = CAShapeLayer()
         
-        appearance.stackedLayoutAppearance.normal.iconColor = .lightGray
-        appearance.stackedLayoutAppearance.normal.titleTextAttributes = [
-            .foregroundColor: UIColor.lightGray
-        ]
+        // Создаем кастомный фон для таббара
+        let bezierPath = UIBezierPath(
+            roundedRect: CGRect(
+                x: Constants.tabBar.positionOnX,
+                y: tabBar.bounds.minY - Constants.tabBar.positionOnY,
+                width: width,
+                height: height
+            ),
+            cornerRadius: Constants.tabBar.radius
+        )
+        
+        roundLayer.path = bezierPath.cgPath
+        roundLayer.fillColor = Constants.color.background
+        tabBar.layer.insertSublayer(roundLayer, at: 0)
 
-        self.tabBar.standardAppearance = appearance
-        if #available(iOS 15.0, *) {
-            self.tabBar.scrollEdgeAppearance = appearance
+        print(width)
+        print(width - (Constants.tabBar.sidePadding * 2))
+        print((width - (Constants.tabBar.sidePadding * 2)) / Constants.tabBar.countOfItems)
+        tabBar.itemWidth = (width - (Constants.tabBar.sidePadding * 2)) / Constants.tabBar.countOfItems
+        tabBar.itemPositioning = .centered
+
+        tabBar.unselectedItemTintColor = Constants.color.unselected
+    }
+}
+
+extension MainCoordinatorViewController {
+    private func generateTabBar() {
+        viewControllers = [
+            generateVC(
+                viewController: feedCoordinator.navigationController,
+                title: Constants.titles.feed,
+                image: Constants.images.feed
+            ),
+            generateVC(
+                viewController: moviesCoordinator.navigationController,
+                title: Constants.titles.movie,
+                image: Constants.images.movie
+            ),
+            generateVC(
+                viewController: favoritesCoordinator.navigationController,
+                title: Constants.titles.favorite,
+                image: Constants.images.favorite
+            ),
+            generateVC(
+                viewController: profileCoordinator.navigationController,
+                title: Constants.titles.profile,
+                image: Constants.images.profile
+            )
+        ]
+    }
+}
+
+extension MainCoordinatorViewController {
+    enum Constants {
+        enum titles {
+            static let feed = LocalizedKey.TabBarTitle.feed
+            static let movie = LocalizedKey.TabBarTitle.movie
+            static let favorite = LocalizedKey.TabBarTitle.favorite
+            static let profile = LocalizedKey.TabBarTitle.user_profile
+        }
+        
+        enum images {
+            static let feed = UIImage(named: "tab-bar-feed")
+            static let movie = UIImage(named: "tab-bar-movie")
+            static let favorite = UIImage(named: "tab-bar-favorite")
+            static let profile = UIImage(named: "tab-bar-profile")
+        }
+        
+        enum tabBar {
+                    static let height: CGFloat = 64
+                    static let positionOnX: CGFloat = 24
+                    static let positionOnY: CGFloat = 8
+                    static let radius: CGFloat = 16
+                    static let countOfItems: CGFloat = 4
+                    static let sidePadding: CGFloat = 8
+                }
+        
+        enum color {
+            static let background = UIColor(named: "AppDarkFaded")?.cgColor
+            static let gl = UIColor(named: "gradientLeftColor")
+            static let unselected = UIColor(named: "AppGrayFaded")
         }
     }
 }

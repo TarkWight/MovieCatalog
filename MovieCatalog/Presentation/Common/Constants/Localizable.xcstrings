@@ -392,9 +392,6 @@
     "Error" : {
 
     },
-    "favorites" : {
-
-    },
     "Favorites" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -413,9 +410,6 @@
       }
     },
     "FavoritesScreen" : {
-
-    },
-    "feed" : {
 
     },
     "Fees" : {
@@ -469,17 +463,25 @@
         }
       }
     },
-    "gender_female" : {
-      "comment" : "Female gender"
-    },
-    "gender_male" : {
-      "comment" : "Male gender"
-    },
     "GenderFemale" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Женщина"
+          }
+        }
+      }
     },
     "GenderMale" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мужчина"
+          }
+        }
+      }
     },
     "Genres" : {
       "extractionState" : "manual",
@@ -841,9 +843,6 @@
     "MovieNotFound" : {
 
     },
-    "movies" : {
-
-    },
     "MyReview" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -933,7 +932,20 @@
       }
     },
     "NoStringAvailable" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "XXX"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "XXX"
+          }
+        }
+      }
     },
     "NotAccountYet" : {
       "extractionState" : "manual",
@@ -1208,6 +1220,70 @@
         }
       }
     },
+    "tb-favorite" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorite"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Избранное"
+          }
+        }
+      }
+    },
+    "tb-feed" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feed"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Лента"
+          }
+        }
+      }
+    },
+    "tb-movie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Movie"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фильмы"
+          }
+        }
+      }
+    },
+    "tb-profile" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profile"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профиль"
+          }
+        }
+      }
+    },
     "Time" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1241,9 +1317,6 @@
           }
         }
       }
-    },
-    "user_profile" : {
-
     },
     "Username" : {
       "extractionState" : "manual",
