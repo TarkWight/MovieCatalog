@@ -25,7 +25,7 @@ final class FeedViewController: BaseViewController {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = Constants.Layout.movieInfoStackSpacing
-        stackView.alignment = .leading
+        stackView.alignment = .center
         return stackView
     }()
 
@@ -34,6 +34,7 @@ final class FeedViewController: BaseViewController {
         label.font = Constants.Fonts.movieTitle
         label.textColor = UIColor(named: Constants.Colors.movieTitle)
         label.numberOfLines = 0
+        label.textAlignment = .center
         return label
     }()
 
@@ -41,6 +42,7 @@ final class FeedViewController: BaseViewController {
         let label = UILabel()
         label.font = Constants.Fonts.movieSubtitle
         label.textColor = UIColor(named: Constants.Colors.movieSubtitle)
+        label.textAlignment = .center
         return label
     }()
 
@@ -49,7 +51,7 @@ final class FeedViewController: BaseViewController {
         stackView.axis = .horizontal
         stackView.spacing = Constants.Layout.tagsSpacing
         stackView.alignment = .center
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fill
         return stackView
     }()
 
@@ -73,7 +75,6 @@ final class FeedViewController: BaseViewController {
         setupGestures()
         bindViewModel()
         viewModel.handle(.fetchInitialMovies)
-        navigationController?.setNavigationBarHidden(true, animated: false)
 
     }
 
@@ -114,15 +115,17 @@ final class FeedViewController: BaseViewController {
             movieCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.Layout.sidePadding),
             movieCardView.heightAnchor.constraint(equalTo: movieCardView.widthAnchor, multiplier: Constants.Layout.cardHeightMultiplier),
 
-            movieInfoStackView.topAnchor.constraint(equalTo: movieCardView.bottomAnchor, constant: Constants.Layout.movieInfoTopPadding),
             movieInfoStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Layout.sidePadding),
             movieInfoStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.Layout.sidePadding),
-
+//            movieInfoStackView.bottomAnchor.constraint(equalTo: tagsStackView.topAnchor, constant: Constants.Layout.movieInfoStackSpacing * 2),
+            
             loadingView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             loadingView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 
+            tagsStackView.heightAnchor.constraint(equalToConstant: 28),
             tagsStackView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -Constants.Layout.sidePadding),
             tagsStackView.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: Constants.Layout.sidePadding),
+            tagsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -Constants.Layout.tagsBottomPadding)
         ])
     }
 
@@ -165,13 +168,25 @@ final class FeedViewController: BaseViewController {
         movieSubtitleLabel.text = "\(movie.country) • \(movie.year)"
 
         tagsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+
+        var availableWidth = view.bounds.width - 2 * Constants.Layout.sidePadding
         for genre in movie.genres {
             let isFavorite = GlobalFavoriteTagsManager.shared.isFavorite(tagId: genre.id)
             let tagView = TagView(text: genre.name ?? "", isActive: isFavorite) { [weak self] in
                 GlobalFavoriteTagsManager.shared.toggleFavorite(tagId: genre.id)
                 self?.updateTagViews(for: movie)
             }
+
+            tagView.translatesAutoresizingMaskIntoConstraints = false
+            tagView.heightAnchor.constraint(equalToConstant: 28).isActive = false
+
+            let tagWidth = tagView.label.intrinsicContentSize.width + 16
+            if tagWidth > availableWidth {
+                break
+            }
+
             tagsStackView.addArrangedSubview(tagView)
+            availableWidth -= (tagWidth + Constants.Layout.tagsSpacing)
         }
     }
 
@@ -216,27 +231,28 @@ final class FeedViewController: BaseViewController {
 // MARK: - Constants
 extension FeedViewController {
     enum Constants {
+        enum Fonts {
+            static let movieTitle = UIFont(name: "Manrope-Bold", size: 24) ?? .boldSystemFont(ofSize: 24)
+            static let movieSubtitle = UIFont(name: "Manrope-Regular", size: 16) ?? .systemFont(ofSize: 16)
+        }
+
         enum Colors {
             static let background = "AppDark"
             static let movieTitle = "AppWhite"
-            static let movieSubtitle = "AppDarkFaded"
-        }
-
-        enum Fonts {
-            static let movieTitle = UIFont.boldSystemFont(ofSize: 24)
-            static let movieSubtitle = UIFont.systemFont(ofSize: 16)
+            static let movieSubtitle = "AppGray"
         }
 
         enum Layout {
             static let logoWidth: CGFloat = 60.72
             static let logoHeight: CGFloat = 32
-            static let logoTopPadding: CGFloat = 78
+            static let logoTopPadding: CGFloat = 24
             static let cardTopPadding: CGFloat = 16
             static let cardHeightMultiplier: CGFloat = 1.4
             static let movieInfoTopPadding: CGFloat = 16
             static let movieInfoStackSpacing: CGFloat = 8
             static let tagsSpacing: CGFloat = 4
             static let sidePadding: CGFloat = 24
+            static let tagsBottomPadding: CGFloat = 32
         }
 
         enum Images {

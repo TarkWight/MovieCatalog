@@ -7,9 +7,8 @@
 
 import UIKit
 
-
 final class TagView: UIView {
-    private let label = UILabel()
+    let label = UILabel()
     private var gradientLayer: CAGradientLayer?
 
     var text: String? {
@@ -45,8 +44,12 @@ final class TagView: UIView {
     private func setupView() {
         layer.cornerRadius = 8
         layer.masksToBounds = true
+
+        translatesAutoresizingMaskIntoConstraints = false
         heightAnchor.constraint(equalToConstant: 28).isActive = true
 
+     
+        
         label.font = .systemFont(ofSize: 16)
         label.textColor = UIColor(named: "AppWhite")
         label.text = text
@@ -56,8 +59,7 @@ final class TagView: UIView {
         NSLayoutConstraint.activate([
             label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            label.topAnchor.constraint(equalTo: topAnchor),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor)
+            label.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
         
         updateGradient()
