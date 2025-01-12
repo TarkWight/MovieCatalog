@@ -9,16 +9,16 @@ import Foundation
 
 final class FetchMovieDetailsUseCase {
 
-    private let profileRepository: ProfileRepository
-
-    init(profileRepository: ProfileRepository) {
-        self.profileRepository = profileRepository
+    private let keychainService: KeychainService
+    
+    init(keychainService: KeychainService) {
+        self.keychainService = keychainService
     }
 
-    func execute(_ movies: [Movie]) async throws -> [MovieDetails] {
+    func execute(movies: [Movie]) async throws -> [MovieDetails] {
         let userId: UUID?
         do {
-            userId = try await profileRepository.getProfile().id
+            userId = try await keychainService.retrieveUserId()
         } catch {
             userId = nil
         }
