@@ -78,7 +78,7 @@ extension MovieRepositoryImplementation: MovieRepository {
         }
 
         let movieDto = try await remoteDataSource.fetchMovie(id: id)
-        let movieEntity = MovieEntity(from: movieDto.toDomain(), context: CoreDataManager.shared.viewContext)
+        let movieEntity = MovieEntity(context: CoreDataManager.shared.viewContext)
 
         await localDataSource.saveMovie(movieEntity)
 
@@ -128,7 +128,7 @@ extension MovieRepositoryImplementation: MovieRepository {
                 favoriteMovies.append(movie)
                 loadedMovies.append(movie)
 
-                let movieEntity = MovieEntity(from: movie, context: CoreDataManager.shared.viewContext)
+                let movieEntity = MovieEntity(context: CoreDataManager.shared.viewContext)
                 await localDataSource.saveMovie(movieEntity)
             }
 
@@ -164,7 +164,7 @@ extension MovieRepositoryImplementation: MovieRepository {
                         let movieDto = try await self.remoteDataSource.fetchMovie(id: id)
                         let movie = movieDto.toDomain()
 
-                        let movieEntity = MovieEntity(from: movie, context: CoreDataManager.shared.viewContext)
+                        let movieEntity = MovieEntity(context: CoreDataManager.shared.viewContext)
                         await self.localDataSource.saveMovie(movieEntity)
 
                         return movie

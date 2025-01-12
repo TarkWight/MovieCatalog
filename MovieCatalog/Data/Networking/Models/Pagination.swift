@@ -14,12 +14,21 @@ struct Pagination {
 
     var isLimitReached: Bool {
         guard let pageCount else { return false }
-        return currentPage > pageCount
+        return currentPage >= pageCount
     }
 
     var page: Page = .first {
         didSet {
-            currentPage = page == .first ? 1 : currentPage + 1
+            if page == .next {
+                currentPage += 1
+            } else {
+                currentPage = 1
+            }
         }
+    }
+
+    mutating func reset() {
+        page = .first
+        currentPage = 1
     }
 }
