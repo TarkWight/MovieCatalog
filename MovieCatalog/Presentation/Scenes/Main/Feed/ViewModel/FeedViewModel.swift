@@ -15,34 +15,37 @@ final class FeedViewModel: ViewModel {
         case hideMovie(UUID)
         case showMovieDetails(UUID)
     }
-
+    
     private let coordinator: FeedCoordinatorProtocol
     private let fetchMovieListUseCase: FetchMovieListUseCase
     private let fetchMovieDetailsUseCase: FetchMovieDetailsUseCase
     private let ignoreListUseCase: AddMovieToIgnoreListUseCase
+    private let fetchFavoriteUseCase: FetchFavoriteMoviesUseCase
     private let addFavoriteUseCase: AddFavoriteMovieUseCase
-
+    
     private var moviesBuffer: [MovieDetails] = []
     private var hiddenMovies: Set<UUID> = []
     private var pagination = Pagination()
-
+    
     var onLoading: ((Bool) -> Void)?
     var onViewDataUpdated: (() -> Void)?
     var onError: ((String) -> Void)?
-
+    
     init(coordinator: FeedCoordinatorProtocol,
          fetchMovieListUseCase: FetchMovieListUseCase,
          fetchMovieDetailsUseCase: FetchMovieDetailsUseCase,
+         fetchFavoriteUseCase: FetchFavoriteMoviesUseCase,
          ignoreListUseCase: AddMovieToIgnoreListUseCase,
          addFavoriteUseCase: AddFavoriteMovieUseCase
     ) {
         self.coordinator = coordinator
         self.fetchMovieListUseCase = fetchMovieListUseCase
         self.fetchMovieDetailsUseCase = fetchMovieDetailsUseCase
+        self.fetchFavoriteUseCase = fetchFavoriteUseCase
         self.ignoreListUseCase = ignoreListUseCase
         self.addFavoriteUseCase = addFavoriteUseCase
     }
-
+    
     func handle(_ event: Event) {
         switch event {
         case .fetchInitialMovies:
@@ -65,24 +68,31 @@ private extension FeedViewModel {
         pagination.reset()
         await fetchMovies()
     }
-
+    
     func fetchMoreMovies() async {
         guard !pagination.isLimitReached else { return }
         pagination.page = .next
         await fetchMovies()
     }
-
-    private func fetchMovies() async {
+    
+    
+    func fetchMovies() async {
         onLoading?(true)
-
+        
         do {
+            let favoriteMovies = try await fetchFavoriteUseCase.execute()
+            let favoriteIds = Set(favoriteMovies.map { $0.id })
+            
             let movies = try await fetchMovieListUseCase.execute(page: pagination.page)
             let detailedMovies = try await fetchMovieDetailsUseCase.execute(movies: movies)
-            let filteredMovies = detailedMovies.filter { !hiddenMovies.contains($0.id) }
-
+            
+            let filteredMovies = detailedMovies.filter {
+                !hiddenMovies.contains($0.id) && !favoriteIds.contains($0.id)
+            }
+            
             moviesBuffer.append(contentsOf: filteredMovies)
             onViewDataUpdated?()
-
+            
             if pagination.isLimitReached {
                 print("Достигнут предел страниц")
             } else if moviesBuffer.count <= 2 {
@@ -91,14 +101,15 @@ private extension FeedViewModel {
         } catch {
             if let repositoryError = error as? MovieRepositoryImplementation.MovieRepositoryError,
                repositoryError == .maxPagesReached {
-                print("Достигнут предел страниц_")
+                print("Достигнут предел страниц")
             } else {
                 onError?(error.localizedDescription)
             }
         }
-
+        
         onLoading?(false)
     }
+    
     
     
     func addFavoriteMovie(id: UUID) async {
@@ -108,14 +119,14 @@ private extension FeedViewModel {
             onError?(error.localizedDescription)
         }
     }
-
+    
     func hideMovie(id: UUID) async {
         hiddenMovies.insert(id)
         moviesBuffer.removeAll { $0.id == id }
         onViewDataUpdated?()
         await fetchMoreMovies()
     }
-
+    
     func makeViewData() -> ViewData {
         let numberOfCards = 4
         let cardItems = moviesBuffer.prefix(numberOfCards).map { MovieDetailsItemViewModel(movie: $0) }
@@ -131,12 +142,11 @@ private extension FeedViewModel {
 
 extension FeedViewModel {
     func getCurrentMovie() -> MovieDetails? {
-        return moviesBuffer.first
+        return moviesBuffer.first { !$0.isFavorite }
     }
     
     func getNextMovie() -> MovieDetails? {
-        guard moviesBuffer.count > 1 else { return nil }
-        return moviesBuffer[1]
+        return moviesBuffer.dropFirst().first { !$0.isFavorite }
     }
 }
 

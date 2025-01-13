@@ -143,7 +143,6 @@ final class FeedViewController: BaseViewController {
     // MARK: - Card Configuration
     private func configureCard() {
         if let currentMovie = viewModel.getCurrentMovie() {
-            logoImageView.isHidden = true
             currentCardView.configure(with: currentMovie.poster ?? "")
             movieTitleLabel.text = currentMovie.name
             movieSubtitleLabel.text = "\(currentMovie.country ?? "Unknown") • \(currentMovie.year)"
@@ -175,7 +174,7 @@ final class FeedViewController: BaseViewController {
 
         switch gesture.state {
         case .changed:
-            currentCardView.applySwipeEffect(direction: translation.x > 0 ? .right : .left, progress: progress)
+            currentCardView.transform = CGAffineTransform(translationX: translation.x, y: 0)
         case .ended:
             let velocity = gesture.velocity(in: view).x
             let shouldDismiss = progress > 0.5 || abs(velocity) > 500
@@ -191,13 +190,16 @@ final class FeedViewController: BaseViewController {
                             self.viewModel.handle(.hideMovie(currentMovie.id))
                         }
                     }
-                    self.configureCard()
-                }
+                    self.configureCard()                }
             } else {
-                currentCardView.resetSwipeEffect()
+                UIView.animate(withDuration: 0.2) {
+                    self.currentCardView.transform = .identity
+                }
             }
         default:
-            currentCardView.resetSwipeEffect()
+            UIView.animate(withDuration: 0.2) {
+                self.currentCardView.transform = .identity
+            }
         }
     }
 }

@@ -25,7 +25,7 @@ extension MovieEntity {
     @NSManaged public var tagline: String?
     @NSManaged public var movieDescription: String?
     @NSManaged public var director: String?
-    @NSManaged public var budget: Int32
+    @NSManaged public var budget: NSNumber?
     @NSManaged public var fees: Int32
     @NSManaged public var ageLimit: Int32
     @NSManaged public var isFavorite: Bool

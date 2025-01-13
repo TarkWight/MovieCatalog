@@ -23,7 +23,7 @@ extension MovieEntity {
             tagline: tagline,
             description: movieDescription,
             director: director,
-            budget: Int(budget),
+            budget: Int(truncating: budget ?? -1),
             fees: Int(fees),
             ageLimit: Int(ageLimit),
             isFavorite: isFavorite

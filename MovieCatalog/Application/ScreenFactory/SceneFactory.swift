@@ -65,7 +65,7 @@ extension SceneFactory: FeedSceneFactory {
         let viewModel = FeedViewModel(
             coordinator: coordinator,
             fetchMovieListUseCase: appFactory.makeFetchMovieListUseCase(),
-            fetchMovieDetailsUseCase: appFactory.makeFetchMovieDetailsUseCase(),
+            fetchMovieDetailsUseCase: appFactory.makeFetchMovieDetailsUseCase(), fetchFavoriteUseCase: appFactory.makeFetchFavoriteMoviesUseCase(),
             ignoreListUseCase: appFactory.makeAddMovieToIgnoreListUseCase(),
             addFavoriteUseCase: appFactory.makeAddFavoriteMovieUseCase()
         )
