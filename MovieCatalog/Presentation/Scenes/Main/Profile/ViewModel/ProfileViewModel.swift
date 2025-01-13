@@ -118,11 +118,13 @@ private extension ProfileViewModel {
     }
 
     func logOut() async {
-        do {
-            try await logoutUseCase.execute()
-            coordinator.unauthorized()
-        } catch {
-            handleError(error)
+        Task { @MainActor in
+            do {
+                try await logoutUseCase.execute()
+                coordinator.unauthorized()
+            } catch {
+                handleError(error)
+            }
         }
     }
 

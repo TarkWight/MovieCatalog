@@ -16,12 +16,19 @@ final class AppCoordinator {
     private let sceneFactory: SceneFactory
     let networkService: NetworkService
 
-    lazy var handleUnauthorized: () -> Void = { [weak self] in
+    lazy var handleUnauthorized: () -> Void = { [unowned self] in
         Task { @MainActor in
-            self?.resetToAuthScene()
+            print("App.resetToAuthScene()")
+            self.resetToAuthScene()
         }
     }
 
+    lazy var completeAuthorization: () -> Void = { [unowned self] in
+        Task { @MainActor in
+            print("App.completeAuthorization()")
+            self.mainStage()
+        }
+    }
     private var mainCoordinator: MainCoordinator?
 
     // MARK: - Initializer
@@ -40,7 +47,9 @@ final class AppCoordinator {
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
 
-        checkAuthorization()
+        Task { @MainActor in
+            checkAuthorization()
+        }
     }
 
     private func configureNetworkCallbacks() {
@@ -58,11 +67,13 @@ final class AppCoordinator {
     }
 
     private func checkAuthorization() {
-        do {
-            let _ = try networkService.keychainService.retrieveToken()
-            showMainScene()
-        } catch {
-            resetToAuthScene()
+        Task { @MainActor in
+            do {
+                let _ = try networkService.keychainService.retrieveToken()
+                showMainScene()
+            } catch {
+                resetToAuthScene()
+            }
         }
     }
 
@@ -70,7 +81,7 @@ final class AppCoordinator {
     func showAuthScene() {
         let authCoordinator = AuthCoordinator(
             navigationController: navigationController,
-            sceneFactory: sceneFactory
+            sceneFactory: sceneFactory, completeAuthorization: completeAuthorization
         )
         authCoordinator.showWelcome()
     }
@@ -91,4 +102,10 @@ final class AppCoordinator {
         navigationController.viewControllers = []
         showAuthScene()
     }
+    
+    func mainStage() {
+        navigationController.viewControllers = []
+        showMainScene()
+    }
+
 }

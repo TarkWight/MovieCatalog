@@ -121,10 +121,6 @@ extension LoginViewController: LoginViewModelDelegate {
         alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default))
         present(alert, animated: true)
     }
-
-    func didCompleteLogin() {
-        print("Login Successful")
-    }
 }
 
 private extension LoginViewController {

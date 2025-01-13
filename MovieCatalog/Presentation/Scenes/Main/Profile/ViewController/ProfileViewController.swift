@@ -95,6 +95,13 @@ final class ProfileViewController: BaseViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(editAvatarTapped))
         profileImageView.addGestureRecognizer(tapGesture)
         
+        logoutButton.setImage(Constants.Images.logoutIcon, for: .normal)
+        logoutButton.tintColor = Constants.Colors.lable
+        logoutButton.backgroundColor = Constants.Colors.logout
+        logoutButton.layer.cornerRadius = 8
+        logoutButton.clipsToBounds = true
+        logoutButton.addTarget(self, action: #selector(logoutTapped), for: .touchUpInside)
+        
         
         personalInfoTitle.text = Constants.Localized.personalInfoTitle
         personalInfoTitle.font = Constants.Fonts.sectionTitle
@@ -278,15 +285,17 @@ final class ProfileViewController: BaseViewController {
     
     private func updateUI(with profile: Profile) {
         if let avatarLink = URL(string: profile.avatarLink) {
-            Task {
-                let avatarImage = await ImageManagerActor.shared.loadImage(from: avatarLink)
-                DispatchQueue.main.async {
-                    self.profileImageView.image = avatarImage ?? Constants.Images.avatarPlaceholder
+                Task {
+                    let avatarImage = await ImageManagerActor.shared.loadImage(from: avatarLink)
+                    DispatchQueue.main.async {
+                        self.profileImageView.image = avatarImage ?? Constants.Images.avatarPlaceholder
+                        self.styleProfileImageView()
+                    }
                 }
+            } else {
+                profileImageView.image = Constants.Images.avatarPlaceholder
+                styleProfileImageView()
             }
-        } else {
-            profileImageView.image = Constants.Images.avatarPlaceholder
-        }
         
         updateGreetingLabel(with: profile)
         usernameField.textField.placeholder = profile.nickName
@@ -327,6 +336,13 @@ final class ProfileViewController: BaseViewController {
         [usernameField, emailField, fullNameField, birthDateField].forEach {
             $0.textField.isUserInteractionEnabled = isEditingProfile
         }
+    }
+    
+    private func styleProfileImageView() {
+        let radius = Constants.Layout.avatarSize / 2
+        profileImageView.layer.cornerRadius = radius
+        profileImageView.layer.masksToBounds = true
+        profileImageView.contentMode = .scaleAspectFill
     }
     
     @objc private func saveTapped() {
@@ -438,6 +454,7 @@ private extension ProfileViewController {
         enum Colors {
             static let title = UIColor(named: "AppGray") ?? .gray
             static let lable = UIColor(named: "AppWhite") ?? .white
+            static let logout = UIColor(named: "AppDarkFaded")
         }
     }
 }

@@ -10,7 +10,6 @@ import Foundation
 protocol LoginViewModelDelegate: AnyObject {
     func didUpdateLoadingState(isLoading: Bool)
     func didEncounterError(_ message: String)
-    func didCompleteLogin()
 }
 
 final class LoginViewModel: ViewModel {
@@ -49,7 +48,7 @@ private extension LoginViewModel {
                 try await loginUseCase.execute(username: "tark_wight"/*username*/, password: "Password123!"/*password*/)
                 
                 delegate?.didUpdateLoadingState(isLoading: false)
-                delegate?.didCompleteLogin()
+                coordinator.didCompleteLogin()
             } catch {
                 delegate?.didUpdateLoadingState(isLoading: false)
                 delegate?.didEncounterError(LocalizedKey.ErrorMessage.loginFailed)
