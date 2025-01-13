@@ -8,23 +8,17 @@
 
 import Foundation
 
-protocol RegisterViewModelDelegate: AnyObject {
-    func didUpdateLoadingState(isLoading: Bool)
-    func didEncounterError(_ message: String)
-    func didCompleteRegistration()
-}
-
 final class RegisterViewModel: ViewModel {
-    
-    weak var delegate: RegisterViewModelDelegate?
-    
-    private let personalInfo: UserInfoViewModel
-    private let coordinator: AuthCoordinatorProtocol
     private let registerUseCase: RegisterUseCase
     private let validateUsernameUseCase: ValidateUsernameUseCase
     private let validateEmailUseCase: ValidateEmailUseCase
     private let validatePasswordUseCase: ValidatePasswordUseCase
-    
+    private let coordinator: AuthCoordinatorProtocol
+
+    var onLoadingStateChanged: ((Bool) -> Void)?
+    var onError: ((String) -> Void)?
+    var onRegistrationSuccess: (() -> Void)?
+
     var username: String = ""
     var email: String = ""
     var name: String = ""
@@ -32,21 +26,21 @@ final class RegisterViewModel: ViewModel {
     var confirmPassword: String = ""
     var birthDate: Date = Date.now
     var gender: Gender = .male
-    
-    init(personalInfo: UserInfoViewModel,
-         coordinator: AuthCoordinatorProtocol,
-         registerUseCase: RegisterUseCase,
-         validateUsernameUseCase: ValidateUsernameUseCase,
-         validateEmailUseCase: ValidateEmailUseCase,
-         validatePasswordUseCase: ValidatePasswordUseCase) {
-        self.personalInfo = personalInfo
+
+    init(
+        coordinator: AuthCoordinatorProtocol,
+        registerUseCase: RegisterUseCase,
+        validateUsernameUseCase: ValidateUsernameUseCase,
+        validateEmailUseCase: ValidateEmailUseCase,
+        validatePasswordUseCase: ValidatePasswordUseCase
+    ) {
         self.coordinator = coordinator
         self.registerUseCase = registerUseCase
         self.validateUsernameUseCase = validateUsernameUseCase
         self.validateEmailUseCase = validateEmailUseCase
         self.validatePasswordUseCase = validatePasswordUseCase
     }
-    
+
     func handle(_ event: RegisterViewEvent) {
         switch event {
         case .registerTapped:
@@ -67,45 +61,44 @@ final class RegisterViewModel: ViewModel {
             gender = newGender
         }
     }
-}
 
-private extension RegisterViewModel {
-    func registerTapped() {
+    private func registerTapped() {
         do {
             try validateUsernameUseCase.execute(username)
             try validateEmailUseCase.execute(email)
             try validatePasswordUseCase.execute(password)
-            
+
             guard password == confirmPassword else {
                 throw RegistrationValidationError.passwordsDoNotMatch
             }
-            
-            delegate?.didUpdateLoadingState(isLoading: true)
-            
+
+            onLoadingStateChanged?(true)
+
             let userRegister = UserRegister(
-                userName: personalInfo.userName,
-                name: personalInfo.name,
+                userName: username,
+                name: name,
                 password: password,
-                email: personalInfo.email,
-                birthDate: personalInfo.birthDate.ISO8601Format(),
-                gender: personalInfo.gender
+                email: email,
+                birthDate: birthDate.ISO8601Format(),
+                gender: gender
             )
 
             Task {
                 do {
                     try await registerUseCase.execute(userRegister)
-                    delegate?.didUpdateLoadingState(isLoading: false)
-                    delegate?.didCompleteRegistration()
+                    onLoadingStateChanged?(false)
+                    coordinator.didCompleteLogin()
                 } catch {
-                    delegate?.didUpdateLoadingState(isLoading: false)
-                    delegate?.didEncounterError(LocalizedKey.ErrorMessage.registrationFailed)
+                    onLoadingStateChanged?(false)
+                    onError?(LocalizedKey.ErrorMessage.registrationFailed)
                 }
             }
         } catch {
-            delegate?.didEncounterError(ValidationErrorHandler.message(for: error))
+            onError?(ValidationErrorHandler.message(for: error))
         }
     }
 }
+
 
 enum RegisterViewEvent {
     case registerTapped

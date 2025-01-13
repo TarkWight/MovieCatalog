@@ -46,7 +46,7 @@ extension SceneFactory: WelcomeSceneFactory {
 extension SceneFactory: RegisterSceneFactory {
     func makeRegisterScene(personalInfo: UserInfoViewModel, coordinator: AuthCoordinatorProtocol) -> RegisterViewController {
         let viewModel = RegisterViewModel(
-            personalInfo: personalInfo,
+//            personalInfo: personalInfo,
             coordinator: coordinator,
             registerUseCase: appFactory.makeRegisterUseCase(),
             validateUsernameUseCase: appFactory.makeValidateUsernameUseCase(),
