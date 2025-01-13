@@ -66,7 +66,7 @@ extension KeychainService {
         try save(value: userId.uuidString, for: .userId)
     }
 
-    func retrieveUserId() throws -> UUID {
+    func retrieveUserId() async throws -> UUID {
         let userIdString = try retrieveValue(for: .userId)
         guard let userId = UUID(uuidString: userIdString) else {
             throw KeychainError.invalidData

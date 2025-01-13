@@ -16,7 +16,7 @@ final class AddMovieToIgnoreListUseCase {
         self.blacklistManager = blacklistManager
     }
 
-    func execute(movieId: UUID) async throws {
+    func execute(movieId: UUID) async {
         await blacklistManager.addToBlacklist(movieId: movieId)
     }
 }

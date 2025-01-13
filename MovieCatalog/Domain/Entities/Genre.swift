@@ -10,4 +10,5 @@ import Foundation
 struct Genre: Equatable, Hashable {
     let id: UUID
     let name: String?
+    var isFavorite: Bool = false
 }

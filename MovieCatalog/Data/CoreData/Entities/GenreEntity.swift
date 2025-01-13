@@ -8,12 +8,6 @@
 
 import CoreData
 
-@objc(GenreEntity)
-final class GenreEntity: NSManagedObject {
-    @NSManaged var id: UUID
-    @NSManaged var name: String?
-}
-
 extension GenreEntity {
     func toDomain() -> Genre {
         Genre(id: id, name: name)
@@ -24,12 +18,12 @@ extension GenreEntity {
         name = genre.name
     }
 }
-
-extension Genre {
-    func toEntity(context: NSManagedObjectContext) -> GenreEntity {
-        let entity = GenreEntity(context: context)
-        entity.id = id
-        entity.name = name
-        return entity
-    }
-}
+//
+//extension Genre {
+//    func toEntity(context: NSManagedObjectContext) -> GenreEntity {
+//        let entity = GenreEntity(context: context)
+//        entity.id = id
+//        entity.name = name
+//        return entity
+//    }
+//}

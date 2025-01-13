@@ -61,9 +61,9 @@ final class NetworkService {
                 print("Response Status Code: \(httpResponse.statusCode)")
             }
             
-            if let responseData = String(data: data, encoding: .utf8) {
-                print("Response Body: \(responseData)")
-            }
+//            if let responseData = String(data: data, encoding: .utf8) {
+//                print("Response Body: \(responseData)")
+//            }
             
             try handleResponse(response)
             return data
@@ -94,17 +94,17 @@ final class NetworkService {
         switch config.task {
         case .requestBody(let data):
             request.httpBody = data
-            if let json = String(data: data, encoding: .utf8) {
-                print("Request body: \(json)")
-            }
+//            if let json = String(data: data, encoding: .utf8) {
+//                print("Request body: \(json)")
+//            }
         case .requestUrlParameters(let parameters):
             try URLParameterEncoder().encode(urlRequest: &request, with: parameters)
         default:
             break
         }
 
-        print("Request URL: \(urlString)")
-        print("Request Headers: \(request.allHTTPHeaderFields ?? [:])")
+//        print("Request URL: \(urlString)")
+//        print("Request Headers: \(request.allHTTPHeaderFields ?? [:])")
         
         return request
     }

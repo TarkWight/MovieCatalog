@@ -60,7 +60,7 @@ final class AppCoordinator {
             navigationController: navigationController,
             sceneFactory: sceneFactory
         )
-        navigationController.setViewControllers([authCoordinator.navigationController], animated: true)
+        authCoordinator.showWelcome()
     }
 
     func showMainScene() {
