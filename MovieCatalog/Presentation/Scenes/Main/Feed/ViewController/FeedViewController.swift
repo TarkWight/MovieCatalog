@@ -31,7 +31,8 @@ final class FeedViewController: BaseViewController {
         let label = UILabel()
         label.font = Constants.Fonts.movieTitle
         label.textColor = UIColor(named: Constants.Colors.movieTitle)
-        label.numberOfLines = 0
+        label.numberOfLines = 2
+        label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .center
         return label
     }()
@@ -113,7 +114,7 @@ final class FeedViewController: BaseViewController {
 
             movieInfoStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Layout.sidePadding),
             movieInfoStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.Layout.sidePadding),
-            movieInfoStackView.topAnchor.constraint(equalTo: currentCardView.bottomAnchor, constant: Constants.Layout.movieInfoTopPadding),
+            movieInfoStackView.bottomAnchor.constraint(equalTo: tagsStackView.bottomAnchor, constant: Constants.Layout.movieInfoStackSpacing),
 
             tagsStackView.heightAnchor.constraint(equalToConstant: 28),
             tagsStackView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -Constants.Layout.sidePadding),
