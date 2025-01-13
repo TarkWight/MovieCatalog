@@ -17,7 +17,7 @@ final class RegisterViewController: BaseViewController {
     private let nameField = CustomTextField(placeholder: LocalizedKey.Auth.Registration.TextField.name, type: .text)
     private let passwordField = CustomTextField(placeholder: LocalizedKey.Auth.Registration.TextField.password, type: .password)
     private let confirmPasswordField = CustomTextField(placeholder: LocalizedKey.Auth.Registration.TextField.confirmPassword, type: .password)
-    private let birthDateField = CustomTextField(placeholder: LocalizedKey.Auth.Registration.TextField.birthDate, type: .date)
+    private let birthDateField = CustomTextField(placeholder: LocalizedKey.Auth.Registration.TextField.birthdate, type: .date)
     private let genderPickerView = GenderPickerView()
     private let registerButton = CustomButton()
 
@@ -171,14 +171,17 @@ final class RegisterViewController: BaseViewController {
     }
 }
 
-// MARK: - Constants
-private enum Constants {
-    enum Layout {
-        static let sidePadding: CGFloat = 24
-        static let inputStackSpacing: CGFloat = 8
-        static let buttonTopOffset: CGFloat = 32
-        static let inputFieldHeight: CGFloat = 48
-        static let safeAreaPadding: CGFloat = 24
+private extension RegisterViewController {
+    
+    
+    // MARK: - Constants
+    private enum Constants {
+        enum Layout {
+            static let sidePadding: CGFloat = 24
+            static let inputStackSpacing: CGFloat = 8
+            static let buttonTopOffset: CGFloat = 32
+            static let inputFieldHeight: CGFloat = 48
+            static let safeAreaPadding: CGFloat = 24
+        }
     }
 }
-

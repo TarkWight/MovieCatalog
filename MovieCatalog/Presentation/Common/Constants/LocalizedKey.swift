@@ -10,41 +10,79 @@ import Foundation
 
 enum LocalizedKey {
 
+   
+
+    enum Сomponents {
+        enum Gender {
+            static let genderMale = NSLocalizedString("GenderMale", comment: "Gender male text")
+            static let genderFemale = NSLocalizedString("GenderFemale", comment: "Gender female text")
+        }
+    }
+    
+    enum Profile {
+        enum Label {
+            static let title = NSLocalizedString("PersonalInformation", comment: "lable")
+        }
+        enum Edit {
+            static let username = NSLocalizedString("Username", comment: "edit profile")
+            static let name = NSLocalizedString("Name", comment: "edit profile")
+            static let gender = NSLocalizedString("Gender", comment: "edit profile")
+            static let email = NSLocalizedString("Email", comment: "edit profile")
+            static let birthdate = NSLocalizedString("Birthdate", comment: "edit profile")
+            static let password = NSLocalizedString("Password", comment: "edit profile")
+            static let confirmPassword = NSLocalizedString("ConfirmPassword", comment: "edit profile")
+            static let avatarLink = NSLocalizedString("AvatarLink", comment: "edit profile")
+        }
+        enum Button {
+            static let friends = NSLocalizedString("MyFriends", comment: "in profile")
+            static let save = NSLocalizedString("Save", comment: "edit profile")
+            static let cancel = NSLocalizedString("Cancel", comment: "edit profile")
+        }
+        
+        enum Greeting{
+            static let morning = NSLocalizedString("Morning", comment: "")
+            static let day = NSLocalizedString("Day", comment: "")
+            static let evening = NSLocalizedString("Evening", comment: "")
+            static let night = NSLocalizedString("Night", comment: "")
+        }
+    }
+    
+    
     enum Welcome {
         static let title = NSLocalizedString("WelcomeTitle", comment: "")
         
         enum Button {
             static let login = NSLocalizedString("WelcomeLoginButton", comment: "")
-            static let register = NSLocalizedString("RegisterButton", comment: "")
+            static let register = NSLocalizedString("RegisterButton", comment: "That's exactly what you need")
         }
     }
-
+    
+    
     enum Auth {
         enum LigIn {
             static let title = NSLocalizedString("LoginTitle", comment: "")
             static let button = NSLocalizedString("LoginButton", comment: "")
             
             enum TextField {
-                static let username = NSLocalizedString("UsernameTextField", comment: "")
-                static let password = NSLocalizedString("PasswordTextField", comment: "")
+                static let username = NSLocalizedString("Username", comment: "")
+                static let password = NSLocalizedString("Password", comment: "")
             }
         }
         
         enum Registration {
-            static let title = NSLocalizedString("RegistrationTitle", comment: "")
-            static let button = NSLocalizedString("RegistrationButton", comment: "")
-            static let genderMale = NSLocalizedString("GenderMale", comment: "")
-            static let genderFemale = NSLocalizedString("GenderFemale", comment: "")
-            
+            static let title = NSLocalizedString("Registration", comment: "")
+            static let button = NSLocalizedString("RegisterButton", comment: "")
             enum TextField {
-                static let username = NSLocalizedString("UsernameTextField", comment: "")
-                static let email = NSLocalizedString("EmailTextField", comment: "")
-                static let name = NSLocalizedString("NameTextField", comment: "")
-                static let password = NSLocalizedString("PasswordTextField", comment: "")
-                static let confirmPassword = NSLocalizedString("ConfirmPasswordTextField", comment: "")
-                static let birthDate = NSLocalizedString("BirthDateTextField", comment: "")
+                static let username = NSLocalizedString("Username", comment: "edit profile")
+
+                static let email = NSLocalizedString("Email", comment: "edit profile")
+                static let name = NSLocalizedString("Name", comment: "edit profile")
+                static let password = NSLocalizedString("Password", comment: "edit profile")
+                static let confirmPassword = NSLocalizedString("ConfirmPassword", comment: "edit profile")
+                static let birthdate = NSLocalizedString("Birthdate", comment: "edit profile")
             }
         }
+        
         
         
         
@@ -58,12 +96,7 @@ enum LocalizedKey {
             static let login = NSLocalizedString("LoginButton", comment: "")
             static let register = NSLocalizedString("RegisterButton", comment: "")
         }
-        enum Action {
-            static let logIn = NSLocalizedString("LogIn", comment: "")
-            static let logOut = NSLocalizedString("LogOut", comment: "")
-            static let register = NSLocalizedString("Register", comment: "")
-            static let `continue` = NSLocalizedString("Continue", comment: "")
-        }
+
     }
 
     enum TabBarTitle {
@@ -72,6 +105,9 @@ enum LocalizedKey {
         static let favorite = NSLocalizedString("tb-favorite", comment: "")
         static let user_profile = NSLocalizedString("tb-profile", comment: "")
     }
+    
+  
+
     
     enum ErrorMessage {
         static let noStringAvailable = NSLocalizedString("NoStringAvailable", comment: "")

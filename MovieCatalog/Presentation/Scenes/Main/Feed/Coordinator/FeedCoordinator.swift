@@ -22,11 +22,17 @@ final class FeedCoordinator {
     }()
     private let movieDetailsFactory: MovieDetailsViewFactory
     private let feedFactory: FeedSceneFactory
+    private let handleUnauthorized: () -> Void
 
     // MARK: - Initializer
-    init(factory: MovieDetailsViewFactory, feedFactory: FeedSceneFactory) {
+    init(
+        factory: MovieDetailsViewFactory,
+        feedFactory: FeedSceneFactory,
+        handleUnauthorized: @escaping () -> Void
+    ) {
         self.movieDetailsFactory = factory
         self.feedFactory = feedFactory
+        self.handleUnauthorized = handleUnauthorized
     }
 }
 

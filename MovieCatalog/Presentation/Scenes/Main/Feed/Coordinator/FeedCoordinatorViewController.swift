@@ -10,7 +10,7 @@ import UIKit
 final class FeedCoordinatorViewController: UIViewController {
     
     // MARK: - Properties
-    private let coordinator: FeedCoordinator
+    private let coordinator: FeedCoordinatorProtocol
     private let feedFactory: FeedSceneFactory
     private var feedViewController: FeedViewController?
 

@@ -124,8 +124,6 @@ class BaseViewController: UIViewController {
         ]
         topGradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
         topGradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
-        topGradientLayer.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: topGradientHeight)
-        imageView.layer.addSublayer(topGradientLayer)
 
         let bottomGradientLayer = CAGradientLayer()
         bottomGradientLayer.colors = [
@@ -134,8 +132,18 @@ class BaseViewController: UIViewController {
         ]
         bottomGradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
         bottomGradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
-        bottomGradientLayer.frame = CGRect(x: 0, y: imageView.bounds.height - bottomGradientHeight, width: view.frame.width, height: bottomGradientHeight)
-        imageView.layer.addSublayer(bottomGradientLayer)
+
+        DispatchQueue.main.async {
+            topGradientLayer.frame = CGRect(x: 0, y: 0, width: imageView.frame.width, height: topGradientHeight)
+            bottomGradientLayer.frame = CGRect(
+                x: 0,
+                y: imageView.frame.height - bottomGradientHeight,
+                width: imageView.frame.width,
+                height: bottomGradientHeight
+            )
+            imageView.layer.addSublayer(topGradientLayer)
+            imageView.layer.addSublayer(bottomGradientLayer)
+        }
     }
 
     private func updateMaskForBackgroundImage() {

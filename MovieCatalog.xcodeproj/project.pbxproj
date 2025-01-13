@@ -158,6 +158,16 @@
 		895229302D341A4F00319414 /* UserShortEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895229262D341A4F00319414 /* UserShortEntity+CoreDataProperties.swift */; };
 		895229372D342D9C00319414 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895229362D342D9C00319414 /* ImageManager.swift */; };
 		8952293A2D343AA900319414 /* GlobalFavoriteTagsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895229392D343AA900319414 /* GlobalFavoriteTagsManager.swift */; };
+		895229502D34985D00319414 /* ProfileCoordinatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952294F2D34985D00319414 /* ProfileCoordinatorViewController.swift */; };
+		895229532D34E4EC00319414 /* FriendCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895229522D34E4EC00319414 /* FriendCoordinatorProtocol.swift */; };
+		895229552D34E4F200319414 /* FriendCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895229542D34E4F200319414 /* FriendCoordinator.swift */; };
+		895229572D34E4F900319414 /* FriendCoordinatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895229562D34E4F900319414 /* FriendCoordinatorViewController.swift */; };
+		895229592D34E50100319414 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895229582D34E50100319414 /* FriendViewController.swift */; };
+		8952295B2D34E50A00319414 /* FriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952295A2D34E50A00319414 /* FriendViewModel.swift */; };
+		895229602D34FAD600319414 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952295F2D34FAD600319414 /* MainCoordinator.swift */; };
+		895229622D3549A100319414 /* UILabel+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895229612D3549A100319414 /* UILabel+Gradient.swift */; };
+		895229662D35B75E00319414 /* UIImage+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895229652D35B75E00319414 /* UIImage+URL.swift */; };
+		895229682D35BA2800319414 /* AvatarLinkModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895229672D35BA2800319414 /* AvatarLinkModalViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -313,6 +323,16 @@
 		895229262D341A4F00319414 /* UserShortEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserShortEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		895229362D342D9C00319414 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		895229392D343AA900319414 /* GlobalFavoriteTagsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFavoriteTagsManager.swift; sourceTree = "<group>"; };
+		8952294F2D34985D00319414 /* ProfileCoordinatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinatorViewController.swift; sourceTree = "<group>"; };
+		895229522D34E4EC00319414 /* FriendCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCoordinatorProtocol.swift; sourceTree = "<group>"; };
+		895229542D34E4F200319414 /* FriendCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCoordinator.swift; sourceTree = "<group>"; };
+		895229562D34E4F900319414 /* FriendCoordinatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCoordinatorViewController.swift; sourceTree = "<group>"; };
+		895229582D34E50100319414 /* FriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
+		8952295A2D34E50A00319414 /* FriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewModel.swift; sourceTree = "<group>"; };
+		8952295F2D34FAD600319414 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		895229612D3549A100319414 /* UILabel+Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Gradient.swift"; sourceTree = "<group>"; };
+		895229652D35B75E00319414 /* UIImage+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+URL.swift"; sourceTree = "<group>"; };
+		895229672D35BA2800319414 /* AvatarLinkModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarLinkModalViewController.swift; sourceTree = "<group>"; };
 		898F0EBC2D0ABB1100FAE99D /* MovieCatalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieCatalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -728,6 +748,7 @@
 			isa = PBXGroup;
 			children = (
 				893E4B772D304BAC00851589 /* MainTabBarController.swift */,
+				8952295F2D34FAD600319414 /* MainCoordinator.swift */,
 				893E4B792D304C6F00851589 /* Feed */,
 				893E4B842D304D2000851589 /* Profile */,
 				893E4B812D304D0B00851589 /* Favorites */,
@@ -759,6 +780,8 @@
 				893E4C2D2D311F6D00851589 /* DateFormatter+iso.swift */,
 				893D7D6A2D2ABD6900F15B29 /* LocalizedKey + String.swift */,
 				895226C62D33D4DC00319414 /* UIImage+Gradient.swift */,
+				895229612D3549A100319414 /* UILabel+Gradient.swift */,
+				895229652D35B75E00319414 /* UIImage+URL.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -811,9 +834,9 @@
 		893E4B792D304C6F00851589 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				895229342D34258500319414 /* ViewController */,
-				895229332D34257500319414 /* ViewModel */,
 				895229322D34255B00319414 /* Coordinator */,
+				895229332D34257500319414 /* ViewModel */,
+				895229342D34258500319414 /* ViewController */,
 				895229352D34259B00319414 /* CardView */,
 			);
 			path = Feed;
@@ -842,9 +865,10 @@
 		893E4B842D304D2000851589 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				893E4C392D31348200851589 /* ProfileViewController.swift */,
-				893E4C372D31347C00851589 /* ProfileViewModel.swift */,
-				893E4B852D304D2700851589 /* ProfileCoordinator.swift */,
+				8952295C2D34ED1400319414 /* Coordinator */,
+				8952295D2D34ED2900319414 /* ViewModel */,
+				8952295E2D34ED5700319414 /* ViewController */,
+				895229512D34E4D400319414 /* Friends */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1054,6 +1078,44 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		895229512D34E4D400319414 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				8952295A2D34E50A00319414 /* FriendViewModel.swift */,
+				895229582D34E50100319414 /* FriendViewController.swift */,
+				895229562D34E4F900319414 /* FriendCoordinatorViewController.swift */,
+				895229542D34E4F200319414 /* FriendCoordinator.swift */,
+				895229522D34E4EC00319414 /* FriendCoordinatorProtocol.swift */,
+			);
+			path = Friends;
+			sourceTree = "<group>";
+		};
+		8952295C2D34ED1400319414 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				893E4B852D304D2700851589 /* ProfileCoordinator.swift */,
+				8952294F2D34985D00319414 /* ProfileCoordinatorViewController.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		8952295D2D34ED2900319414 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				893E4C372D31347C00851589 /* ProfileViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8952295E2D34ED5700319414 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				895229672D35BA2800319414 /* AvatarLinkModalViewController.swift */,
+				893E4C392D31348200851589 /* ProfileViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		898F0EB32D0ABB1100FAE99D = {
 			isa = PBXGroup;
 			children = (
@@ -1155,12 +1217,14 @@
 				893E4C0A2D31108000851589 /* LoginCredentials.swift in Sources */,
 				893D7CE22D281C6400F15B29 /* AuthError.swift in Sources */,
 				893E4BF92D30737000851589 /* MovieNetworkConfig.swift in Sources */,
+				895229682D35BA2800319414 /* AvatarLinkModalViewController.swift in Sources */,
 				893E4BCA2D30703800851589 /* Profile.swift in Sources */,
 				893E4C032D3074F900851589 /* MovieRepository.swift in Sources */,
 				893E4BCB2D30703800851589 /* Gender.swift in Sources */,
 				893E4C362D3131FF00851589 /* FavoritesViewModel.swift in Sources */,
 				893E4BCC2D30703800851589 /* UserRegister.swift in Sources */,
 				893E4C482D31464300851589 /* FriendRepository.swift in Sources */,
+				895229502D34985D00319414 /* ProfileCoordinatorViewController.swift in Sources */,
 				893E4C382D31347C00851589 /* ProfileViewModel.swift in Sources */,
 				893E4BCD2D30703800851589 /* Movie.swift in Sources */,
 				893E4BCE2D30703800851589 /* MovieShort.swift in Sources */,
@@ -1180,6 +1244,7 @@
 				893E4C122D311D4200851589 /* LogoutUseCase.swift in Sources */,
 				891430362D2E72E500D1BA36 /* BaseViewController.swift in Sources */,
 				895226BD2D32F23700319414 /* FeedCoordinatorViewController.swift in Sources */,
+				895229602D34FAD600319414 /* MainCoordinator.swift in Sources */,
 				893D7CE52D281C6400F15B29 /* HTTPTask.swift in Sources */,
 				893E4B7D2D304C8700851589 /* FeedViewController.swift in Sources */,
 				8952293A2D343AA900319414 /* GlobalFavoriteTagsManager.swift in Sources */,
@@ -1201,6 +1266,7 @@
 				893E4B832D304D1400851589 /* FavoritesCoordinator.swift in Sources */,
 				893E4C1E2D311D9200851589 /* FetchMovieDetailsUseCase.swift in Sources */,
 				893D7CE62D281C6400F15B29 /* NetworkError.swift in Sources */,
+				895229552D34E4F200319414 /* FriendCoordinator.swift in Sources */,
 				893D7D582D291D0200F15B29 /* ViewModel.swift in Sources */,
 				893D7D4C2D291A2800F15B29 /* AuthCoordinator.swift in Sources */,
 				893D7D5F2D29614000F15B29 /* AppCoordinator.swift in Sources */,
@@ -1214,6 +1280,7 @@
 				893E4BEC2D30727000851589 /* UserShortDTO.swift in Sources */,
 				893E4BEE2D30727000851589 /* Pagination.swift in Sources */,
 				893E4BF02D30727000851589 /* ReviewShortDTO.swift in Sources */,
+				8952295B2D34E50A00319414 /* FriendViewModel.swift in Sources */,
 				895228F32D340F7500319414 /* MovieCatalog.xcdatamodeld in Sources */,
 				893E4BFD2D30737C00851589 /* FavoriteMoviesNetworkConfig.swift in Sources */,
 				893E4BFE2D30737C00851589 /* ReviewNetworkConfig.swift in Sources */,
@@ -1223,6 +1290,7 @@
 				893E4BF22D30727000851589 /* ReviewDTO.swift in Sources */,
 				893E4BF32D30727000851589 /* GenreDTO.swift in Sources */,
 				893E4C212D311DD600851589 /* AddFavoriteMovieUseCase.swift in Sources */,
+				895229622D3549A100319414 /* UILabel+Gradient.swift in Sources */,
 				893E4BF62D30727000851589 /* MovieDTO.swift in Sources */,
 				895229372D342D9C00319414 /* ImageManager.swift in Sources */,
 				893E4BF72D30727000851589 /* ReviewModifyDTO.swift in Sources */,
@@ -1230,6 +1298,7 @@
 				895226C72D33D4DC00319414 /* UIImage+Gradient.swift in Sources */,
 				893E4BB52D306D0E00851589 /* ProfileRepositoryImplementation.swift in Sources */,
 				893E4BB12D306CFE00851589 /* ProfileLocalDataSource.swift in Sources */,
+				895229592D34E50100319414 /* FriendViewController.swift in Sources */,
 				893E4B8B2D30559E00851589 /* MovieDetailsScreen.swift in Sources */,
 				895226C92D33D74C00319414 /* GradientColor.swift in Sources */,
 				895228EE2D3405CB00319414 /* MovieCardView.swift in Sources */,
@@ -1252,6 +1321,7 @@
 				891430322D2D562700D1BA36 /* AppCoordinatorViewController.swift in Sources */,
 				893E4C6C2D32547300851589 /* BlacklistManager.swift in Sources */,
 				893E4C652D31870C00851589 /* AddMovieToIgnoreListUseCase.swift in Sources */,
+				895229532D34E4EC00319414 /* FriendCoordinatorProtocol.swift in Sources */,
 				893D7D6B2D2ABD6900F15B29 /* LocalizedKey + String.swift in Sources */,
 				891430262D2D51DC00D1BA36 /* AppFactory.swift in Sources */,
 				893E4BAA2D306CD200851589 /* CoreDataManager.swift in Sources */,
@@ -1260,6 +1330,7 @@
 				895228EA2D33F65000319414 /* ViewData.swift in Sources */,
 				893E4C702D3257F600851589 /* ReviewEntity.swift in Sources */,
 				893E4C252D311DEE00851589 /* FetchFavoriteMoviesUseCase.swift in Sources */,
+				895229662D35B75E00319414 /* UIImage+URL.swift in Sources */,
 				893D7D152D28308300F15B29 /* TokenInfo.swift in Sources */,
 				891430482D2FDCD900D1BA36 /* RegisterUseCase.swift in Sources */,
 				893D7CEC2D281C6400F15B29 /* AuthRepository.swift in Sources */,
@@ -1278,6 +1349,7 @@
 				893D7CEE2D281C6400F15B29 /* LocalizedKey.swift in Sources */,
 				893D7D102D28249B00F15B29 /* AuthNetworkConfig.swift in Sources */,
 				893D7D5C2D291ED800F15B29 /* RegistrationViewController.swift in Sources */,
+				895229572D34E4F900319414 /* FriendCoordinatorViewController.swift in Sources */,
 				893E4B7B2D304C7300851589 /* FeedCoordinator.swift in Sources */,
 				893E4C692D324F7A00851589 /* FriendLocalDataSource.swift in Sources */,
 				893E4C502D3146E500851589 /* FriendRepositoryImplementation.swift in Sources */,

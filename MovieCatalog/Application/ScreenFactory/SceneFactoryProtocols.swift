@@ -48,3 +48,8 @@ protocol ProfileSceneFactory {
 protocol MovieDetailsViewFactory {
     func makeMovieDetailsView(movieId: UUID) -> UIViewController
 }
+
+@MainActor
+protocol FriendSceneFactory {
+    func makeFriendScene(coordinator: FriendCoordinatorProtocol) -> FriendViewController
+}

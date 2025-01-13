@@ -1,4 +1,3 @@
-//
 //  WelcomeViewController.swift
 //  MovieCatalog
 //
@@ -32,17 +31,17 @@ final class WelcomeViewController: BaseViewController {
     // MARK: - Private Methods
     private func setupUI() {
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-        backgroundImage.image = UIImage(named: Constants.backgroundImageName)
+        backgroundImage.image = UIImage(named: Constants.Images.background)
         backgroundImage.contentMode = .scaleAspectFill
         view.insertSubview(backgroundImage, at: 0)
 
-        view.backgroundColor = .appDark
+        view.backgroundColor = Constants.Colors.background
 
         let welcomeLabel = UILabel()
-        welcomeLabel.text = LocalizedKey.Welcome.title
+        welcomeLabel.text = Constants.Text.welcomeTitle
         welcomeLabel.textAlignment = .center
-        welcomeLabel.font = UIFont(name: Constants.welcomeFontName, size: Constants.welcomeFontSize)
-        welcomeLabel.textColor = UIColor(named: Constants.labelTextColorName)
+        welcomeLabel.font = UIFont(name: Constants.Fonts.welcome, size: Constants.Sizes.welcomeFontSize)
+        welcomeLabel.textColor = Constants.Colors.labelText
         welcomeLabel.textAlignment = .left
         welcomeLabel.numberOfLines = 2
         welcomeLabel.lineBreakMode = .byWordWrapping
@@ -50,34 +49,34 @@ final class WelcomeViewController: BaseViewController {
         view.addSubview(welcomeLabel)
 
         let signInButton = CustomButton()
-        signInButton.setTitle(LocalizedKey.Auth.Action.logIn, for: .normal)
+        signInButton.setTitle(Constants.Text.signInButton, for: .normal)
         signInButton.configure(for: .default)
-        signInButton.setSize(width: Constants.buttonWidth, height: Constants.buttonHeight)
+        signInButton.setSize(width: Constants.Sizes.buttonWidth, height: Constants.Sizes.buttonHeight)
         signInButton.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
 
         let signUpButton = CustomButton()
-        signUpButton.setTitle(LocalizedKey.Auth.Action.register, for: .normal)
+        signUpButton.setTitle(Constants.Text.signUpButton, for: .normal)
         signUpButton.configure(for: .secondary)
-        signUpButton.setSize(width: Constants.buttonWidth, height: Constants.buttonHeight)
+        signUpButton.setSize(width: Constants.Sizes.buttonWidth, height: Constants.Sizes.buttonHeight)
         signUpButton.addTarget(self, action: #selector(didTapSignUp), for: .touchUpInside)
 
         let stackView = UIStackView(arrangedSubviews: [signInButton, signUpButton])
         stackView.axis = .vertical
-        stackView.spacing = Constants.stackViewSpacing
+        stackView.spacing = Constants.Sizes.stackViewSpacing
         stackView.alignment = .center
         stackView.distribution = .equalSpacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
 
         NSLayoutConstraint.activate([
-            welcomeLabel.widthAnchor.constraint(equalToConstant: Constants.labelWidth),
-            welcomeLabel.heightAnchor.constraint(equalToConstant: Constants.labelHeight),
-            welcomeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.labelTopPadding),
-            welcomeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.labelLeadingPadding),
+            welcomeLabel.widthAnchor.constraint(equalToConstant: Constants.Sizes.labelWidth),
+            welcomeLabel.heightAnchor.constraint(equalToConstant: Constants.Sizes.labelHeight),
+            welcomeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.Paddings.labelTop),
+            welcomeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Paddings.labelLeading),
 
-            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -Constants.stackViewBottomPadding),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.stackViewHorizontalPadding),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.stackViewHorizontalPadding)
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -Constants.Paddings.stackViewBottom),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Paddings.stackViewHorizontal),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.Paddings.stackViewHorizontal)
         ])
 
         navigationController?.navigationBar.barTintColor = .white
@@ -94,21 +93,39 @@ final class WelcomeViewController: BaseViewController {
 
     // MARK: - Constants
     private enum Constants {
-        static let backgroundImageName = "Background"
+        enum Images {
+            static let background = "Background"
+        }
 
-        static let welcomeFontName = "Manrope-Bold"
-        static let welcomeFontSize: CGFloat = 36
-        static let labelTextColorName = "AppWhite"
-        static let labelWidth: CGFloat = 345
-        static let labelHeight: CGFloat = 100
-        static let labelTopPadding: CGFloat = 76
-        static let labelLeadingPadding: CGFloat = 24
+        enum Fonts {
+            static let welcome = "Manrope-Bold"
+        }
 
-        static let buttonWidth: CGFloat = 345
-        static let buttonHeight: CGFloat = 48
+        enum Colors {
+            static let background = UIColor(named: "AppDark") ?? .black
+            static let labelText = UIColor(named: "AppWhite") ?? .white
+        }
 
-        static let stackViewSpacing: CGFloat = 8
-        static let stackViewBottomPadding: CGFloat = 20
-        static let stackViewHorizontalPadding: CGFloat = 20
+        enum Sizes {
+            static let welcomeFontSize: CGFloat = 36
+            static let labelWidth: CGFloat = 345
+            static let labelHeight: CGFloat = 100
+            static let buttonWidth: CGFloat = 345
+            static let buttonHeight: CGFloat = 48
+            static let stackViewSpacing: CGFloat = 8
+        }
+
+        enum Paddings {
+            static let labelTop: CGFloat = 76
+            static let labelLeading: CGFloat = 24
+            static let stackViewBottom: CGFloat = 20
+            static let stackViewHorizontal: CGFloat = 20
+        }
+
+        enum Text {
+            static let welcomeTitle = LocalizedKey.Welcome.title
+            static let signInButton = LocalizedKey.Welcome.Button.login
+            static let signUpButton = LocalizedKey.Welcome.Button.register
+        }
     }
 }

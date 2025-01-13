@@ -100,9 +100,10 @@ extension SceneFactory: ProfileSceneFactory {
     func makeProfileScene(coordinator: ProfileCoordinatorProtocol) -> ProfileViewController {
         let viewModel = ProfileViewModel(
             coordinator: coordinator,
-            fetchProfileUseCase: appFactory.makeFetchProfileUseCase(),
+            logoutUseCase: appFactory.makeLogoutUseCase(),
+            getProfileUseCase: appFactory.makeFetchProfileUseCase(),
             updateProfileUseCase: appFactory.makeUpdateProfileUseCase(),
-            logoutUseCase: appFactory.makeLogoutUseCase()
+            validateEmailUseCase: appFactory.makeValidateEmailUseCase()
         )
         return ProfileViewController(viewModel: viewModel)
     }
@@ -116,4 +117,14 @@ extension SceneFactory: MovieDetailsViewFactory {
     }
 }
 
+extension SceneFactory: FriendSceneFactory {
+    func makeFriendScene(coordinator: any FriendCoordinatorProtocol) -> FriendViewController {
+        let viewModel = FriendViewModel(
+            coordinator: coordinator,
+            fetchFriendsUseCase: appFactory.makeFetchFriendsUseCase()
+        )
+        return FriendViewController(viewModel: viewModel)
+    }
+    
+}
 

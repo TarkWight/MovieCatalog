@@ -27,12 +27,18 @@ final class MainCoordinatorViewController: UITabBarController, UITabBarControlle
     
 
     // MARK: - Initializer
-    init(factory: SceneFactory) {
+    init(
+        factory: SceneFactory,
+        feedCoordinator: FeedCoordinator,
+        moviesCoordinator: MoviesCoordinator,
+        favoritesCoordinator: FavoritesCoordinator,
+        profileCoordinator: ProfileCoordinator
+    ) {
         self.factory = factory
-        self.feedCoordinator = FeedCoordinator(factory: factory, feedFactory: factory)
-        self.moviesCoordinator = MoviesCoordinator(sceneFactory: factory)
-        self.favoritesCoordinator = FavoritesCoordinator(sceneFactory: factory)
-        self.profileCoordinator = ProfileCoordinator(factory: factory)
+        self.feedCoordinator = feedCoordinator
+        self.moviesCoordinator = moviesCoordinator
+        self.favoritesCoordinator = favoritesCoordinator
+        self.profileCoordinator = profileCoordinator
 
         super.init(nibName: nil, bundle: nil)
 
@@ -72,7 +78,7 @@ extension MainCoordinatorViewController {
                 image: Constants.images.favorite
             ),
             generateVC(
-                viewController: profileCoordinator.navigationController,
+                viewController: profileCoordinator.profileViewController,
                 title: Constants.titles.profile,
                 image: Constants.images.profile
             )

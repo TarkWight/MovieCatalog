@@ -18,10 +18,16 @@ protocol FavoritesCoordinatorProtocol {
 final class FavoritesCoordinator {
     private let sceneFactory: SceneFactory
     let navigationController: UINavigationController
+    private let handleUnauthorized: () -> Void
 
-    init(sceneFactory: SceneFactory) {
+    init(
+        sceneFactory: SceneFactory,
+        handleUnauthorized: @escaping () -> Void
+    ) {
+        
         self.sceneFactory = sceneFactory
         self.navigationController = UINavigationController()
+        self.handleUnauthorized = handleUnauthorized
     }
 
     @MainActor func showMovieDetails(movieId: UUID) {

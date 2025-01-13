@@ -1,36 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        }
-      },
-      "shouldTranslate" : false
-    },
-    "%@ • %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ • %2$@"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        }
-      },
-      "shouldTranslate" : false
-    },
     "AboutMovie" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -167,9 +137,6 @@
         }
       }
     },
-    "BirthDateTextField" : {
-
-    },
     "Budget" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -238,12 +205,6 @@
         }
       }
     },
-    "ConfirmPasswordTextField" : {
-
-    },
-    "Continue" : {
-
-    },
     "Country" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -260,6 +221,9 @@
           }
         }
       }
+    },
+    "Day" : {
+
     },
     "DecodingError" : {
       "extractionState" : "manual",
@@ -349,9 +313,6 @@
         }
       }
     },
-    "EmailTextField" : {
-
-    },
     "EncodingError" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -391,6 +352,22 @@
     },
     "Error" : {
 
+    },
+    "Evening" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Good evening"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добрый вечер"
+          }
+        }
+      }
     },
     "Favorites" : {
       "extractionState" : "manual",
@@ -464,6 +441,7 @@
       }
     },
     "GenderFemale" : {
+      "comment" : "Gender female text",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -474,6 +452,7 @@
       }
     },
     "GenderMale" : {
+      "comment" : "Gender male text",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -698,42 +677,21 @@
         }
       }
     },
-    "LogIn" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Log In"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Войти в аккаунт"
-          }
-        }
-      }
-    },
-    "LogInAccount" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Log In"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Войдите"
-          }
-        }
-      }
-    },
     "LoginButton" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Войти"
+          }
+        }
+      }
     },
     "LoginFailed" : {
       "extractionState" : "manual",
@@ -753,7 +711,14 @@
       }
     },
     "LoginTitle" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вход в аккаунт"
+          }
+        }
+      }
     },
     "LogOut" : {
       "extractionState" : "manual",
@@ -840,8 +805,27 @@
         }
       }
     },
+    "Morning" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Good morning"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Доброе утро"
+          }
+        }
+      }
+    },
     "MovieNotFound" : {
 
+    },
+    "MyFriends" : {
+      "comment" : "in profile"
     },
     "MyReview" : {
       "extractionState" : "manual",
@@ -868,12 +852,6 @@
             "state" : "translated",
             "value" : "N/A"
           }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Н/Д"
-          }
         }
       }
     },
@@ -894,8 +872,21 @@
         }
       }
     },
-    "NameTextField" : {
-
+    "Night" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Good night"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Доброй ночи"
+          }
+        }
+      }
     },
     "NoConnect" : {
       "extractionState" : "manual",
@@ -936,13 +927,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "XXX"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "XXX"
+            "value" : "N/A"
           }
         }
       }
@@ -1001,8 +986,16 @@
         }
       }
     },
-    "PasswordTextField" : {
-
+    "PersonalInformation" : {
+      "comment" : "lable",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Личная информация"
+          }
+        }
+      }
     },
     "Profile" : {
       "extractionState" : "manual",
@@ -1092,27 +1085,25 @@
         }
       }
     },
-    "RegisterAccount" : {
-      "extractionState" : "manual",
+    "RegisterButton" : {
+      "comment" : "That's exactly what you need",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Register"
+            "value" : "Registration"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Зарегистрируйтесь"
+            "value" : "Зарегистрироваться"
           }
         }
       }
     },
-    "RegisterButton" : {
-
-    },
     "Registration" : {
+      "comment" : "Title in reg screen",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1128,9 +1119,6 @@
           }
         }
       }
-    },
-    "RegistrationButton" : {
-
     },
     "RegistrationFailed" : {
       "extractionState" : "manual",
@@ -1148,9 +1136,6 @@
           }
         }
       }
-    },
-    "RegistrationTitle" : {
-
     },
     "RequestFailed" : {
       "extractionState" : "manual",
@@ -1335,11 +1320,15 @@
         }
       }
     },
-    "UsernameTextField" : {
-
-    },
     "WelcomeLoginButton" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Войти в аккаунт"
+          }
+        }
+      }
     },
     "WelcomeTitle" : {
       "extractionState" : "manual",

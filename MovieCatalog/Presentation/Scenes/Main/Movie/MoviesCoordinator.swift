@@ -16,11 +16,17 @@ protocol MoviesCoordinatorProtocol {
 
 final class MoviesCoordinator {
     private let sceneFactory: SceneFactory
+    private let handleUnauthorized: () -> Void
+
     let navigationController: UINavigationController
 
-    init(sceneFactory: SceneFactory) {
+    init(
+        sceneFactory: SceneFactory,
+        handleUnauthorized: @escaping () -> Void
+    ) {
         self.sceneFactory = sceneFactory
         self.navigationController = UINavigationController()
+        self.handleUnauthorized = handleUnauthorized
     }
    
 }
