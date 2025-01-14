@@ -19,7 +19,7 @@ final class ProfileViewController: BaseViewController {
     private let greetingLabel = UILabel()
     private let logoutButton = UIButton(type: .system)
     
-    private let friendsButton = CustomButton()
+    private let friendsButton = FriendsButton()
     
     private let personalInfoTitle = UILabel()
     
@@ -102,6 +102,25 @@ final class ProfileViewController: BaseViewController {
         logoutButton.clipsToBounds = true
         logoutButton.addTarget(self, action: #selector(logoutTapped), for: .touchUpInside)
         
+        // Save Button
+             saveButton.setTitle(Constants.Localized.saveButton, for: .normal)
+             saveButton.configure(for: .disabled)
+             saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
+
+             // Cancel Button
+             cancelButton.setTitle(Constants.Localized.cancelButton, for: .normal)
+             cancelButton.configure(for: .disabled)
+             cancelButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
+             
+        friendsButton.configure(
+                with: [
+                    UIImage(named: "AvatarPlaceholder")!,
+                    UIImage(named: "AvatarPlaceholder")!,
+                    UIImage(named: "AvatarPlaceholder")!
+                ],
+                title: LocalizedKey.Profile.Button.friends
+            )
+        friendsButton.addTarget(self, action: #selector(friendsTapped), for: .touchUpInside)
         
         personalInfoTitle.text = Constants.Localized.personalInfoTitle
         personalInfoTitle.font = Constants.Fonts.sectionTitle
@@ -350,6 +369,10 @@ final class ProfileViewController: BaseViewController {
         viewModel.handle(.saveTapped)
     }
     
+    @objc private func friendsTapped() {
+        viewModel.handle(.showFriendsTapped)
+    }
+    
     @objc private func cancelTapped() {
         isEditingProfile = false
         viewModel.handle(.cancelTapped)
@@ -386,6 +409,8 @@ extension ProfileViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         isEditingProfile = true
     }
+    
+    
 }
 private extension ProfileViewController {
     enum Constants {
@@ -458,3 +483,4 @@ private extension ProfileViewController {
         }
     }
 }
+

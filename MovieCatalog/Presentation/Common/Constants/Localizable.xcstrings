@@ -825,7 +825,21 @@
 
     },
     "MyFriends" : {
-      "comment" : "in profile"
+      "comment" : "in profile",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My friends"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мои друзья"
+          }
+        }
+      }
     },
     "MyReview" : {
       "extractionState" : "manual",

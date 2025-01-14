@@ -168,6 +168,7 @@
 		895229622D3549A100319414 /* UILabel+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895229612D3549A100319414 /* UILabel+Gradient.swift */; };
 		895229662D35B75E00319414 /* UIImage+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895229652D35B75E00319414 /* UIImage+URL.swift */; };
 		895229682D35BA2800319414 /* AvatarLinkModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895229672D35BA2800319414 /* AvatarLinkModalViewController.swift */; };
+		89BB9DA52D3602DB008AE9E5 /* FriendsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BB9DA42D3602DB008AE9E5 /* FriendsButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -334,6 +335,7 @@
 		895229652D35B75E00319414 /* UIImage+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+URL.swift"; sourceTree = "<group>"; };
 		895229672D35BA2800319414 /* AvatarLinkModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarLinkModalViewController.swift; sourceTree = "<group>"; };
 		898F0EBC2D0ABB1100FAE99D /* MovieCatalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieCatalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		89BB9DA42D3602DB008AE9E5 /* FriendsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -807,6 +809,7 @@
 		893D7D742D2B935600F15B29 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				89BB9DA42D3602DB008AE9E5 /* FriendsButton.swift */,
 				895228EF2D34063400319414 /* TagView.swift */,
 				891430422D2FD70300D1BA36 /* GenderPickerView.swift */,
 				891430352D2E72E500D1BA36 /* BaseViewController.swift */,
@@ -1355,6 +1358,7 @@
 				893E4C502D3146E500851589 /* FriendRepositoryImplementation.swift in Sources */,
 				893E4B782D304BAC00851589 /* MainTabBarController.swift in Sources */,
 				895229272D341A4F00319414 /* GenreEntity+CoreDataClass.swift in Sources */,
+				89BB9DA52D3602DB008AE9E5 /* FriendsButton.swift in Sources */,
 				895229282D341A4F00319414 /* GenreEntity+CoreDataProperties.swift in Sources */,
 				895229292D341A4F00319414 /* MovieEntity+CoreDataClass.swift in Sources */,
 				8952292A2D341A4F00319414 /* MovieEntity+CoreDataProperties.swift in Sources */,
