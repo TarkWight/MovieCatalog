@@ -7,6 +7,8 @@
 
 import UIKit
 
+import UIKit
+
 final class FeedViewController: BaseViewController {
     // MARK: - Properties
     private let viewModel: FeedViewModel
@@ -50,6 +52,7 @@ final class FeedViewController: BaseViewController {
         stackView.axis = .horizontal
         stackView.spacing = Constants.Layout.tagsSpacing
         stackView.alignment = .center
+        stackView.distribution = .fillProportionally
         return stackView
     }()
 
@@ -137,8 +140,8 @@ final class FeedViewController: BaseViewController {
         }
 
         viewModel.onViewDataUpdated = { [weak self] in
-                self?.configureCard()
-            }
+            self?.configureCard()
+        }
     }
 
     // MARK: - Card Configuration
@@ -147,17 +150,51 @@ final class FeedViewController: BaseViewController {
             currentCardView.configure(with: currentMovie.poster ?? "")
             movieTitleLabel.text = currentMovie.name
             movieSubtitleLabel.text = "\(currentMovie.country ?? "Unknown") • \(currentMovie.year)"
-            
-            tagsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-            if let genres = currentMovie.genres {
-                for genre in genres {
-                    let tagView = TagView(text: genre.name ?? "")
-                    tagsStackView.addArrangedSubview(tagView)
-                }
-            }
+
+            configureTags(for: currentMovie.genres)
         } else {
             showPlaceholder()
         }
+    }
+
+    private func configureTags(for genres: [Genre]?) {
+        tagsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+
+        guard let genres = genres, !genres.isEmpty else { return }
+
+        let availableWidth = view.bounds.width - (2 * Constants.Layout.sidePadding)
+        var usedWidth: CGFloat = 0
+
+        for genre in genres {
+            let genreId = genre.id
+            guard let genreName = genre.name else { continue }
+
+            let isActive = GlobalFavoriteTagsManager.shared.isFavorite(tagId: genreId)
+            let tagView = TagView(text: genreName, isActive: isActive)
+
+            // Настройка `onToggleFavorite` для обработки клика
+            tagView.onToggleFavorite = { [weak self] in
+                guard let self = self else { return }
+                GlobalFavoriteTagsManager.shared.toggleFavorite(tagId: genreId)
+                self.updateTagState(tagView, isFavorite: GlobalFavoriteTagsManager.shared.isFavorite(tagId: genreId))
+            }
+
+            // Учитываем размеры тега
+            let tagWidth = tagView.label.intrinsicContentSize.width + 16 // Учитываем отступы
+            let tagSize = tagWidth + Constants.Layout.tagsSpacing
+
+            if usedWidth + tagSize <= availableWidth {
+                tagsStackView.addArrangedSubview(tagView)
+                usedWidth += tagSize
+            } else {
+                break
+            }
+        }
+    }
+    
+    
+    private func updateTagState(_ tagView: TagView, isFavorite: Bool) {
+        tagView.isActive = isFavorite
     }
 
     private func showPlaceholder() {
@@ -191,7 +228,8 @@ final class FeedViewController: BaseViewController {
                             self.viewModel.handle(.hideMovie(currentMovie.id))
                         }
                     }
-                    self.configureCard()                }
+                    self.configureCard()
+                }
             } else {
                 UIView.animate(withDuration: 0.2) {
                     self.currentCardView.transform = .identity
@@ -204,7 +242,6 @@ final class FeedViewController: BaseViewController {
         }
     }
 }
-
 // MARK: - Constants
 extension FeedViewController {
     enum Constants {
