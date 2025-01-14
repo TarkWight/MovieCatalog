@@ -121,23 +121,21 @@ extension LoginViewController: LoginViewModelDelegate {
         alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default))
         present(alert, animated: true)
     }
-
-    func didCompleteLogin() {
-        print("Login Successful")
-    }
 }
 
-// MARK: - Constants
-private enum Constants {
-    enum Layout {
-        static let sidePadding: CGFloat = 24
-        static let inputStackSpacing: CGFloat = 8
-        static let buttonTopOffset: CGFloat = 32
-        static let inputFieldHeight: CGFloat = 48
-        static let safeAreaPadding: CGFloat = 24
-    }
-
-    enum Colors {
-        static let background = "AppDark"
+private extension LoginViewController {
+    // MARK: - Constants
+    private enum Constants {
+        enum Layout {
+            static let sidePadding: CGFloat = 24
+            static let inputStackSpacing: CGFloat = 8
+            static let buttonTopOffset: CGFloat = 32
+            static let inputFieldHeight: CGFloat = 48
+            static let safeAreaPadding: CGFloat = 24
+        }
+        
+        enum Colors {
+            static let background = "AppDark"
+        }
     }
 }

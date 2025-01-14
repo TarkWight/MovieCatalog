@@ -7,40 +7,24 @@
 
 import UIKit
 
-final class CustomTextField: UIView {
+public class CustomTextField: UIView {
 
     public enum FieldType {
         case text, password, date
     }
-    
-    public enum FieldState {
-        case normal
-        case error
-    }
 
-    // MARK: - Constants
-    private enum Constants {
-        static let textFieldFontName = "Manrope-Regular"
-        static let textFieldFontSize: CGFloat = 14
-        static let textFieldBorderColor = UIColor(named: "AppDarkFaded")
-        static let textFieldTextColor = UIColor(named: "AppWhite")
-        static let textFieldPlaceholderColor = UIColor(named: "AppGrayFaded") ?? UIColor.lightGray
-        
-        static let iconButtonWidth: CGFloat = 24
-        static let iconButtonHeight: CGFloat = 24
-        static let eyeIcon = "Eye"
-        static let eyeOffIcon = "Eye Off"
-        static let closeIcon = "Close"
-        static let calendarIcon = "Calendar"
-        
-        static let datePickerButtonTitle = "Done"
-    }
-
-    // MARK: - Properties
     public let textField = UITextField()
     private let iconButton = UIButton(type: .system)
     private var fieldType: FieldType
     public var onTextChanged: ((String) -> Void)?
+    
+    public var isCalendarButtonHiddenByDefault: Bool = false {
+        didSet {
+            if fieldType == .date {
+                updateCalendarButtonState(isHidden: isCalendarButtonHiddenByDefault)
+            }
+        }
+    }
 
     // MARK: - Initializer
     public init(placeholder: String, type: FieldType) {
@@ -54,40 +38,46 @@ final class CustomTextField: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - Setup Methods
+    // MARK: - Setup Views
     private func setupViews() {
-        setupTextField()
-        setupIconButton()
-    }
-
-    private func setupTextField() {
         addSubview(textField)
+        addSubview(iconButton)
+
         textField.translatesAutoresizingMaskIntoConstraints = false
+        iconButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             textField.leadingAnchor.constraint(equalTo: leadingAnchor),
             textField.trailingAnchor.constraint(equalTo: trailingAnchor),
             textField.topAnchor.constraint(equalTo: topAnchor),
-            textField.bottomAnchor.constraint(equalTo: bottomAnchor)
+            textField.bottomAnchor.constraint(equalTo: bottomAnchor),
+
+            iconButton.centerYAnchor.constraint(equalTo: textField.centerYAnchor),
+            iconButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.Layout.iconSpacing),
+            iconButton.widthAnchor.constraint(equalToConstant: Constants.Layout.iconSize),
+            iconButton.heightAnchor.constraint(equalToConstant: Constants.Layout.iconSize)
         ])
 
         textField.borderStyle = .roundedRect
-        textField.backgroundColor = Constants.textFieldBorderColor
-        textField.textColor = Constants.textFieldTextColor
-        textField.font = UIFont(name: Constants.textFieldFontName, size: Constants.textFieldFontSize)
-        textField.rightViewMode = .always
-        textField.rightView = iconButton
+        textField.backgroundColor = Constants.Colors.textFieldBackground
+        textField.textColor = Constants.Colors.textFieldText
+        textField.font = Constants.Fonts.textField
         textField.addTarget(self, action: #selector(textChanged), for: .editingChanged)
-    }
+        textField.addTarget(self, action: #selector(handleFieldFocus), for: .editingDidBegin)
+        textField.addTarget(self, action: #selector(handleFieldBlur), for: .editingDidEnd)
 
-    private func setupIconButton() {
-        iconButton.frame = CGRect(x: 0, y: 0, width: Constants.iconButtonWidth, height: Constants.iconButtonHeight)
-        iconButton.tintColor = Constants.textFieldTextColor
-        iconButton.contentMode = .scaleAspectFit
+        iconButton.tintColor = Constants.Colors.iconInactive
+        iconButton.isHidden = true
     }
 
     private func configureField(for type: FieldType, placeholder: String) {
-        configurePlaceholder(placeholder)
+        textField.attributedPlaceholder = NSAttributedString(
+            string: placeholder,
+            attributes: [
+                .foregroundColor: Constants.Colors.placeholder,
+                .font: Constants.Fonts.textField
+            ]
+        )
 
         switch type {
         case .text:
@@ -99,52 +89,46 @@ final class CustomTextField: UIView {
         }
     }
 
-    private func configurePlaceholder(_ placeholder: String) {
-        textField.attributedPlaceholder = NSAttributedString(
-            string: placeholder,
-            attributes: [
-                .foregroundColor: Constants.textFieldPlaceholderColor,
-                .font: UIFont(name: Constants.textFieldFontName, size: Constants.textFieldFontSize) ?? UIFont.systemFont(ofSize: Constants.textFieldFontSize)
-            ]
-        )
-    }
-
     private func configureTextFieldForTextType() {
-        iconButton.setImage(UIImage(named: Constants.closeIcon), for: .normal)
+        iconButton.setImage(UIImage(named: Constants.Images.clearIcon), for: .normal)
         iconButton.addTarget(self, action: #selector(clearText), for: .touchUpInside)
     }
 
     private func configureTextFieldForPasswordType() {
         textField.isSecureTextEntry = true
-        textField.textContentType = .oneTimeCode 
-        iconButton.setImage(UIImage(named: Constants.eyeIcon), for: .normal)
+        iconButton.setImage(UIImage(named: Constants.Images.eyeIcon), for: .normal)
         iconButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
     }
 
     private func configureTextFieldForDateType() {
-        iconButton.setImage(UIImage(named: Constants.calendarIcon), for: .normal)
-        iconButton.tintColor = Constants.textFieldPlaceholderColor
-        iconButton.isHidden = false
+        iconButton.setImage(UIImage(named: Constants.Images.calendarIcon), for: .normal)
         iconButton.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
-    }
-
-    // MARK: - State Handling
-    public func setState(_ state: FieldState) {
-        switch state {
-        case .normal:
-            textField.layer.borderColor = UIColor.clear.cgColor
-            textField.layer.borderWidth = 0
-        case .error:
-            textField.layer.borderColor = UIColor.red.cgColor
-            textField.layer.borderWidth = 1.5
-        }
+        updateCalendarButtonState(isHidden: isCalendarButtonHiddenByDefault)
     }
 
     // MARK: - Actions
     @objc private func textChanged() {
         let hasText = !(textField.text?.isEmpty ?? true)
-        iconButton.isHidden = (fieldType == .text || fieldType == .password) ? !hasText : false
+
+        if fieldType == .text || fieldType == .password {
+            iconButton.isHidden = !hasText
+        } else if fieldType == .date {
+            updateCalendarButtonState(isHidden: !hasText)
+        }
+
         onTextChanged?(textField.text ?? "")
+    }
+
+    @objc private func handleFieldFocus() {
+        if fieldType == .date {
+            updateCalendarButtonState(isHidden: false)
+        }
+    }
+
+    @objc private func handleFieldBlur() {
+        if fieldType == .date && isCalendarButtonHiddenByDefault {
+            updateCalendarButtonState(isHidden: true)
+        }
     }
 
     @objc private func clearText() {
@@ -155,7 +139,7 @@ final class CustomTextField: UIView {
 
     @objc private func togglePasswordVisibility() {
         textField.isSecureTextEntry.toggle()
-        let iconName = textField.isSecureTextEntry ? Constants.eyeIcon : Constants.eyeOffIcon
+        let iconName = textField.isSecureTextEntry ? Constants.Images.eyeIcon : Constants.Images.eyeOffIcon
         iconButton.setImage(UIImage(named: iconName), for: .normal)
     }
 
@@ -164,10 +148,15 @@ final class CustomTextField: UIView {
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .wheels
 
+//        datePicker.tintColor = UIColor(named: "AppPrimaryColor")
+        datePicker.backgroundColor = UIColor(named: "AppGrayFaded")
+
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: Constants.datePickerButtonTitle, style: .done, target: self, action: #selector(donePickingDate))
-        toolbar.setItems([doneButton], animated: true)
+
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(donePickingDate))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolbar.items = [flexibleSpace, doneButton]
 
         textField.inputView = datePicker
         textField.inputAccessoryView = toolbar
@@ -177,11 +166,49 @@ final class CustomTextField: UIView {
     @objc private func donePickingDate() {
         if let datePicker = textField.inputView as? UIDatePicker {
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "d MMMM yyyy"
-            dateFormatter.locale = Locale.current
+            dateFormatter.dateStyle = .long
             textField.text = dateFormatter.string(from: datePicker.date)
             onTextChanged?(textField.text ?? "")
         }
         textField.resignFirstResponder()
+    }
+
+    // MARK: - Helper Methods
+    private func updateCalendarButtonState(isHidden: Bool) {
+        iconButton.isHidden = isHidden
+        iconButton.tintColor = isHidden ? Constants.Colors.iconInactive : Constants.Colors.iconActive
+    }
+}
+
+// MARK: - Constants
+private extension CustomTextField {
+    enum Constants {
+        enum Fonts {
+            static let textField = UIFont(name: "Manrope-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14)
+        }
+
+        enum Colors {
+            static let textFieldBackground = UIColor(named: "AppDarkFaded") ?? .darkGray
+            static let textFieldText = UIColor(named: "AppWhite") ?? .white
+            static let placeholder = UIColor(named: "AppGrayFaded") ?? .darkGray
+            static let iconActive = UIColor(named: "AppWhite") ?? .white
+            static let iconInactive = UIColor(named: "AppGrayFaded") ?? .darkGray
+        }
+
+        enum Images {
+            static let clearIcon = "Close"
+            static let eyeIcon = "Eye"
+            static let eyeOffIcon = "Eye Off"
+            static let calendarIcon = "Calendar"
+        }
+
+        enum Layout {
+            static let iconSize: CGFloat = 24
+            static let iconSpacing: CGFloat = 12
+        }
+
+        enum Texts {
+            static let datePickerDone = "Done"
+        }
     }
 }

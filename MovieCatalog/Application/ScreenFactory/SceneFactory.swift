@@ -46,7 +46,7 @@ extension SceneFactory: WelcomeSceneFactory {
 extension SceneFactory: RegisterSceneFactory {
     func makeRegisterScene(personalInfo: UserInfoViewModel, coordinator: AuthCoordinatorProtocol) -> RegisterViewController {
         let viewModel = RegisterViewModel(
-            personalInfo: personalInfo,
+//            personalInfo: personalInfo,
             coordinator: coordinator,
             registerUseCase: appFactory.makeRegisterUseCase(),
             validateUsernameUseCase: appFactory.makeValidateUsernameUseCase(),
@@ -64,8 +64,10 @@ extension SceneFactory: FeedSceneFactory {
     func makeFeedScene(coordinator: FeedCoordinatorProtocol) -> FeedViewController {
         let viewModel = FeedViewModel(
             coordinator: coordinator,
-            fetchFeedUseCase: appFactory.makeFetchMovieListUseCase(),
-            fetchMovieDetailsUseCase: appFactory.makeFetchFavoriteMoviesUseCase()
+            fetchMovieListUseCase: appFactory.makeFetchMovieListUseCase(),
+            fetchMovieDetailsUseCase: appFactory.makeFetchMovieDetailsUseCase(), fetchFavoriteUseCase: appFactory.makeFetchFavoriteMoviesUseCase(),
+            ignoreListUseCase: appFactory.makeAddMovieToIgnoreListUseCase(),
+            addFavoriteUseCase: appFactory.makeAddFavoriteMovieUseCase()
         )
         return FeedViewController(viewModel: viewModel)
     }
@@ -76,7 +78,8 @@ extension SceneFactory: MoviesSceneFactory {
     func makeMoviesScene(coordinator: MoviesCoordinatorProtocol) -> MoviesViewController {
         let viewModel = MoviesViewModel(
             coordinator: coordinator,
-            fetchMovieListUseCase: appFactory.makeFetchMovieListUseCase()
+            fetchMovieListUseCase: appFactory.makeFetchMovieListUseCase(),
+            fetchFavoriteMoviesUseCase: appFactory.makeFetchFavoriteMoviesUseCase()
         )
         return MoviesViewController(viewModel: viewModel)
     }
@@ -98,9 +101,10 @@ extension SceneFactory: ProfileSceneFactory {
     func makeProfileScene(coordinator: ProfileCoordinatorProtocol) -> ProfileViewController {
         let viewModel = ProfileViewModel(
             coordinator: coordinator,
-            fetchProfileUseCase: appFactory.makeFetchProfileUseCase(),
+            logoutUseCase: appFactory.makeLogoutUseCase(),
+            getProfileUseCase: appFactory.makeFetchProfileUseCase(),
             updateProfileUseCase: appFactory.makeUpdateProfileUseCase(),
-            logoutUseCase: appFactory.makeLogoutUseCase()
+            validateEmailUseCase: appFactory.makeValidateEmailUseCase()
         )
         return ProfileViewController(viewModel: viewModel)
     }
@@ -114,4 +118,14 @@ extension SceneFactory: MovieDetailsViewFactory {
     }
 }
 
+extension SceneFactory: FriendSceneFactory {
+    func makeFriendScene(coordinator: any FriendCoordinatorProtocol) -> FriendViewController {
+        let viewModel = FriendViewModel(
+            coordinator: coordinator,
+            fetchFriendsUseCase: appFactory.makeFetchFriendsUseCase()
+        )
+        return FriendViewController(viewModel: viewModel)
+    }
+    
+}
 

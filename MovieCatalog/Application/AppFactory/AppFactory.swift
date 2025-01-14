@@ -110,3 +110,9 @@ extension AppFactory {
         AddMovieToIgnoreListUseCase(blacklistManager: BlacklistManager())
     }
 }
+
+extension AppFactory {
+    func makeFetchMovieDetailsUseCase() -> FetchMovieDetailsUseCase {
+        FetchMovieDetailsUseCase(keychainService: KeychainService())
+    }
+}

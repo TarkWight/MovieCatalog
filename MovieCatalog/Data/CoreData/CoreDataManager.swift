@@ -34,3 +34,23 @@ final class CoreDataManager {
         return context
     }
 }
+
+extension CoreDataManager {
+    func clearDatabase() {
+        let context = persistentContainer.viewContext
+        let entities = persistentContainer.managedObjectModel.entities
+
+        entities.forEach { entity in
+            guard let entityName = entity.name else { return }
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+            do {
+                try context.execute(deleteRequest)
+                try context.save()
+            } catch {
+                print("Failed to clear entity \(entityName): \(error.localizedDescription)")
+            }
+        }
+    }
+}

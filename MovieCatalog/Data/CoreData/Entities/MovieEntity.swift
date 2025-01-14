@@ -6,102 +6,67 @@
 //
 
 
+import Foundation
 import CoreData
-
-@objc(MovieEntity)
-final class MovieEntity: NSManagedObject {
-    @NSManaged var id: UUID
-    @NSManaged var name: String?
-    @NSManaged var poster: String?
-    @NSManaged var year: Int32
-    @NSManaged var country: String?
-    @NSManaged var time: Int32
-    @NSManaged var tagline: String?
-    @NSManaged var movieDescription: String?
-    @NSManaged var director: String?
-    @NSManaged var budget: Int32
-    @NSManaged var fees: Int32
-    @NSManaged var ageLimit: Int32
-    @NSManaged var isFavorite: Bool
-    @NSManaged var genres: NSSet?
-    @NSManaged var reviews: NSSet?
-
-    convenience init(from movie: Movie, context: NSManagedObjectContext) {
-        let entity = NSEntityDescription.entity(forEntityName: "MovieEntity", in: context)!
-        self.init(entity: entity, insertInto: context)
-        
-        id = movie.id
-        name = movie.name
-        poster = movie.poster
-        year = Int32(movie.year)
-        country = movie.country
-        time = Int32(movie.time)
-        tagline = movie.tagline
-        movieDescription = movie.description
-        director = movie.director
-        budget = Int32(movie.budget ?? 0)
-        fees = Int32(movie.fees ?? 0)
-        ageLimit = Int32(movie.ageLimit)
-        isFavorite = movie.isFavorite
-        
-        if let genres = movie.genres {
-            self.genres = NSSet(array: genres.map { $0.toEntity(context: context) })
-        }
-        
-        if let reviews = movie.reviews {
-            self.reviews = NSSet(array: reviews.map { $0.toEntity(context: context) })
-        }
-    }
-}
 
 extension MovieEntity {
     func toDomain() -> Movie {
-        Movie(
+        return Movie(
             id: id,
             name: name,
             poster: poster,
             year: Int(year),
             country: country,
-            genres: (genres?.allObjects as? [GenreEntity])?.map { $0.toDomain() },
-            reviews: (reviews?.allObjects as? [ReviewEntity])?.map { $0.toDomain() },
+            genres: (genres as? Set<GenreEntity>)?.map { $0.toDomain() } ?? [],
+            reviews: (reviews as? Set<ReviewEntity>)?.map { $0.toDomain() } ?? [],
             time: Int(time),
             tagline: tagline,
             description: movieDescription,
             director: director,
-            budget: Int(budget),
+            budget: budget?.intValue,
             fees: Int(fees),
             ageLimit: Int(ageLimit),
             isFavorite: isFavorite
         )
     }
+    
+    func update(from domain: Movie, in context: NSManagedObjectContext) {
+            self.id = domain.id
+            self.name = domain.name
+            self.poster = domain.poster
+            self.year = Int32(domain.year)
+            self.country = domain.country
+            self.time = Int32(domain.time)
+            self.tagline = domain.tagline
+            self.movieDescription = domain.description
+            self.director = domain.director
+            self.budget = domain.budget as NSNumber?
+            self.fees = Int32(domain.fees ?? 0)
+            self.ageLimit = Int32(domain.ageLimit)
+            self.isFavorite = domain.isFavorite
 
-    func update(from movieEntity: MovieEntity, context: NSManagedObjectContext) {
-        id = movieEntity.id
-        name = movieEntity.name
-        poster = movieEntity.poster
-        year = movieEntity.year
-        country = movieEntity.country
-        time = movieEntity.time
-        tagline = movieEntity.tagline
-        movieDescription = movieEntity.movieDescription
-        director = movieEntity.director
-        budget = movieEntity.budget
-        fees = movieEntity.fees
-        ageLimit = movieEntity.ageLimit
-        isFavorite = movieEntity.isFavorite
+            if let currentGenres = genres as? Set<GenreEntity> {
+                for genre in currentGenres {
+                    context.delete(genre)
+                }
+            }
+            let genreEntities = domain.genres?.map { genre -> GenreEntity in
+                let genreEntity = GenreEntity(context: context)
+                genreEntity.update(from: genre, in: context)
+                return genreEntity
+            }
+            genres = NSSet(array: genreEntities ?? [])
 
-        if let genres = movieEntity.genres as? Set<GenreEntity> {
-            self.genres = NSSet(set: genres)
+            if let currentReviews = reviews as? Set<ReviewEntity> {
+                for review in currentReviews {
+                    context.delete(review)
+                }
+            }
+            let reviewEntities = domain.reviews?.map { review -> ReviewEntity in
+                let reviewEntity = ReviewEntity(context: context)
+                reviewEntity.update(from: review, in: context)
+                return reviewEntity
+            }
+            reviews = NSSet(array: reviewEntities ?? [])
         }
-
-        if let reviews = movieEntity.reviews as? Set<ReviewEntity> {
-            self.reviews = NSSet(set: reviews)
-        }
-    }
-}
-
-extension MovieEntity {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<MovieEntity> {
-        return NSFetchRequest<MovieEntity>(entityName: "MovieEntity")
-    }
 }

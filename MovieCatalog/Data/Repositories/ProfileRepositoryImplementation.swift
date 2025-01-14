@@ -60,7 +60,7 @@ extension ProfileRepositoryImplementation: ProfileRepository {
                 let profileDto = try await remoteDataSource.fetchProfile()
                 let profile = profileDto.toDomain()
                 
-                await localDataSource.saveProfile(ProfileEntity(from: profile, context: CoreDataManager.shared.viewContext))
+                await localDataSource.saveProfile(profile: profile)
                 isProfileLoaded = true
                 return profile
             } catch {
@@ -84,7 +84,7 @@ extension ProfileRepositoryImplementation: ProfileRepository {
         
         do {
             try await remoteDataSource.updateProfile(profile: profileDto)
-            await localDataSource.saveProfile(ProfileEntity(from: profile, context: CoreDataManager.shared.viewContext))
+            await localDataSource.saveProfile(profile: profile)
         } catch {
             await handleUnauthorizedError(error)
             throw ProfileRepositoryError.updateFailed

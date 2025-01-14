@@ -8,14 +8,39 @@
 import UIKit
 
 final class GenderPickerView: UIView {
-    
+
+    // MARK: - Constants
+    private enum Constants {
+        enum Colors {
+            static let selectedGradientStart = UIColor.red.cgColor
+            static let selectedGradientEnd = UIColor.orange.cgColor
+            static let deselectedBackground = UIColor.darkGray
+            static let textColor = UIColor.white
+        }
+        
+        enum CornerRadius {
+            static let value: CGFloat = 10
+        }
+        
+        enum Animation {
+            static let duration: TimeInterval = 0.3
+        }
+        
+        enum Localization {
+            static let male = LocalizedKey.Сomponents.Gender.genderMale
+            static let female = LocalizedKey.Сomponents.Gender.genderFemale
+        }
+    }
+
+    // MARK: - UI Elements
     private let maleView = UIView()
     private let femaleView = UIView()
     
     private let maleLabel = UILabel()
     private let femaleLabel = UILabel()
-    
-    var selectedGender: String = NSLocalizedString("gender_male", comment: "Male gender") {
+
+    // MARK: - Properties
+    var selectedGender: String = Constants.Localization.male {
         didSet {
             updateUI(for: selectedGender)
             onGenderSelected?(selectedGender)
@@ -24,6 +49,7 @@ final class GenderPickerView: UIView {
     
     public var onGenderSelected: ((String) -> Void)?
     
+    // MARK: - Initializer
     public override init(frame: CGRect = .zero) {
         super.init(frame: frame)
         setupViews()
@@ -38,16 +64,17 @@ final class GenderPickerView: UIView {
         updateUI(for: selectedGender)
     }
     
+    // MARK: - Setup Methods
     private func setupViews() {
-        maleView.backgroundColor = .darkGray
-        maleLabel.text = NSLocalizedString("gender_male", comment: "Male gender")
-        maleLabel.textColor = .white
+        maleView.backgroundColor = Constants.Colors.deselectedBackground
+        maleLabel.text = Constants.Localization.male
+        maleLabel.textColor = Constants.Colors.textColor
         maleLabel.textAlignment = .center
         maleView.addSubview(maleLabel)
         
-        femaleView.backgroundColor = .darkGray
-        femaleLabel.text = NSLocalizedString("gender_female", comment: "Female gender")
-        femaleLabel.textColor = .white
+        femaleView.backgroundColor = Constants.Colors.deselectedBackground
+        femaleLabel.text = Constants.Localization.female
+        femaleLabel.textColor = Constants.Colors.textColor
         femaleLabel.textAlignment = .center
         femaleView.addSubview(femaleLabel)
         
@@ -83,14 +110,14 @@ final class GenderPickerView: UIView {
     private func setCornerRadius() {
         let malePath = UIBezierPath(roundedRect: maleView.bounds,
                                     byRoundingCorners: [.topLeft, .bottomLeft],
-                                    cornerRadii: CGSize(width: 10, height: 10))
+                                    cornerRadii: CGSize(width: Constants.CornerRadius.value, height: Constants.CornerRadius.value))
         let maleMask = CAShapeLayer()
         maleMask.path = malePath.cgPath
         maleView.layer.mask = maleMask
         
         let femalePath = UIBezierPath(roundedRect: femaleView.bounds,
                                       byRoundingCorners: [.topRight, .bottomRight],
-                                      cornerRadii: CGSize(width: 10, height: 10))
+                                      cornerRadii: CGSize(width: Constants.CornerRadius.value, height: Constants.CornerRadius.value))
         let femaleMask = CAShapeLayer()
         femaleMask.path = femalePath.cgPath
         femaleView.layer.mask = femaleMask
@@ -102,6 +129,7 @@ final class GenderPickerView: UIView {
         updateUI(for: selectedGender)
     }
     
+    // MARK: - Gesture Recognizers
     private func addGestureRecognizers() {
         let maleTap = UITapGestureRecognizer(target: self, action: #selector(selectMale))
         let femaleTap = UITapGestureRecognizer(target: self, action: #selector(selectFemale))
@@ -110,19 +138,20 @@ final class GenderPickerView: UIView {
     }
     
     @objc private func selectMale() {
-        selectedGender = NSLocalizedString("gender_male", comment: "Male gender")
+        selectedGender = Constants.Localization.male
     }
     
     @objc private func selectFemale() {
-        selectedGender = NSLocalizedString("gender_female", comment: "Female gender")
+        selectedGender = Constants.Localization.female
     }
     
+    // MARK: - Update UI
     private func updateUI(for gender: String) {
-        UIView.animate(withDuration: 0.3) {
-            self.maleView.backgroundColor = gender == NSLocalizedString("gender_male", comment: "Male gender") ? .clear : .darkGray
-            self.femaleView.backgroundColor = gender == NSLocalizedString("gender_female", comment: "Female gender") ? .clear : .darkGray
+        UIView.animate(withDuration: Constants.Animation.duration) {
+            self.maleView.backgroundColor = gender == Constants.Localization.male ? .clear : Constants.Colors.deselectedBackground
+            self.femaleView.backgroundColor = gender == Constants.Localization.female ? .clear : Constants.Colors.deselectedBackground
             
-            if gender == NSLocalizedString("gender_male", comment: "Male gender") {
+            if gender == Constants.Localization.male {
                 self.applyGradient(to: self.maleView)
                 self.removeGradient(from: self.femaleView)
             } else {
@@ -135,7 +164,7 @@ final class GenderPickerView: UIView {
     
     private func applyGradient(to view: UIView, mirrored: Bool = false) {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.red.cgColor, UIColor.orange.cgColor]
+        gradientLayer.colors = [Constants.Colors.selectedGradientStart, Constants.Colors.selectedGradientEnd]
         
         if mirrored {
             gradientLayer.startPoint = CGPoint(x: 1, y: 0.5)
@@ -152,6 +181,6 @@ final class GenderPickerView: UIView {
     
     private func removeGradient(from view: UIView) {
         view.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
-        view.backgroundColor = .darkGray
+        view.backgroundColor = Constants.Colors.deselectedBackground
     }
 }

@@ -25,7 +25,7 @@ extension FriendRepositoryImplementation: FriendRepository {
 
     func saveFriend(friend: UserShort) async {
         let context = CoreDataManager.shared.viewContext
-                   let friendEntity = UserShortEntity(from: friend, context: context)
+                   let friendEntity = UserShortEntity(from: friend,  context: context)
              await localDataSource.saveFriend(friendEntity)
     }
 

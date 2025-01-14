@@ -30,6 +30,7 @@ extension AuthRepositoryImplementation: AuthRepository {
         try await networkService.request(with: config)
         try keychainService.deleteToken()
         try keychainService.deleteUserId()
+        CoreDataManager.shared.clearDatabase()
     }
 
     func logIn(credentials: LoginCredentials) async throws {

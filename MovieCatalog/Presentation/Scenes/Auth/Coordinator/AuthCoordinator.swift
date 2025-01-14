@@ -12,17 +12,23 @@ protocol AuthCoordinatorProtocol: AnyObject {
     func showWelcome()
     func showLogin()
     func showRegistration()
-//    func didCompleteLogin()
+    func didCompleteLogin()
 }
 
 @MainActor
 final class AuthCoordinator {
-    private(set) var navigationController: UINavigationController
+    private let navigationController: UINavigationController
     private let sceneFactory: SceneFactory
-
-    init(navigationController: UINavigationController, sceneFactory: SceneFactory) {
+    private let completeAuthorization: () -> Void
+    
+    init(
+        navigationController: UINavigationController,
+        sceneFactory: SceneFactory,
+        completeAuthorization: @escaping () -> Void
+    ) {
         self.navigationController = navigationController
         self.sceneFactory = sceneFactory
+        self.completeAuthorization = completeAuthorization
         showWelcome()
     }
 }
@@ -44,11 +50,7 @@ extension AuthCoordinator: AuthCoordinatorProtocol {
         navigationController.pushViewController(registrationVC, animated: true)
     }
 
-//    func didCompleteLogin() {
-//        let appCoordinator = AppCoordinator(
-//            window: UIApplication.shared.windows.first!,
-//            sceneFactory: sceneFactory, networkService
-//        )
-//        appCoordinator.showMainScene()
-//    }
+    func didCompleteLogin() {
+        self.completeAuthorization()
+    }
 }
