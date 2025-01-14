@@ -11,13 +11,17 @@ import CoreData
 
 extension UserShortEntity {
     func toDomain() -> UserShort {
-        UserShort(userId: userId ?? UUID(), nickName: nickName, avatar: avatarLink)
+        return UserShort(
+            userId: userId ?? UUID(),
+            nickName: nickName,
+            avatar: avatarLink
+        )
     }
-
-    convenience init(from userShort: UserShort, context: NSManagedObjectContext) {
+    
+    convenience init(from domain: UserShort, context: NSManagedObjectContext) {
         self.init(context: context)
-        self.userId = userShort.userId
-        self.nickName = userShort.nickName
-        self.avatarLink = userShort.avatar
+        self.userId = domain.userId
+        self.nickName = domain.nickName
+        self.avatarLink = domain.avatar
     }
 }

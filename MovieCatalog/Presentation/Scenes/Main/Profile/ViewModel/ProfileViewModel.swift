@@ -179,18 +179,18 @@ private extension ProfileViewModel {
             gender: gender
         )
 
+        do {
+            try await updateProfileUseCase.execute(profile: updatedProfile)
+            
+            self.profile = updatedProfile
+            self.avatarLink = updatedProfile.avatarLink
+            checkDataIsChanged()
+        } catch {
+            resetChanges()
+            handleError(error)
+        }
         
-            do {
-                try await updateProfileUseCase.execute(profile: updatedProfile)
-                self.profile = updatedProfile
-                self.avatarLink = updatedProfile.avatarLink
-                checkDataIsChanged()
-            } catch {
-                resetChanges()
-                handleError(error)
-            }
-            isUpdating = false
-        
+        isUpdating = false
     }
 
     func emailUpdated(_ email: String) {
@@ -219,6 +219,10 @@ private extension ProfileViewModel {
                 onError?(LocalizedKey.ErrorMessage.invalidLink)
             } else {
                 checkDataIsChanged()
+
+                await updateProfile()
+
+                await fetchProfile()
             }
         }
     }

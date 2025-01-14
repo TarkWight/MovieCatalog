@@ -2,6 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24C101" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="GenreEntity" representedClassName="GenreEntity" syncable="YES">
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isFavorite" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
     <entity name="MovieEntity" representedClassName="MovieEntity" syncable="YES">
@@ -36,7 +37,7 @@
         <attribute name="isAnonymous" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="rating" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="reviewText" optional="YES" attributeType="String"/>
-        <relationship name="author" maxCount="1" deletionRule="Nullify" destinationEntity="UserShortEntity"/>
+        <relationship name="author" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserShortEntity"/>
     </entity>
     <entity name="UserShortEntity" representedClassName="UserShortEntity" syncable="YES">
         <attribute name="avatarLink" optional="YES" attributeType="String"/>

@@ -112,9 +112,11 @@ private extension FeedViewModel {
     
     
     
-    func addFavoriteMovie(id: UUID) async {
+    private func addFavoriteMovie(id: UUID) async {
         do {
             try await addFavoriteUseCase.execute(movieId: id)
+            moviesBuffer.removeAll { $0.id == id }
+            onViewDataUpdated?()
         } catch {
             onError?(error.localizedDescription)
         }

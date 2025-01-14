@@ -51,9 +51,9 @@ extension MovieRepositoryImplementation: MovieRepository {
             try await handleUnauthorizedError(error)
         }
 
-        if let movieEntity = await localDataSource.fetchMovie(id: id) {
-            movieEntity.isFavorite = true
-            await localDataSource.saveMovie(movieEntity)
+        if var movie = await localDataSource.fetchMovie(id: id) {
+            movie.isFavorite = true
+            await localDataSource.saveMovie(movie)
         }
     }
 
@@ -65,7 +65,7 @@ extension MovieRepositoryImplementation: MovieRepository {
             try await handleUnauthorizedError(error)
         }
 
-        if let movieEntity = await localDataSource.fetchMovie(id: id) {
+        if var movieEntity = await localDataSource.fetchMovie(id: id) {
             movieEntity.isFavorite = false
             await localDataSource.saveMovie(movieEntity)
         }
@@ -73,16 +73,16 @@ extension MovieRepositoryImplementation: MovieRepository {
 
     @CoreDataActor
     func getMovie(id: UUID) async throws -> Movie {
-        if let localMovieEntity = await localDataSource.fetchMovie(id: id) {
-            return localMovieEntity.toDomain()
+        if let localMovie = await localDataSource.fetchMovie(id: id) {
+            return localMovie
         }
 
         let movieDto = try await remoteDataSource.fetchMovie(id: id)
-        let movieEntity = MovieEntity(context: CoreDataManager.shared.viewContext)
+        let movieDomain = movieDto.toDomain()
 
-        await localDataSource.saveMovie(movieEntity)
+        await localDataSource.saveMovie(movieDomain)
 
-        return movieEntity.toDomain()
+        return movieDomain
     }
 
     @CoreDataActor
@@ -102,13 +102,13 @@ extension MovieRepositoryImplementation: MovieRepository {
                     loadedMovies[index].isFavorite = true
                     favoriteMovies.append(loadedMovies[index])
 
-                    if let movieEntity = await localDataSource.fetchMovie(id: id) {
+                    if var movieEntity = await localDataSource.fetchMovie(id: id) {
                         movieEntity.isFavorite = true
                         await localDataSource.saveMovie(movieEntity)
                     }
                 } else {
                     if let movieEntity = await localDataSource.fetchMovie(id: id) {
-                        var movie = movieEntity.toDomain()
+                        var movie = movieEntity
                         movie.isFavorite = true
                         favoriteMovies.append(movie)
 
@@ -128,8 +128,7 @@ extension MovieRepositoryImplementation: MovieRepository {
                 favoriteMovies.append(movie)
                 loadedMovies.append(movie)
 
-                let movieEntity = MovieEntity(context: CoreDataManager.shared.viewContext)
-                await localDataSource.saveMovie(movieEntity)
+                await localDataSource.saveMovie(movie)
             }
 
             isFavoritesLoaded = true
@@ -163,14 +162,14 @@ extension MovieRepositoryImplementation: MovieRepository {
                 let id = movieShort.id
 
                 if let movieEntity = await localDataSource.fetchMovie(id: id) {
-                    movieList.append(movieEntity.toDomain())
+                    movieList.append(movieEntity)
                 } else {
                     taskGroup.addTask {
                         let movieDto = try await self.remoteDataSource.fetchMovie(id: id)
                         let movie = movieDto.toDomain()
 
-                        let movieEntity = MovieEntity(context: CoreDataManager.shared.viewContext)
-                        await self.localDataSource.saveMovie(movieEntity)
+                       
+                        await self.localDataSource.saveMovie(movie)
 
                         return movie
                     }

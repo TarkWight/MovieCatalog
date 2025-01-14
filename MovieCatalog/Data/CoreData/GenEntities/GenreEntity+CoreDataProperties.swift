@@ -18,7 +18,7 @@ extension GenreEntity {
 
     @NSManaged public var id: UUID
     @NSManaged public var name: String?
-
+    @NSManaged public var isFavorite: Bool
 }
 
 extension GenreEntity : Identifiable {

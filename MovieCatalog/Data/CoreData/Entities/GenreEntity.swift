@@ -10,20 +10,16 @@ import CoreData
 
 extension GenreEntity {
     func toDomain() -> Genre {
-        Genre(id: id, name: name)
+        return Genre(
+            id: id,
+            name: name,
+            isFavorite: false
+        )
     }
-
-    func update(from genre: Genre) {
-        id = genre.id
-        name = genre.name
+    
+    func update(from domain: Genre, in context: NSManagedObjectContext) {
+        self.id = domain.id
+        self.name = domain.name
+        self.isFavorite = domain.isFavorite
     }
 }
-//
-//extension Genre {
-//    func toEntity(context: NSManagedObjectContext) -> GenreEntity {
-//        let entity = GenreEntity(context: context)
-//        entity.id = id
-//        entity.name = name
-//        return entity
-//    }
-//}

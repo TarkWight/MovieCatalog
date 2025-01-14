@@ -11,46 +11,62 @@ import CoreData
 
 extension MovieEntity {
     func toDomain() -> Movie {
-        Movie(
+        return Movie(
             id: id,
             name: name,
             poster: poster,
             year: Int(year),
             country: country,
-            genres: (genres?.allObjects as? [GenreEntity])?.map { $0.toDomain() },
-            reviews: (reviews?.allObjects as? [ReviewEntity])?.map { $0.toDomain() },
+            genres: (genres as? Set<GenreEntity>)?.map { $0.toDomain() } ?? [],
+            reviews: (reviews as? Set<ReviewEntity>)?.map { $0.toDomain() } ?? [],
             time: Int(time),
             tagline: tagline,
             description: movieDescription,
             director: director,
-            budget: Int(truncating: budget ?? -1),
+            budget: budget?.intValue,
             fees: Int(fees),
             ageLimit: Int(ageLimit),
             isFavorite: isFavorite
         )
     }
+    
+    func update(from domain: Movie, in context: NSManagedObjectContext) {
+            self.id = domain.id
+            self.name = domain.name
+            self.poster = domain.poster
+            self.year = Int32(domain.year)
+            self.country = domain.country
+            self.time = Int32(domain.time)
+            self.tagline = domain.tagline
+            self.movieDescription = domain.description
+            self.director = domain.director
+            self.budget = domain.budget as NSNumber?
+            self.fees = Int32(domain.fees ?? 0)
+            self.ageLimit = Int32(domain.ageLimit)
+            self.isFavorite = domain.isFavorite
 
-    func update(from movieEntity: MovieEntity, context: NSManagedObjectContext) {
-        id = movieEntity.id
-        name = movieEntity.name
-        poster = movieEntity.poster
-        year = movieEntity.year
-        country = movieEntity.country
-        time = movieEntity.time
-        tagline = movieEntity.tagline
-        movieDescription = movieEntity.movieDescription
-        director = movieEntity.director
-        budget = movieEntity.budget
-        fees = movieEntity.fees
-        ageLimit = movieEntity.ageLimit
-        isFavorite = movieEntity.isFavorite
+            if let currentGenres = genres as? Set<GenreEntity> {
+                for genre in currentGenres {
+                    context.delete(genre)
+                }
+            }
+            let genreEntities = domain.genres?.map { genre -> GenreEntity in
+                let genreEntity = GenreEntity(context: context)
+                genreEntity.update(from: genre, in: context)
+                return genreEntity
+            }
+            genres = NSSet(array: genreEntities ?? [])
 
-        if let genres = movieEntity.genres as? Set<GenreEntity> {
-            self.genres = NSSet(set: genres)
+            if let currentReviews = reviews as? Set<ReviewEntity> {
+                for review in currentReviews {
+                    context.delete(review)
+                }
+            }
+            let reviewEntities = domain.reviews?.map { review -> ReviewEntity in
+                let reviewEntity = ReviewEntity(context: context)
+                reviewEntity.update(from: review, in: context)
+                return reviewEntity
+            }
+            reviews = NSSet(array: reviewEntities ?? [])
         }
-
-        if let reviews = movieEntity.reviews as? Set<ReviewEntity> {
-            self.reviews = NSSet(set: reviews)
-        }
-    }
 }

@@ -61,9 +61,9 @@ final class NetworkService {
                 print("Response Status Code: \(httpResponse.statusCode)")
             }
             
-//            if let responseData = String(data: data, encoding: .utf8) {
-//                print("Response Body: \(responseData)")
-//            }
+            if let responseData = String(data: data, encoding: .utf8) {
+                print("Response Body: \(responseData)")
+            }
             
             try handleResponse(response)
             return data
