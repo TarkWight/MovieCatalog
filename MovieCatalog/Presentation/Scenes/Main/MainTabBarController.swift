@@ -68,7 +68,7 @@ extension MainCoordinatorViewController {
                 image: Constants.images.feed
             ),
             generateVC(
-                viewController: moviesCoordinator.navigationController,
+                viewController: moviesCoordinator.moviesViewController,
                 title: Constants.titles.movie,
                 image: Constants.images.movie
             ),

@@ -169,6 +169,8 @@
 		895229662D35B75E00319414 /* UIImage+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895229652D35B75E00319414 /* UIImage+URL.swift */; };
 		895229682D35BA2800319414 /* AvatarLinkModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895229672D35BA2800319414 /* AvatarLinkModalViewController.swift */; };
 		89BB9DA52D3602DB008AE9E5 /* FriendsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BB9DA42D3602DB008AE9E5 /* FriendsButton.swift */; };
+		89BB9E522D360D22008AE9E5 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BB9E512D360D22008AE9E5 /* MovieCell.swift */; };
+		89BB9E552D360DA7008AE9E5 /* MoviesCoordinatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BB9E542D360DA7008AE9E5 /* MoviesCoordinatorViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -336,6 +338,8 @@
 		895229672D35BA2800319414 /* AvatarLinkModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarLinkModalViewController.swift; sourceTree = "<group>"; };
 		898F0EBC2D0ABB1100FAE99D /* MovieCatalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieCatalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89BB9DA42D3602DB008AE9E5 /* FriendsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsButton.swift; sourceTree = "<group>"; };
+		89BB9E512D360D22008AE9E5 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		89BB9E542D360DA7008AE9E5 /* MoviesCoordinatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCoordinatorViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -848,9 +852,10 @@
 		893E4B7E2D304CF700851589 /* Movie */ = {
 			isa = PBXGroup;
 			children = (
+				89BB9E532D360D99008AE9E5 /* Coordinator */,
+				89BB9E512D360D22008AE9E5 /* MovieCell.swift */,
 				893E4C332D31318200851589 /* MoviesViewController.swift */,
 				893E4C312D31311C00851589 /* MoviesViewModel.swift */,
-				893E4B7F2D304CFF00851589 /* MoviesCoordinator.swift */,
 			);
 			path = Movie;
 			sourceTree = "<group>";
@@ -1135,6 +1140,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		89BB9E532D360D99008AE9E5 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				89BB9E542D360DA7008AE9E5 /* MoviesCoordinatorViewController.swift */,
+				893E4B7F2D304CFF00851589 /* MoviesCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1322,6 +1336,7 @@
 				893E4BD92D3071EA00851589 /* ProfileRemoteDataSource.swift in Sources */,
 				893E4BDB2D3071F500851589 /* MovieRemoteDataSource.swift in Sources */,
 				891430322D2D562700D1BA36 /* AppCoordinatorViewController.swift in Sources */,
+				89BB9E522D360D22008AE9E5 /* MovieCell.swift in Sources */,
 				893E4C6C2D32547300851589 /* BlacklistManager.swift in Sources */,
 				893E4C652D31870C00851589 /* AddMovieToIgnoreListUseCase.swift in Sources */,
 				895229532D34E4EC00319414 /* FriendCoordinatorProtocol.swift in Sources */,
@@ -1356,6 +1371,7 @@
 				893E4B7B2D304C7300851589 /* FeedCoordinator.swift in Sources */,
 				893E4C692D324F7A00851589 /* FriendLocalDataSource.swift in Sources */,
 				893E4C502D3146E500851589 /* FriendRepositoryImplementation.swift in Sources */,
+				89BB9E552D360DA7008AE9E5 /* MoviesCoordinatorViewController.swift in Sources */,
 				893E4B782D304BAC00851589 /* MainTabBarController.swift in Sources */,
 				895229272D341A4F00319414 /* GenreEntity+CoreDataClass.swift in Sources */,
 				89BB9DA52D3602DB008AE9E5 /* FriendsButton.swift in Sources */,

@@ -35,7 +35,7 @@ final class MainCoordinator {
             handleUnauthorized: handleUnauthorized
         )
         let moviesCoordinator = MoviesCoordinator(
-            sceneFactory: sceneFactory,
+            factory: sceneFactory,
             handleUnauthorized: handleUnauthorized
         )
         let favoritesCoordinator = FavoritesCoordinator(

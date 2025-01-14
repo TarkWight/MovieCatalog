@@ -78,7 +78,8 @@ extension SceneFactory: MoviesSceneFactory {
     func makeMoviesScene(coordinator: MoviesCoordinatorProtocol) -> MoviesViewController {
         let viewModel = MoviesViewModel(
             coordinator: coordinator,
-            fetchMovieListUseCase: appFactory.makeFetchMovieListUseCase()
+            fetchMovieListUseCase: appFactory.makeFetchMovieListUseCase(),
+            fetchFavoriteMoviesUseCase: appFactory.makeFetchFavoriteMoviesUseCase()
         )
         return MoviesViewController(viewModel: viewModel)
     }
