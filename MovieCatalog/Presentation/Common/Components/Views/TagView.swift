@@ -48,12 +48,11 @@ final class TagView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         heightAnchor.constraint(equalToConstant: 28).isActive = true
 
-     
-        
         label.font = .systemFont(ofSize: 16)
         label.textColor = UIColor(named: "AppWhite")
         label.text = text
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.lineBreakMode = .byClipping 
         addSubview(label)
 
         NSLayoutConstraint.activate([
@@ -64,7 +63,6 @@ final class TagView: UIView {
         
         updateGradient()
     }
-
     private func updateWidth() {
         let labelWidth = label.intrinsicContentSize.width
         widthAnchor.constraint(equalToConstant: labelWidth + 16).isActive = true

@@ -31,6 +31,7 @@ extension AuthRepositoryImplementation: AuthRepository {
         try keychainService.deleteToken()
         try keychainService.deleteUserId()
         CoreDataManager.shared.clearDatabase()
+        GlobalFavoriteTagsManager.shared.clearFavorites()
     }
 
     func logIn(credentials: LoginCredentials) async throws {
