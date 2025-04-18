@@ -62,7 +62,7 @@ final class MovieCell: UICollectionViewCell {
         if let posterString = movie.poster, let posterURL = URL(string: posterString) {
             loadImage(from: posterURL)
         } else {
-            imageView.image = UIImage(named: "Background")
+            imageView.image = UIImage(named: "Background Icon")
         }
     }
 

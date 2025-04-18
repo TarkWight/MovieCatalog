@@ -34,7 +34,7 @@ final class LoginViewController: BaseViewController {
 
     // MARK: - UI Setup
     private func setupUI() {
-        setBackgroundImage(named: "Background",
+        setBackgroundImage(named: "Background Icon",
                            topOffset: 0,
                            heightMultiplier: 0.7,
                            topGradientHeight: 434,

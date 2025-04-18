@@ -18,7 +18,8 @@ class BaseViewController: UIViewController {
     private let backButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "ChevronLeft")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage(UIImage(named: "ChevronLeft Icon")?
+            .withRenderingMode(.alwaysTemplate), for: .normal)
         return button
     }()
 

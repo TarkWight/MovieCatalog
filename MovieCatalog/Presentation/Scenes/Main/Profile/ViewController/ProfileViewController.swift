@@ -471,9 +471,9 @@ private extension ProfileViewController {
         }
         
         enum Images {
-            static let background = "Mountain"
-            static let avatarPlaceholder = UIImage(named: "AvatarPlaceholder")
-            static let logoutIcon = UIImage(named: "Logout")
+            static let background = "Mountain Icon"
+            static let avatarPlaceholder = UIImage(named: "AvatarPlaceholder Icon")
+            static let logoutIcon = UIImage(named: "Sign Out Icon")
         }
         
         enum Colors {

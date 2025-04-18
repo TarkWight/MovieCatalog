@@ -48,7 +48,8 @@ final class AppCoordinator {
         window.makeKeyAndVisible()
 
         Task { @MainActor in
-            checkAuthorization()
+//            checkAuthorization()
+            showAuthScene()
         }
     }
 

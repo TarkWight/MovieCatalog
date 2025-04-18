@@ -94,7 +94,7 @@ final class WelcomeViewController: BaseViewController {
     // MARK: - Constants
     private enum Constants {
         enum Images {
-            static let background = "Background"
+            static let background = "Background Icon"
         }
 
         enum Fonts {

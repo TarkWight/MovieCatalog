@@ -19,12 +19,16 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="fm3-hi-jBp">
                                 <rect key="frame" x="64" y="338" width="265" height="176"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalCompressionResistancePriority="751" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="YlU-iL-e49">
-                                        <rect key="frame" x="23" y="0.0" width="219" height="116"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalCompressionResistancePriority="751" image="Logo Icon" translatesAutoresizingMaskIntoConstraints="NO" id="YlU-iL-e49">
+                                        <rect key="frame" x="0.0" y="0.0" width="265" height="154"/>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="MovieCatalogPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="pFW-r0-rga">
-                                        <rect key="frame" x="0.0" y="138" width="265" height="38"/>
-                                    </imageView>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="MovieCatalog" borderStyle="roundedRect" textAlignment="center" minimumFontSize="28" translatesAutoresizingMaskIntoConstraints="NO" id="VzC-Ag-OWM">
+                                        <rect key="frame" x="0.0" y="176" width="265" height="0.0"/>
+                                        <color key="backgroundColor" name="AppDark"/>
+                                        <color key="textColor" name="AccentColor"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="48"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="176" id="cZi-e3-8Sm"/>
@@ -42,12 +46,17 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.671755725190835" y="374.64788732394368"/>
         </scene>
     </scenes>
     <resources>
-        <image name="Logo" width="219" height="116"/>
-        <image name="MovieCatalogPlaceholder" width="265" height="40"/>
+        <image name="Logo Icon" width="350" height="185"/>
+        <namedColor name="AccentColor">
+            <color red="0.93333333333333335" green="0.23137254901960785" blue="0.011764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="AppDark">
+            <color red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
         <namedColor name="Background">
             <color red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

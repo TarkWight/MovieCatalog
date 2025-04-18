@@ -270,7 +270,7 @@ extension FeedViewController {
         }
 
         enum Images {
-            static let logo = "Logo"
+            static let logo = "Logo Icon"
         }
     }
 }

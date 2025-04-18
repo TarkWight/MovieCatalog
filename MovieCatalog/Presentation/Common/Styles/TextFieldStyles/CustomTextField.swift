@@ -196,10 +196,10 @@ private extension CustomTextField {
         }
 
         enum Images {
-            static let clearIcon = "Close"
-            static let eyeIcon = "Eye"
-            static let eyeOffIcon = "Eye Off"
-            static let calendarIcon = "Calendar"
+            static let clearIcon = "Close Icon"
+            static let eyeIcon = "Eye Icon"
+            static let eyeOffIcon = "Eye Off Icon"
+            static let calendarIcon = "Calendar Icon"
         }
 
         enum Layout {

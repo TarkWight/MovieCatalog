@@ -38,7 +38,7 @@ final class RegisterViewController: BaseViewController {
     // MARK: - UI Setup
     private func setupUI() {
         configureTitle(LocalizedKey.Auth.Registration.title)
-        setBackgroundImage(named: "Background",
+        setBackgroundImage(named: "Background Icon",
                            topOffset: 0,
                            heightMultiplier: 0.3,
                            topGradientHeight: 434,

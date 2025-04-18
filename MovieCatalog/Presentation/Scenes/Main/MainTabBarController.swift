@@ -163,10 +163,10 @@ extension MainCoordinatorViewController {
         }
         
         enum images {
-            static let feed = UIImage(named: "tab-bar-feed")
-            static let movie = UIImage(named: "tab-bar-movie")
-            static let favorite = UIImage(named: "tab-bar-favorite")
-            static let profile = UIImage(named: "tab-bar-profile")
+            static let feed = UIImage(named: "Feed Icon")
+            static let movie = UIImage(named: "Movies Icon")
+            static let favorite = UIImage(named: "Library Icon")
+            static let profile = UIImage(named: "Person Icon")
         }
         
         enum tabBar {
