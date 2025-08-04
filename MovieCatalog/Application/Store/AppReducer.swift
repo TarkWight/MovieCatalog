@@ -10,4 +10,3 @@ import Foundation
 func appReducer(state: inout AppState, action: AppAction) -> Void {
     switch action { }
 }
-

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum FullScreenModalRoute {
+enum FullScreenModalRoute: Equatable {
     case movieDetails(movieID: UUID)
     case friends
     case collection(tag: UUID)

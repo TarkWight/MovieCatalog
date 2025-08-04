@@ -7,4 +7,6 @@
 
 import Foundation
 
-struct AppState: Equatable {}
+struct AppState: Equatable {
+    var route: AppRoute = .auth(.welcome)
+}

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Tab: Int, CaseIterable {
+enum Tab: Equatable {
     case feed
     case movies
     case favorites

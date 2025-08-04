@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum AuthRoute {
+enum AuthRoute: Equatable {
     case welcome
     case login
     case register
