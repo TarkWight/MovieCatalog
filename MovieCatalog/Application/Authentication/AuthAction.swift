@@ -8,6 +8,9 @@
 import Foundation
 
 enum AuthAction {
+    case loginRequest
+    case registerRequest
+
     case login
     case register
 
