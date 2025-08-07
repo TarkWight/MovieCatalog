@@ -11,5 +11,5 @@ enum AppRoute: Equatable {
     case auth(AuthRoute)
     case tab(Tab)
     case fullScreenModal(FullScreenModalRoute)
-    case modal(ModalRoute)
+    case sheetModal(SheetModalRoute)
 }

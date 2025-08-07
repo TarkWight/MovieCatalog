@@ -1,5 +1,5 @@
 //
-//  ModalRoute.swift
+//  SheetModalRoute.swift
 //  MovieCatalog
 //
 //  Created by Tark Wight on 04.08.2025.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum ModalRoute: Equatable {
+enum SheetModalRoute: Equatable {
     case addReview(movieID: UUID)
     case error(with: Error)
 
-    static func == (lhs: ModalRoute, rhs: ModalRoute) -> Bool {
+    static func == (lhs: SheetModalRoute, rhs: SheetModalRoute) -> Bool {
         switch (lhs, rhs) {
         case (.addReview(let lhsID), .addReview(let rhsID)):
             return lhsID == rhsID
