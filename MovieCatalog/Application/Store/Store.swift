@@ -7,20 +7,30 @@
 
 import Combine
 
-final class Store<State, Action>: ObservableObject where State: Equatable {
+final class Store: ObservableObject {
+    @Published private(set) var state: AppState
 
-    @Published private(set) var state: State
-    private let reducer: (inout State, Action) -> Void
+    private let reducer: (AppState, AppAction) -> AppState
+    private let middlewares: [Middleware<AppState, AppAction>]
 
     init(
-        initialState: State,
-        reducer: @escaping (inout State, Action) -> Void
+        initial: AppState,
+        reducer: @escaping (AppState, AppAction) -> AppState,
+        middlewares: [Middleware<AppState, AppAction>] = []
     ) {
-        self.state = initialState
+        self.state = initial
         self.reducer = reducer
+        self.middlewares = middlewares
     }
 
-    func send(_ action: Action) {
-        reducer(&state, action)
+    func dispatch(_ action: AppAction) {
+        let newState = reducer(state, action)
+        if newState != state {
+            state = newState
+        }
+        let dispatchFn: (AppAction) -> Void = { [weak self] in
+            self?.dispatch($0)
+        }
+        middlewares.forEach { $0(state, action, dispatchFn) }
     }
 }

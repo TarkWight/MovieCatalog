@@ -8,10 +8,10 @@
 import Foundation
 
 enum AppAction {
-    case pathChanged(to: AppRoute)
-
     case appStarted
 
     case authStatusChanged(AuthStatus)
     case authentication(AuthAction)
+
+    case navigation(NavigationAction)
 }
